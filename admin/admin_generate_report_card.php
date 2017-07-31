@@ -41,7 +41,7 @@
 		<div class="container-fluid">
 			<div class="ht col-md-10 col-md-offset-1">
 				
-				<div align="center" class="col-md-3 subhead sidebar">
+				<div align="center" class="col-md-3 subhead sidebarlong">
 					<h3>Welcome, Prateek</h3>
 					<?php echo "Date: ".date("d-m-Y")."<br/>";
 					echo "Time: ".date("h:i:sa");
@@ -123,55 +123,13 @@
 					  <br/>
 					  
 					  <div align="center">
-						<input type='submit' name='Download' value='Generate' class='btn btn-success btn-block'/>
+						<input type='submit' name='View' value='Generate' class='btn btn-success btn-block'/>
 					</div>
 					 <br/>
 					 
 					</form>
 				</div>
 			</div>	
-				
-					<?php
-									
-					if(isset($_POST["download"]))
-					{
-						$sem = $_POST['sem'];
-						$year = $_POST['year'];
-						$class = $_POST['class'];
-						if($class!='default')
-						{
-							
-						if($class <= 4)
-							$class = 'CLASS 1-4 ';
-						else if($class == 5)
-							$class = 'CLASS 5 ';
-						else if($class <= 8)
-							$class = 'CLASS 6-8 ';
-						else if($class == 9)
-							$class = 'CLASS 9 ';
-						else if($class == '11S')
-							$class = 'CLASS 11 SCIENCE ';
-						else if($class == '11C')
-							$class = 'CLASS 11 COMMERCE ';
-						
-						$filename = $class.$sem.'.xlsx';
-						$path = "../deb/";
-						$download_file = $path.$filename;
-						
-						header('Content-Description: File Transfer');
-						header('Content-Type: application/octet-stream');
-						header('Content-Disposition: attachment; filename='.basename($download_file));
-						header('Expires: 0');
-						header('Cache-Control: must-revalidate');
-						header('Pragma: public');
-						header('Content-Length: ' . filesize($download_file));
-						ob_clean();
-						flush();
-						readfile($download_file);
-						exit;
-						}
-					}
-					?>
 				</div>
 			</div>
 		</div>
@@ -193,15 +151,15 @@
 		
 			if(clas==1)
 			{
-				$("#sel3").load("../report_card/primary.txt");
+				$("#sel3").load("./report_card/primary.txt");
 			}
 			else if(clas<10)
 			{
-				$("#sel3").load("../report_card/secondary.txt");
+				$("#sel3").load("./report_card/secondary.txt");
 			}
 			else
 			{
-				$("#sel3").load("../report_card/senior.txt");
+				$("#sel3").load("./report_card/senior.txt");
 			}
 			
 		});

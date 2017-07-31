@@ -41,7 +41,7 @@
 		<div class="container-fluid">
 			<div class="ht col-md-10 col-md-offset-1">
 				
-				<div align="center" class="col-md-3 subhead sidebar">
+				<div align="center" class="col-md-3 subhead sidebarlong">
 					<h3>Welcome, Prateek</h3>
 					<?php echo "Date: ".date("d-m-Y")."<br/>";
 					echo "Time: ".date("h:i:sa");

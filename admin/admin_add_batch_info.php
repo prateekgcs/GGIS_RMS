@@ -50,23 +50,23 @@
 					<div class="container-fluid subhead">  	
 				
 						<div align='center'>
-							<h2>ADD BATCH INFORMATION</h2>
+							<h3>ADD BATCH INFORMATION</h3>
 						</div>
 					
-						<form action="" method="POST" enctype="multipart/form-data">
+						<form action="" class='subhead' method="POST" enctype="multipart/form-data">
 							<div class="form-group">
 								
 								<h4>Batch Year</h4>
 								<select name="year" class="form-control" id="sel1">
-									 <option value="141">2017</option>
-									 <option value="151">2018</option>
-									 <option value="161">2019</option>
-									 <option value="171">2020</option>
-									 <option value="181">2021</option>
-									 <option value="141">2022</option>
-									 <option value="151">2023</option>
-									 <option value="161">2024</option>
-									 <option value="171">2025</option>							 
+									 <option value="2017">2017</option>
+									 <option value="2018">2018</option>
+									 <option value="2019">2019</option>
+									 <option value="2020">2020</option>
+									 <option value="2021">2021</option>
+									 <option value="2022">2022</option>
+									 <option value="2023">2023</option>
+									 <option value="2024">2024</option>
+									 <option value="2025">2025</option>							 
 								 </select>
 							</div>
 				 				 
@@ -84,16 +84,16 @@
 							   <option value="7">7</option>
 							   <option value="8">8</option>
 							   <option value="9">9</option>
-							   <option value="10">10<option>
+							   <option value="10">10</option>
 							   <option value="11S">11 (SCIENCE)</option>
 							   <option value="11C">11 (COMMERCE)</option>
-							   <option value="12S">12 (SCIENCE)<option>
-							   <option value="12C">12 (COMMERCE)<option>
+							   <option value="11S">12 (SCIENCE)</option>
+							   <option value="11C">12 (COMMERCE)</option>
 							   </select>
 							 </div>
 					 		
 					
-					<div id="hide" class="form-group">
+					<div class="form-group">
 					  <h4>Upload File</h4>
 					  <input type="file" name="file" class='form-control'>
 					  </div>
@@ -118,34 +118,17 @@
 				
 					<?php
 									
-					/*if(isset($_POST["download"]))
-					{
-						$sem = $_POST['sem'];
-						$year = $_POST['year'];
-						$class = $_POST['class'];
-						if($class!='default')
-						{
-							
-						if($class <= 4)
-							$class = 'CLASS 1-4 ';
-						else if($class == 5)
-							$class = 'CLASS 5 ';
-						else if($class <= 8)
-							$class = 'CLASS 6-8 ';
-						else if($class == 9)
-							$class = 'CLASS 9 ';
-						else if($class == '11S')
-							$class = 'CLASS 11 SCIENCE ';
-						else if($class == '11C')
-							$class = 'CLASS 11 COMMERCE ';
-						
-						$filename = $class.$sem.'.xlsx';
-						$path = "../deb/";
+					if(isset($_POST["download"]))
+					{					
+						$year=$_POST['year'];
+						$class=$_POST['class'];
+						$filename = "CLASS 1-12 STUDENT INFO.xlsx";
+						$path = "../files/templates/";
 						$download_file = $path.$filename;
 						
 						header('Content-Description: File Transfer');
 						header('Content-Type: application/octet-stream');
-						header('Content-Disposition: attachment; filename='.basename($download_file));
+						header('Content-Disposition: attachment; filename='.'Class '.$class.'('.$year.')_info.xlsx');
 						header('Expires: 0');
 						header('Cache-Control: must-revalidate');
 						header('Pragma: public');
@@ -154,8 +137,7 @@
 						flush();
 						readfile($download_file);
 						exit;
-						}
-					}*/
+					}
 					?>
 				</div>
 			</div>
