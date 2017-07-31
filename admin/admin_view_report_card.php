@@ -82,11 +82,11 @@
 		</div>
 		
 		<!--BODY-->	
-		<div id='report'>
-		<div class="container-fluid">
-			<div class="ht col-md-10 col-md-offset-1" >
+		<div class='headmargin'>
+		<div class="container-fluid" id='report'>
+			<div style="border: 2px solid black" class="ht col-md-10 col-md-offset-1" >
 				
-				<div class="headmargin" >
+				<div class="container-fluid">
 				
 				<div class='row'>
 				
@@ -110,180 +110,180 @@
 					<h4>Class: IX <br/>Academic Session: 2017-18</h4>
 				</div>
 			
-				<div id='p' class="col-md-6 mtop">
-					<table>
-						<tr>
-							<td class='left'>Student's Name</td>
-							<td min-width="80%" style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						</tr>
-						
-						<tr>
-							<td class='left'>Father's Name</td>
-							<td min-width="80%" style="border-bottom: 1px solid black;"></td>
-						</tr>
-						<tr>
-							<td class='left'>Mother's Name</td>
-							<td min-width="80%" style="border-bottom: 1px solid black;"></td>
-						</tr>
-						<tr>
-							<td class='left'>Date of Birth</td>
-							<td min-width="80%" style="border-bottom: 1px solid black;"></td>
-						</tr>
-						<tr>
-							<td class='left'>Address</td>
-							<td min-width="80%" style="border-bottom: 1px solid black;"></td>
-						</tr>
-					</table>
-			
-				</div>
-			
-			<div id='p' class="col-md-4 mtop">
-			
-					<table>
-						<tr align='center'>
-							<td style="border: 1px solid black;">Roll No.</td>
-							<td style="border: 1px solid black;">1</td>
-						</tr>
-						<tr>
-							<td colspan='2'>&nbsp;</td>
-						</tr>
-						
-						<tr>
-							<td>Admission Number</td>
-							<td width='50%' style="border-bottom: 1px solid black;"></td>
-						</tr>
-						
-					</table>
+				<div class='row'>
+					<div id='p' class="col-md-6 mtop">
+						<table>
+							<tr>
+								<td class='left'>Student's Name</td>
+								<td min-width="80%" style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							</tr>
+							
+						    <tr>
+								<td class='left'>Father's Name</td>
+								<td min-width="80%" style="border-bottom: 1px solid black;"></td>
+							</tr>
+							<tr>
+								<td class='left'>Mother's Name</td>
+								<td min-width="80%" style="border-bottom: 1px solid black;"></td>
+							</tr>
+							<tr>
+								<td class='left'>Date of Birth</td>
+								<td min-width="80%" style="border-bottom: 1px solid black;"></td>
+							</tr>
+							<tr>
+								<td class='left'>Address</td>
+								<td min-width="80%" style="border-bottom: 1px solid black;"></td>
+							</tr>
+						</table>
+					
 					</div>
+			
+					<div id='p' class="col-md-4 mtop">
+						
+						<table>
+							<tr align='center'>
+								<td style="border: 1px solid black;">Roll No.</td>
+								<td style="border: 1px solid black;">1</td>
+							</tr>
 				
-				
-				<br/><br/>
+							<tr>
+								<td colspan='2'>&nbsp;</td>
+							</tr>							
+
+							<tr>
+								<td>Admission Number</td>
+								<td width='50%' style="border-bottom: 1px solid black;"></td>
+							</tr>
+								
+						</table>
+					</div>
+				</div>
 				
 				<div class='col-md-12 mtop'>
 			
-				<table class='table table-centered' border="2">
-				<tr class='bold'>
-					<td rowspan="2">SCHOLASTIC AREA</td>
-					<td colspan="5" rowspan="2">SA 1</td>
-					<td colspan="5" rowspan="2">SA 2</td>
-					<td colspan="3">OVERALL</td>
-				</tr>
-				<tr class='bold'>
-					<td colspan="3">Term 1 (50)+Term 2 (50)</td>	
-				</tr>
-				<tr class='bold'>
-					<td rowspan="2">Subjects</td>
-					<td>Per. Test</td>
-					<td>Note Book</td>
-					<td>SEA</td>
-					<td>Half Yearly</td>
-					<td>Total</td>
-					<td>Per. Test</td>
-					<td>Note Book</td>
-					<td>SEA</td>
-					<td>Half Yearly</td>
-					<td>Total</td>
-					<td>Grand Total</td>
-					<td rowspan="2">Grade</td>
-					<td rowspan="2">Rank</td>
-				</tr>
-				<tr class='bold'>
-					<td>10</td>
-					<td>5</td>
-					<td>5</td>
-					<td>80</td>
-					<td>100</td>
-					<td>10</td>
-					<td>5</td>
-					<td>5</td>
-					<td>80</td>
-					<td>100</td>
-					<td>100</td>
-				</tr>
-				<tr>
-					<td class='left'>English</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Hindi</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Maths</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Science</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Social Studies</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td colspan="14"><b>8 Point Grading Scale: </b>A1(91% - 100%), A2(81% - 90%), B1(71% - 80%), B2(61% - 70%), C1(51%-60%), C2(41% - 50%), D(33% - 40%), E(32% & Below) *SE=Sub Enrichment</b></td>
-				</tr>
-			</table>
+					<table class='table table-centered' border="2">
+					<tr class='bold'>
+						<td rowspan="2">SCHOLASTIC AREA</td>
+						<td colspan="5" rowspan="2">SA 1</td>
+						<td colspan="5" rowspan="2">SA 2</td>
+						<td colspan="3">OVERALL</td>
+					</tr>
+					<tr class='bold'>
+						<td colspan="3">Term 1 (50)+Term 2 (50)</td>	
+					</tr>
+					<tr class='bold'>
+						<td rowspan="2">Subjects</td>
+						<td>Per. Test</td>
+						<td>Note Book</td>
+						<td>SEA</td>
+						<td>Half Yearly</td>
+						<td>Total</td>
+						<td>Per. Test</td>
+						<td>Note Book</td>
+						<td>SEA</td>
+						<td>Half Yearly</td>
+						<td>Total</td>
+						<td>Grand Total</td>
+						<td rowspan="2">Grade</td>
+						<td rowspan="2">Rank</td>
+					</tr>
+					<tr class='bold'>
+						<td>10</td>
+						<td>5</td>
+						<td>5</td>
+						<td>80</td>
+						<td>100</td>
+						<td>10</td>
+						<td>5</td>
+						<td>5</td>
+						<td>80</td>
+						<td>100</td>
+						<td>100</td>
+					</tr>
+					<tr>
+						<td class='left'>English</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class='left'>Hindi</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class='left'>Maths</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class='left'>Science</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class='left'>Social Studies</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="14"><b>8 Point Grading Scale: </b>A1(91% - 100%), A2(81% - 90%), B1(71% - 80%), B2(61% - 70%), C1(51%-60%), C2(41% - 50%), D(33% - 40%), E(32% & Below) *SE=Sub Enrichment</b></td>
+					</tr>
+				</table>
 			</div>
 			
 			<br/>
@@ -325,6 +325,7 @@
 				</div>
 			</div>
 			
+			<div class="row">
 		
 			<div id='p' class='col-md-6 mtop'>
 			<table border="2">
@@ -432,11 +433,11 @@
 				</tr>
 			</table>
 		</div>
-	
+	</div>
 
-	<div class="col-md-12 mtop">
+	<div class="row mtop">
 		
-		<div id='p' class='col-md-5'>
+		<div class='col-md-4'>
 		<table>
 			<tr>
 				<td>Attendance</td>
@@ -445,31 +446,35 @@
 		</table>
 		</div>
 		
-		<div id='p' class='col-md-7'>
+		<div class='col-md-8'>
 		<table>
 			<tr>
 				<td>Remarks</td>
-				<td min-width='100%' style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td min-width='80%' style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			</tr>
 		</table>
 		</div>
 	</div>
 	
-		<div id='p' class="col-md-12 mtop">
+	<div class='row mtop'>
+		<h4><b>Congratulations! Promoted to next Class.</b></h4>
+	</div>
+	
+	<div class='row'>
+		<div class="row headmargin">
 		
-			<h4><b>Congratulations! Promoted to next Class.</b></h4>
+				<table class="table-responsive table-centered t1" width="100%" >
+					<tr>
+						<td id='p1'>Date: </td>
+						<td id='p1'>Class Teacher</td>
+						<td id='p1'>Principal</td>
+					</tr>
+				</table>
 			
-			<div class='row headmargin'>
-			<table class="table-responsive table-centered" width="100%" >
-				<tr>
-					<td id='p1'>Date: </td>
-					<td id='p1'>Class Teacher</td>
-					<td id='p1'>Principal</td>
-				</tr>
-			</table>
-			</div>
 		</div>
 	</div>	
+	
+	</div>
 	</div>
 </div>
 	</div>	
