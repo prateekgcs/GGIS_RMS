@@ -68,15 +68,15 @@
 								
 								<h4>Batch Year</h4>
 								<select name="year" class="form-control" id="sel1">
-									 <option value="141">2017</option>
-									 <option value="151">2018</option>
-									 <option value="161">2019</option>
-									 <option value="171">2020</option>
-									 <option value="181">2021</option>
-									 <option value="141">2022</option>
-									 <option value="151">2023</option>
-									 <option value="161">2024</option>
-									 <option value="171">2025</option>							 
+									 <option value="2017">2017</option>
+									 <option value="2018">2018</option>
+									 <option value="2019">2019</option>
+									 <option value="2020">2020</option>
+									 <option value="2021">2021</option>
+									 <option value="2022">2022</option>
+									 <option value="2023">2023</option>
+									 <option value="2024">2024</option>
+									 <option value="2025">2025</option>							 
 								 </select>
 							</div>
 				 				 
@@ -94,11 +94,24 @@
 							   <option value="7">7</option>
 							   <option value="8">8</option>
 							   <option value="9">9</option>
+							   <option value="10">10</option>
 							   <option value="11S">11 (SCIENCE)</option>
 							   <option value="11C">11 (COMMERCE)</option>
+							   <option value="11S">12 (SCIENCE)</option>
+							   <option value="11C">12 (COMMERCE)</option>
 							   </select>
 							 </div>
 					 					 
+								<div class="form-group">
+							   <h4>Section</h4>
+							   <select name="section" class="form-control" id="sel2">
+							   <option value="default">Select</option>
+							   <option value="a">A</option>
+							   <option value="b">B</option>
+							   <option value="c">C</option>
+							   </select>
+							 </div>
+							 
 					 <div class="form-group">
 						<h4>Test Name</h4>
 						<select name="sem" class="form-control" id="sel3">
