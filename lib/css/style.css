@@ -1,0 +1,226 @@
+@charset "utf-8";
+/* CSS Document */
+
+@media print 
+{
+	#p
+	{
+		float: left;
+	}
+	
+	#p1
+	{
+		width: 300px;
+	}
+	
+	 @page {
+		size: A4;
+		margin: 0px;
+    }
+	
+	body 
+	{
+		margin-top:0px;
+		padding-top:0px;
+		page-break-inside: avoid;
+		transform: scale(.90);		
+	}
+	
+}
+	
+.header
+{
+	box-shadow: 10px 10px 5px #02161e;  
+	background-color:#04202C; 
+	color:#fff;
+	position: relative;
+    z-index: 10000;
+}
+
+.footer {
+  /*position: fixed;*/
+  bottom: 0;
+  width: 100%;
+  min-height: 60px;
+  background-color: #04202C;
+  border-color: #04202C;
+  color:#fff;
+}
+
+.cards
+{
+	color:#fff;
+	background-color: darkslategray; 
+	border-color: darkslategray;
+	min-height: 50px;
+}
+
+.card1
+{
+	color:#fff;
+	background-color: #337AB7; 
+	border-color: black;
+	min-height: 50px;
+}
+
+.card1:hover
+{
+	background-color: #337AEE;
+}
+
+.card2
+{
+	color:#fff;
+	background-color: #5CB85C; 
+	border-color: black;
+	min-height: 50px;
+}
+
+.card2:hover
+{
+	background-color: #4dc861;
+}
+
+.card3
+{
+	color:#fff;
+	background-color: #F0AD4E; 
+	border-color: black;
+	min-height: 50px;
+}
+
+.card3:hover
+{
+	background-color: #f3c149;
+}
+
+.card4
+{
+	color:#fff;
+	background-color: #F87878; 
+	border-color: black;
+	min-height: 50px;
+}
+
+.card4:hover
+{
+	background-color: #f78a7d;
+}
+
+.card5
+{
+	color:#fff;
+	background-color: #603CBA; 
+	border-color: black;
+	min-height: 50px;
+}
+
+.card5:hover
+{
+	background-color: #603CEE;
+}
+
+.card6
+{
+	color:#fff;
+	background-color: #E94039; 
+	border-color: black;
+	min-height: 50px;
+}
+
+.card6:hover
+{
+	background-color: #E9405E;
+}
+
+.result
+{
+	background-color: white;
+	color: #000;
+}
+
+.sidebar
+{
+	background-color: #04202C;
+	color: #fff;
+	min-height: inherit;
+	display: table-cell;
+}
+
+.sidebarlong
+{
+	background-color: #04202C;
+	color: #fff;
+	min-height: 550px;
+}
+
+.mtop
+{
+	padding-left: 50px;
+	margin-top: 25px;
+}
+
+.subhead
+{
+	margin-top: 25px;
+	margin-bottom: 30px;
+}
+
+.headmargin
+{
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+h2,h3,h4
+{
+	font-family: roboto condensed,Franklin Gothic;
+}
+
+ul li a
+{
+	color: #fff;
+}
+
+.next, .prev, .submit
+{
+	margin-top: 20px;
+	margin-left: 30px;
+}
+
+li a
+{
+	color: #fff;
+	font-size: 18px;
+}
+
+.ff
+{
+	width: 40%; 
+	margin: 0 auto;
+}
+
+.fs
+{
+	margin-left: 370px;
+	
+}
+
+.midpad
+{
+	display: flex;
+	justify-content: center; 
+	align-items: center; 	
+}
+
+.ht
+{
+	min-height: 450px;
+	background-color: #eee;
+}
+
+.padd
+{
+	padding-bottom: 5px;
+	padding-top: 5px;
+}
