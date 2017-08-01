@@ -1,6 +1,33 @@
 <?php
-	//session_start();
-	//require_once("lib/sql/conn.php");
+	session_start();
+	require_once('../lib/sql/conn.php');
+	require_once('../lib/phpass-0.5/PasswordHash.php');
+	$conn = connect();
+	$hasher = new PasswordHash(8,false);
+	if(isset($_POST['login']))
+	{
+		$username = htmlentities($_POST['username'],ENT_QUOTES,'UTF-8');
+		$password = htmlentities($_POST['password'],ENT_QUOTES,'UTF-8');
+		$query = "SELECT * FROM professor_info WHERE email = ?";
+		$stmt = $conn->prepare($query);
+		$stmt->bindParam(1,$username);
+		if(!($stmt->execute())) die("<script>alert('Internal error!');</script>");
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		$class = $result['class'];
+		$section = $result['section'];
+		$fetched_password = $result['password'];
+		if($hasher->CheckPassword($password,$fetched_password))
+		{
+			$_SESSION['prof_username'] = $username;
+			$_SESSION['prof_class'] = $class;
+			$_SESSION['prof_section'] = $section;
+			header('Location: ./professor_dashboard.php');
+		}
+		else
+		{
+			printf("<script>alert('Incorrect Username or Password!');</script>");
+		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +70,7 @@
 							<div class="form-group">
 								<label for="inputEmail" class="col-md-3">Username</label>
 								<div class="col-md-9">
-									<input type="text" name="email" class="col-md-3 form-control" placeholder="Email"/>
+									<input type="text" name="username" class="col-md-3 form-control" placeholder="Email"/>
 								</div>
 							</div>
 			  
@@ -57,7 +84,7 @@
 							<br/>
 							
 							<div align="center">
-								<button type="submit" name="submits" class="btn btn-success">Submit</button>
+								<button type="submit" name="login" class="btn btn-success">Submit</button>
 							</div>
 										
 						</form>

@@ -1,11 +1,40 @@
 <?php
-/*
-	session_start();
-	if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
+	require_once('../lib/sql/conn.php');
+	$conn = connect();
+	$password = file_get_contents('../lib/shadow.txt'); //123qwe,./
+	if(isset($_POST['add']))
 	{
-		die(header("location: ../index.php"));
+		
+		$fname = htmlentities($_POST['fname'],ENT_QUOTES, 'UTF-8');
+		$mname = htmlentities($_POST['mname'],ENT_QUOTES, 'UTF-8');
+		$lname = htmlentities($_POST['lname'],ENT_QUOTES, 'UTF-8');
+		$gender = htmlentities($_POST['gender'],ENT_QUOTES, 'UTF-8');
+		$email = htmlentities($_POST['email'],ENT_QUOTES, 'UTF-8');
+		$contact = htmlentities($_POST['contact'],ENT_QUOTES, 'UTF-8');
+		$class = htmlentities($_POST['class'],ENT_QUOTES, 'UTF-8');
+		$section = htmlentities($_POST['section'],ENT_QUOTES, 'UTF-8');
+		
+		$query = "INSERT INTO professor_info (fname, mname,lname, gender, email, contact, class, section, password) VALUES (?,?,?,?,?,?,?,?,?)";
+		$stmt = $conn->prepare($query);
+		$stmt->bindParam(1,$fname);
+		$stmt->bindParam(2,$mname);
+		$stmt->bindParam(3,$lname);
+		$stmt->bindParam(4,$gender);
+		$stmt->bindParam(5,$email);
+		$stmt->bindParam(6,$contact);
+		$stmt->bindParam(7,$class);
+		$stmt->bindParam(8,$section);
+		$stmt->bindParam(9,$password);
+		
+		if($stmt->execute())
+		{
+			printf("<script>alert('User added succesfully!');window.location.href='./admin_manage_user.php';</script>");
+		}
+		else
+		{
+			printf("<script>alert('Retry!');</script>");
+		}
 	}
-	*/
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +92,7 @@
 							<h2>ADD PROFESSOR</h2>
 						</div>
 					   			
-				<form action="./add_professor_action.php" method="POST">
+				<form action="" method="POST">
 						
 						<div class="form-group">
 							<h4>First Name</h4>
@@ -95,7 +124,7 @@
 						
 						<div class="form-group">
 							<h4>Contact Number</h4>
-							<input class="form-control" name="cnumber" type="text" pattern="[7-9][0-9]{9}$" minlength="10" maxlength="10" required/>
+							<input class="form-control" name="contact" type="text" pattern="[7-9][0-9]{9}$" minlength="10" maxlength="10" required/>
 						</div>
 						
 						<div class="form-group">
