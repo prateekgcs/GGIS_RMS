@@ -61,7 +61,7 @@
 							<div class="form-group">
 								
 								<h4>Batch Year</h4>
-								<select name="year" class="form-control" id="sel1">
+								<select name="year" class="form-control" id="year">
 									 <option value="2017">2017</option>
 									 <option value="2018">2018</option>
 									 <option value="2019">2019</option>
@@ -77,18 +77,18 @@
 					
 							 <div class="form-group">
 							   <h4>Class</h4>
-							   <input type="text" value="<?php printf($_SESSION['prof_class']); ?>" name="class" class="form-control" id="sel1" readonly/>
+							   <input type="text" value="<?php printf($_SESSION['prof_class']); ?>" name="class" class="form-control" id="class" readonly/>
 							 </div>
 					 		
 							<div class="form-group">
 							   <h4>Section</h4>
-							   <input type="text" value="<?php printf($_SESSION['prof_section']); ?>" name="section" class="form-control" id="sel2" readonly/>
+							   <input type="text" value="<?php printf($_SESSION['prof_section']); ?>" name="section" class="form-control" id="section" readonly/>
 							 </div>
 							
 							<div class="form-group">
 								<h4>Result Template</h4>
-								<select name="sem" class="form-control" id="sel3">
-								 <option value="default">Select</option>
+								<select name="sem" class="form-control" id="template">
+								 <!--option value="default">Select</option-->
 								</select>
 							</div>
 					
@@ -173,22 +173,22 @@
 
 	window.onload = function() 
 	{
-			var clas= parseInt(document.getElementById('sel1').val());		
+			var clas= parseInt($('#class').val());		
 		
-			if(clas<4)
+			if(clas<=5)
 			{
-				$("#sel3").load("../lib/upload_template/primary.txt");
+				$("#template").load("../lib/upload_template/primary.txt");
 			}
 			else if(clas<10)
 			{
-				$("#sel3").load("../lib/upload_template/secondary.txt");
+				$("#template").load("../lib/upload_template/secondary.txt");
 			}
 			else
 			{
-				$("#sel3").load("../lib/upload_template/senior.txt");
+				$("#template").load("../lib/upload_template/senior.txt");
 			}
 			
-		});
+		}
 		
 	</script>
 	
