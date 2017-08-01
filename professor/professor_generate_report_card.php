@@ -151,15 +151,15 @@
 		
 			if(clas==1)
 			{
-				$("#sel3").load("../lib/report_card/primary.txt");
+				$("#sel3").load("./report_card/primary.txt");
 			}
 			else if(clas<10)
 			{
-				$("#sel3").load("../lib/report_card/secondary.txt");
+				$("#sel3").load("./report_card/secondary.txt");
 			}
 			else
 			{
-				$("#sel3").load("../lib/report_card/senior.txt");
+				$("#sel3").load("./report_card/senior.txt");
 			}
 			
 		});

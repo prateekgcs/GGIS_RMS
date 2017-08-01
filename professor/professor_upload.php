@@ -1,4 +1,4 @@
- <?php
+<?php
 	require_once('./professor_session_check.php');
  ?>
 
@@ -47,7 +47,7 @@
 					<a href="./professor_dashboard.php"><button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/home.png"/><br/>Home</button></a><br/>
 					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/reset.png"/><br/>Reset Password</button>
 					<br/>
-					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
+					<button onclick="location.href='../lib/signout.php'" class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
 				</div>
 				
 				<div class="col-md-7 col-md-offset-1 row">
