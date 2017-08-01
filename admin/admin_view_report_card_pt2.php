@@ -54,19 +54,19 @@
 	</style>
 	
 	<script>
-	function printDiv(divName) 
-{
+		function printDiv(divName) 
+		{
 
-	     var printContents = document.getElementById(divName).innerHTML;
-	     var originalContents = document.body.innerHTML;
-	
-	     document.body.innerHTML = printContents;
-	
-	     window.print();
-	
-	     document.body.innerHTML = originalContents;
-	}
-</script>
+			 var printContents = document.getElementById(divName).innerHTML;
+			 var originalContents = document.body.innerHTML;
+		
+			 document.body.innerHTML = printContents;
+		
+			 window.print();
+		
+			 document.body.innerHTML = originalContents;
+		}
+	</script>
 	
 </head>
 
@@ -82,9 +82,11 @@
 		</div>
 		
 		<!--BODY-->	
+		
 			<div class="container-fluid" id='report'>
 				<div style="border: 2px solid black" class="ht col-md-10 col-md-offset-1" >
 				<div class='headmargin'>
+					
 					<div class='container-fluid'>
 					
 						<div class='row'>
@@ -106,7 +108,7 @@
 				
 						<div align='center' class="col-md-12">
 							<h3>Report Card</h3>
-							<h4>Class: IX <br/>Academic Session: 2017-18 <br/><b>Periodic Test-1</b></h4>
+							<h4>Class: IX <br/>Academic Session: 2017-18 <br/><b>Periodic Test-2</b></h4>
 						</div>
 			
 						<div class='row'>
