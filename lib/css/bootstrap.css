@@ -11,9 +11,11 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
-body {}
+
+body {
   margin: 0;
 }
+
 article,
 aside,
 details,
@@ -3180,8 +3182,8 @@ fieldset[disabled] .btn-primary.focus {
 }
 .btn-success:hover {
   color: #fff;
-  background-color: #674D3E;
-  border-color: #674D3E;
+  background-color: #0a5372;
+  border-color: #0a5372;
 }
 .btn-success:active,
 .btn-success.active,
@@ -3217,8 +3219,8 @@ fieldset[disabled] .btn-success:focus,
 .btn-success.disabled.focus,
 .btn-success[disabled].focus,
 fieldset[disabled] .btn-success.focus {
-  background-color: #674D3E;
-  border-color: #674D3E;
+  background-color: #0a5372;
+  border-color: #0a5372;
 }
 .btn-success .badge {
   color: #3D4155;

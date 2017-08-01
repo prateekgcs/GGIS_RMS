@@ -1,9 +1,19 @@
-<!DOCTYPE html>
+ <?php
+    session_start();
+	if(!isset($_SESSION['admin_username']) && empty($_SESSION['admin_name'])) 
+	{
+		die(header("location: ../index.php"));
+	}
+    require_once '../lib/sql/conn.php';
+    $conn = connect();
+ ?>
+
+ <!DOCTYPE html>
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Admin Dashboard</title>
+	<title>Admin Upload Info</title>
 	<link href="../lib/css/bootstrap.css" rel="stylesheet">
 	<link href="../lib/css/style.css" rel="stylesheet">
 	
@@ -50,10 +60,11 @@
 					<div class="container-fluid subhead">  	
 				
 						<div align='center'>
-							<h3>ADD BATCH INFORMATION</h3>
+							<h3>UPLOAD BATCH INFORMATION</h3>
 						</div>
 					
-						<form action="" class='subhead' method="POST" enctype="multipart/form-data">
+						<form action="" method="POST" enctype="multipart/form-data">
+							<br/>
 							<div class="form-group">
 								
 								<h4>Batch Year</h4>
@@ -85,31 +96,25 @@
 							   <option value="8">8</option>
 							   <option value="9">9</option>
 							   <option value="10">10</option>
-							   <option value="11S">11 (SCIENCE)</option>
-							   <option value="11C">11 (COMMERCE)</option>
-							   <option value="11S">12 (SCIENCE)</option>
-							   <option value="11C">12 (COMMERCE)</option>
+							   <option value="11s">11 (SCIENCE)</option>
+							   <option value="11c">11 (COMMERCE)</option>
+							   <option value="11s">12 (SCIENCE)</option>
+							   <option value="11c">12 (COMMERCE)</option>
 							   </select>
 							 </div>
-					 		
-					
-					<div class="form-group">
-					  <h4>Upload File</h4>
-					  <input type="file" name="file" class='form-control'>
-					  </div>
+					 							
+							<div id="hide" class="form-group">
+							  <h4>Upload File</h4>
+							  <input type="file" name="file" class='form-control'>
+							</div>
 					  
-					  <br/>
+						<br/>
 					  
-					  <div align="center">
-						
-						<div class="col-md-6">
-						<button id='but' name='download' class='btn btn-success btn-block'>Download Template</button>
+						<div align="center">
+							
+							<input type='submit' name='Upload' value='Upload' class='btn btn-success btn-block'/>
+							</div>
 						</div>
-					    
-						<div class="col-md-6">
-						<input type='submit' name='Upload' value='Upload' class='btn btn-success btn-block'/>
-						</div>
-					</div>
 					 <br/>
 					 
 					</form>
@@ -118,17 +123,34 @@
 				
 					<?php
 									
-					if(isset($_POST["download"]))
-					{					
-						$year=$_POST['year'];
-						$class=$_POST['class'];
-						$filename = "CLASS 1-12 STUDENT INFO.xlsx";
-						$path = "../files/templates/";
+					/*if(isset($_POST["download"]))
+					{
+						$sem = $_POST['sem'];
+						$year = $_POST['year'];
+						$class = $_POST['class'];
+						if($class!='default')
+						{
+							
+						if($class <= 4)
+							$class = 'CLASS 1-4 ';
+						else if($class == 5)
+							$class = 'CLASS 5 ';
+						else if($class <= 8)
+							$class = 'CLASS 6-8 ';
+						else if($class == 9)
+							$class = 'CLASS 9 ';
+						else if($class == '11S')
+							$class = 'CLASS 11 SCIENCE ';
+						else if($class == '11C')
+							$class = 'CLASS 11 COMMERCE ';
+						
+						$filename = $class.$sem.'.xlsx';
+						$path = "../deb/";
 						$download_file = $path.$filename;
 						
 						header('Content-Description: File Transfer');
 						header('Content-Type: application/octet-stream');
-						header('Content-Disposition: attachment; filename='.'Class '.$class.'('.$year.')_info.xlsx');
+						header('Content-Disposition: attachment; filename='.basename($download_file));
 						header('Expires: 0');
 						header('Cache-Control: must-revalidate');
 						header('Pragma: public');
@@ -137,7 +159,8 @@
 						flush();
 						readfile($download_file);
 						exit;
-					}
+						}
+					}*/
 					?>
 				</div>
 			</div>
@@ -151,29 +174,6 @@
 	
 	<script src="../lib/js/jquery.min.js"></script>
 	<script src="../lib/js/bootstrap.js"></script>
-	
-	<script>
-
-	$("#sel2").on('change', function() 
-	{
-			var clas= parseInt($(this).val());		
-		
-			if(clas==1)
-			{
-				$("#sel3").load("./primary.txt");
-			}
-			else if(clas<10)
-			{
-				$("#sel3").load("./secondary.txt");
-			}
-			else
-			{
-				$("#sel3").load("./senior.txt");
-			}
-			
-		});
-		
-	</script>
 	
 </body>
 
