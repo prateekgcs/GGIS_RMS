@@ -4,7 +4,6 @@
 	require_once('../lib/phpass-0.5/PasswordHash.php');
 	$conn = connect();
  ?>
-
  <!DOCTYPE html>
 
 <head>

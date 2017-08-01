@@ -1,14 +1,10 @@
  <?php
- /*session_start();
-	if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
-	{
-		die(header("location: ../index.php"));
-	}
-    require_once '../lib/sql/conn.php';
-    $conn = connect();*/
+	require_once('./admin_session_check.php');
+	require_once('../lib/sql/conn.php');
+	require_once('../lib/phpass-0.5/PasswordHash.php');
+	$conn = connect();
  ?>
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 
 <head>
 	<meta charset="utf-8">
@@ -44,7 +40,7 @@
 			<div class="ht col-md-10 col-md-offset-1">
 				
 				<div align="center" class="col-md-3 subhead sidebar">
-					<h3>Welcome, Prateek</h3>
+					<h3>Welcome</br><?php printf($_SESSION['admin_name']); ?></h3>
 					<?php echo "Date: ".date("d-m-Y")."<br/>";
 					echo "Time: ".date("h:i:sa");
 					?>
@@ -83,7 +79,42 @@
 						
 						<button type="submit" name="reset" class="btn btn-success btn-block">Reset</button>
 					</form>
-					
+					<?php
+						$hasher = new PasswordHash(8, false);
+						if(isset($_POST['reset']))
+						{
+							$email = $_SESSION['admin_username'];
+							$current_password = htmlentities($_POST['cpass'], ENT_QUOTES, 'UTF-8');
+							$new_password = htmlentities($_POST['npass'], ENT_QUOTES, 'UTF-8');
+							$confirm_password = htmlentities($_POST['cnpass'], ENT_QUOTES, 'UTF-8');
+							
+							if($new_password != $confirm_password)
+								die("<script>alert('Password did not match!');</script>");
+							
+							$query = "SELECT * FROM admin_info where email = ?";
+							
+							$stmt = $conn->prepare($query);
+							$stmt->bindParam(1, $email);
+							if(!$stmt->execute()) die("<script>alert('Internal error!');</script>");
+							
+							$result = $stmt->fetch(PDO::FETCH_ASSOC);
+							
+							$fetched_password = $result['password'];
+							
+							if(!$hasher->CheckPassword($current_password,$fetched_password)) die("<script>alert('Incorrect Password!');</script>");
+							
+							$query = "UPDATE admin_info SET password = ? WHERE email = ?";
+							
+							$stmt = $conn->prepare($query);
+							$stmt->bindParam(1, $hasher->HashPassword($new_password));
+							$stmt->bindParam(2, $email);
+							
+							if(!$stmt->execute()) die("<script>alert('Can't update password!');</script>");
+							
+							printf("<script>alert('Password updated!'); window.location.href='./admin_dashboard.php';</script>");
+							
+						}
+					?>
 				</div>
 			</div>	
 			</div>
