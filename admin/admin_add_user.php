@@ -1,4 +1,5 @@
 <?php
+	require_once('../lib/session_check.php');
 	require_once('../lib/sql/conn.php');
 	$conn = connect();
 	$password = file_get_contents('../lib/shadow.txt'); //123qwe,./

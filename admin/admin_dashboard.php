@@ -1,12 +1,6 @@
 <?php
-		
-	/*session_start();
-	if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
-	{
-		die(header("location: ./index.php"));
-	}*/
+	require_once('./admin_session_check.php');
 ?>
-
 <!DOCTYPE html>
 
 <head>
@@ -42,7 +36,7 @@
 			<div class="ht col-md-10 col-md-offset-1">
 				
 				<div align="center" class="col-md-3 subhead sidebar">
-					<h3>Welcome, Prateek</h3>
+					<h3>Welcome, <?php printf($_SESSION['admin_name']); ?></h3>
 					<?php echo "Date: ".date("d-m-Y")."<br/>";
 					echo "Time: ".date("h:i:sa");
 					?>
@@ -50,7 +44,7 @@
 					<br/><br/>
 					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/reset.png"/><br/>Reset Password</button>
 					<br/>
-					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
+					<button onclick="location.href='../lib/signout.php'" class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
 				</div>
 				
 				<div class="col-md-9 row">

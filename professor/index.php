@@ -16,8 +16,10 @@
 		$class = $result['class'];
 		$section = $result['section'];
 		$fetched_password = $result['password'];
+		$name = ucwords($result['fname'].' '.$result['mname'].' '.$result['lname']);
 		if($hasher->CheckPassword($password,$fetched_password))
 		{
+			$_SESSION['prof_name'] = $name;
 			$_SESSION['prof_username'] = $username;
 			$_SESSION['prof_class'] = $class;
 			$_SESSION['prof_section'] = $section;

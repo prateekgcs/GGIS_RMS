@@ -1,4 +1,32 @@
-
+<?php
+	session_start();
+	require_once('../lib/sql/conn.php');
+	require_once('../lib/phpass-0.5/PasswordHash.php');
+	$conn = connect();
+	$hasher = new PasswordHash(8,false);
+	if(isset($_POST['login']))
+	{
+		$username = htmlentities($_POST['username'],ENT_QUOTES,'UTF-8');
+		$password = htmlentities($_POST['password'],ENT_QUOTES,'UTF-8');
+		$query = "SELECT * FROM admin_info WHERE email = ?";
+		$stmt = $conn->prepare($query);
+		$stmt->bindParam(1,$username);
+		if(!($stmt->execute())) die("<script>alert('Internal error!');</script>");
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		$name = ucwords($result['fname'].' '.$result['mname'].' '.$result['lname']);
+		$fetched_password = $result['password'];
+		if($hasher->CheckPassword($password,$fetched_password))
+		{
+			$_SESSION['admin_username'] = $username;
+			$_SESSION['admin_name'] = $name;
+			printf("<script>window.location.href='./admin_dashboard.php';</script>");
+		}
+		else
+		{
+			printf("<script>alert('Incorrect Username or Password!');</script>");
+		}
+	}
+?>
 <!DOCTYPE html>
 
 <head>
@@ -39,7 +67,7 @@
 							<div class="form-group">
 								<label for="inputEmail" class="col-md-3">Username</label>
 								<div class="col-md-9">
-									<input type="text" name="email" class="col-md-3 form-control" placeholder="Email"/>
+									<input type="text" name="username" class="col-md-3 form-control" placeholder="Email"/>
 								</div>
 							</div>
 			  
@@ -53,7 +81,7 @@
 							<br/>
 							
 							<div align="center">
-								<button type="submit" name="submits" class="btn btn-success">Submit</button>
+								<button type="submit" name="login" class="btn btn-success">Submit</button>
 							</div>
 										
 						</form>
@@ -75,46 +103,3 @@
 </body>
 
 </html>
-
-<?php
-
-	if(isset($_POST['submits']))
-		header("location: ./admin_dashboard.php");
-	/*{
-		$username=$_POST['email'];
-		$password=$_POST['password'];
-		
-		$conn=connect();
-		$table = "admin_login";
-		
-		$query="SELECT fname, mname, lname FROM `$table` WHERE username=? AND password=?";
-		$sql=$conn->prepare($query);
-		$sql->bindParam(1,$username);
-		$sql->bindParam(2,$password);
-		
-		if(!($sql->execute()))
-		{
-			die();
-		}
-		
-		$count = $sql->rowCount();
-		
-		if($count==1)
-        {   
-	
-			$row = $sql->fetch(PDO::FETCH_ASSOC);
-			$fname = $row['fname'];
-			$mname = $row['mname'];
-			$lname = $row['lname'];
-			
-			$_SESSION['name'] = $fname.' '.$mname.' '.$lname;
-			$_SESSION['username'] = $username;
-            header("location: ./admin_dashboard.php");
-		}
-        else
-        {
-			printf("<script> alert('Incorrect Authentication!') </script>");
-		}
-	}
-	*/
-?>
