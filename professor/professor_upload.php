@@ -1,12 +1,5 @@
  <?php
- session_start();
-	if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
-	{
-		die(header("location: ../index.php"));
-	}
-    require_once '../lib/ExcelToDB.php';
-    require_once '../lib/sql/conn.php';
-    $conn = connect();
+	require_once('./professor_session_check.php');
  ?>
 
  <!DOCTYPE html>
