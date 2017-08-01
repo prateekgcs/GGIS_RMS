@@ -1,11 +1,6 @@
 <?php
-    //session_start();
-	/*if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
-	{
-		die(header("location: ../index.php"));
-	}*/
-	?>
-	
+	require_once('./professor_session_check.php');
+?>
 <!DOCTYPE html>
 
 <head>
@@ -42,7 +37,7 @@
 			<div class="ht col-md-10 col-md-offset-1">
 				
 				<div align="center" class="col-md-3 subhead sidebarlong">
-					<h3>Welcome, Prateek</h3>
+					<h3>Welcome</br><?php printf($_SESSION['prof_name']); ?></h3>
 					<?php echo "Date: ".date("d-m-Y")."<br/>";
 					echo "Time: ".date("h:i:sa");
 					?>
@@ -52,7 +47,7 @@
 					<br/>
 					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/reset.png"/><br/>Reset Password</button>
 					<br/>
-					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
+					<button onclick = "location.href = '../lib/signout.php'" class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
 				</div>
 				
 				<div class="col-md-7 col-md-offset-1 row">
@@ -83,38 +78,17 @@
 					
 							 <div class="form-group">
 							   <h4>Class</h4>
-							   <select name="class" class="form-control" id="sel2">
-							   <option value="default">Select</option>
-							   <option value="1">1</option>
-							   <option value="2">2</option>
-							   <option value="3">3</option>
-							   <option value="4">4</option>
-							   <option value="5">5</option>
-							   <option value="6">6</option>
-							   <option value="7">7</option>
-							   <option value="8">8</option>
-							   <option value="9">9</option>
-							   <option value="10">10</option>
-							   <option value="11S">11 (SCIENCE)</option>
-							   <option value="11C">11 (COMMERCE)</option>
-							   <option value="11S">12 (SCIENCE)</option>
-							   <option value="11C">12 (COMMERCE)</option>
-							   </select>
+							   <input type="text" value="<?php printf($_SESSION['prof_class']); ?>" name="class" class="form-control" id="class" readonly/>
 							 </div>
 					 					 
 								<div class="form-group">
 							   <h4>Section</h4>
-							   <select name="section" class="form-control" id="sel2">
-							   <option value="default">Select</option>
-							   <option value="a">A</option>
-							   <option value="b">B</option>
-							   <option value="c">C</option>
-							   </select>
+							   <input type="text" value="<?php printf($_SESSION['prof_section']); ?>" name="section" class="form-control" id="section" readonly/>
 							 </div>
 							 
 					 <div class="form-group">
 						<h4>Test Name</h4>
-						<select name="sem" class="form-control" id="sel3">
+						<select name="sem" class="form-control" id="template">
 						 <option value="default">Select</option>
 						 </select>
                      </div>
@@ -150,24 +124,24 @@
 	
 	<script>
 
-	$("#sel2").on('change', function() 
+	window.onload = function() 
 	{
-			var clas= parseInt($(this).val());		
+			var clas= parseInt($('#class').val());		
 		
 			if(clas<=5)
 			{
-				$("#sel3").load("../lib/report_card/primary.txt");
+				$("#template").load("../lib/upload_template/primary.txt");
 			}
-			else if(clas<=9)
+			else if(clas<10)
 			{
-				$("#sel3").load("../lib/report_card/secondary.txt");
+				$("#template").load("../lib/upload_template/secondary.txt");
 			}
 			else
 			{
-				$("#sel3").load("../lib/report_card/senior.txt");
+				$("#template").load("../lib/upload_template/senior.txt");
 			}
 			
-		});
+		}
 		
 	</script>
 	
