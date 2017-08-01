@@ -40,7 +40,7 @@
 		</div>
 		
 		<!--BODY-->	
-		<div class="container-fluid">
+		<div class='container-fluid'>
 			<div class="ht col-md-10 col-md-offset-1">
 				
 				<div align="center" class="col-md-3 subhead sidebar">
