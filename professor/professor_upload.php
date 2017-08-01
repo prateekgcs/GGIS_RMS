@@ -77,33 +77,12 @@
 					
 							 <div class="form-group">
 							   <h4>Class</h4>
-							   <select name="class" class="form-control" id="sel2">
-							   <option value="default">Select</option>
-							   <option value="1">1</option>
-							   <option value="2">2</option>
-							   <option value="3">3</option>
-							   <option value="4">4</option>
-							   <option value="5">5</option>
-							   <option value="6">6</option>
-							   <option value="7">7</option>
-							   <option value="8">8</option>
-							   <option value="9">9</option>
-							   <option value="10">10</option>
-							   <option value="11s">11 (SCIENCE)</option>
-							   <option value="11c">11 (COMMERCE)</option>
-							   <option value="11s">12 (SCIENCE)</option>
-							   <option value="11c">12 (COMMERCE)</option>
-							   </select>
+							   <input type="text" value="<?php printf($_SESSION['prof_class']); ?>" name="class" class="form-control" id="sel1" readonly/>
 							 </div>
 					 		
 							<div class="form-group">
 							   <h4>Section</h4>
-							   <select name="section" class="form-control" id="sel2">
-							   <option value="default">Select</option>
-							   <option value="a">A</option>
-							   <option value="b">B</option>
-							   <option value="c">C</option>
-							   </select>
+							   <input type="text" value="<?php printf($_SESSION['prof_section']); ?>" name="section" class="form-control" id="sel2" readonly/>
 							 </div>
 							
 							<div class="form-group">
@@ -143,37 +122,37 @@
 						$sem = $_POST['sem'];
 						$year = $_POST['year'];
 						$class = $_POST['class'];
+						
 						if($class!='default')
 						{
+							if($class <= 4)
+								$class = 'CLASS 1-4 ';
+							else if($class == 5)
+								$class = 'CLASS 5 ';
+							else if($class <= 8)
+								$class = 'CLASS 6-8 ';
+							else if($class == 9)
+								$class = 'CLASS 9 ';
+							else if($class == '11S')
+								$class = 'CLASS 11 SCIENCE ';
+							else if($class == '11C')
+								$class = 'CLASS 11 COMMERCE ';
 							
-						if($class <= 4)
-							$class = 'CLASS 1-4 ';
-						else if($class == 5)
-							$class = 'CLASS 5 ';
-						else if($class <= 8)
-							$class = 'CLASS 6-8 ';
-						else if($class == 9)
-							$class = 'CLASS 9 ';
-						else if($class == '11S')
-							$class = 'CLASS 11 SCIENCE ';
-						else if($class == '11C')
-							$class = 'CLASS 11 COMMERCE ';
-						
-						$filename = $class.$sem.'.xlsx';
-						$path = "../deb/";
-						$download_file = $path.$filename;
-						
-						header('Content-Description: File Transfer');
-						header('Content-Type: application/octet-stream');
-						header('Content-Disposition: attachment; filename='.basename($download_file));
-						header('Expires: 0');
-						header('Cache-Control: must-revalidate');
-						header('Pragma: public');
-						header('Content-Length: ' . filesize($download_file));
-						ob_clean();
-						flush();
-						readfile($download_file);
-						exit;
+							$filename = $class.$sem.'.xlsx';
+							$path = "../deb/";
+							$download_file = $path.$filename;
+							
+							header('Content-Description: File Transfer');
+							header('Content-Type: application/octet-stream');
+							header('Content-Disposition: attachment; filename='.basename($download_file));
+							header('Expires: 0');
+							header('Cache-Control: must-revalidate');
+							header('Pragma: public');
+							header('Content-Length: ' . filesize($download_file));
+							ob_clean();
+							flush();
+							readfile($download_file);
+							exit;
 						}
 					}
 					?>
@@ -192,21 +171,21 @@
 	
 	<script>
 
-	$("#sel2").on('change', function() 
+	window.onload = function() 
 	{
-			var clas= parseInt($(this).val());		
+			var clas= parseInt(document.getElementById('sel1').val());		
 		
-			if(clas==1)
+			if(clas<4)
 			{
-				$("#sel3").load("./upload_template/primary.txt");
+				$("#sel3").load("../lib/upload_template/primary.txt");
 			}
 			else if(clas<10)
 			{
-				$("#sel3").load("./upload_template/secondary.txt");
+				$("#sel3").load("../lib/upload_template/secondary.txt");
 			}
 			else
 			{
-				$("#sel3").load("./upload_template/senior.txt");
+				$("#sel3").load("../lib/upload_template/senior.txt");
 			}
 			
 		});
