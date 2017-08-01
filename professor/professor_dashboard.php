@@ -43,9 +43,9 @@
 					?>
 					<hr/>
 					<br/><br/>
-					<button class="btn btn-primary btn-block">Reset Password</button>
+					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/reset.png"/><br/>Reset Password</button>
 					<br/>
-					<button onclick = "location.href = '../lib/signout.php' " class="btn btn-primary btn-block">Sign Out</button>
+					<button onclick="location.href='../lib/signout.php'" class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
 				</div>
 				
 				<div class="col-md-9 row">
@@ -74,7 +74,7 @@
 					
 					<div class="col-md-5 col-md-offset-1 ">
 						<div align="center" class="card">
-							<a href="professor/index.php">
+							<a href="./professor_generate_report_card.php">
 							<div class=" card card3 padd" id="cards">
 								<img class="card-img-top" width="20%" src="../lib/image/report.png">
 									<h3 class="card-title">GENERATE REPORT CARD</h3>
@@ -85,7 +85,7 @@
 					
 					<div class="col-md-5">
 						<div align="center" class="card">
-							<a href="professor/index.php">
+							<a href="./professor_view_individual_result.php">
 							<div class=" card card4 padd" id="cards">
 								<img class="card-img-top" width="20%" src="../lib/image/result.png">
 									<h3 class="card-title">VIEW INDIVIDUAL RESULT</h3>

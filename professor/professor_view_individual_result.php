@@ -1,13 +1,17 @@
- <?php
-	require_once('./professor_session_check.php');
- ?>
-
- <!DOCTYPE html>
+<?php
+    //session_start();
+	/*if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
+	{
+		die(header("location: ../index.php"));
+	}*/
+	?>
+	
+<!DOCTYPE html>
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Upload Result</title>
+	<title>Download Result</title>
 	<link href="../lib/css/bootstrap.css" rel="stylesheet">
 	<link href="../lib/css/style.css" rel="stylesheet">
 	
@@ -39,12 +43,13 @@
 				
 				<div align="center" class="col-md-3 subhead sidebarlong">
 					<h3>Welcome, Prateek</h3>
-						<?php echo "Date: ".date("d-m-Y")."<br/>";
-						echo "Time: ".date("h:i:sa");
+					<?php echo "Date: ".date("d-m-Y")."<br/>";
+					echo "Time: ".date("h:i:sa");
 					?>
 					<hr/>
 					<br/>
-					<a href="./professor_dashboard.php"><button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/home.png"/><br/>Home</button></a><br/>
+					<a href="./professor_dashboard.php"><button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/home.png"/><br/>Home</button></a>
+					<br/>
 					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/reset.png"/><br/>Reset Password</button>
 					<br/>
 					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
@@ -54,10 +59,11 @@
 					<div class="container-fluid subhead">  	
 				
 						<div align='center'>
-							<h2>UPLOAD RESULT</h2>
+							<h2>VIEW INDIVIDUAL RESULT</h2>
+							<br/>
 						</div>
 					
-						<form action="" method="POST" enctype="multipart/form-data">
+						<form action="./admin_view_report_card.php" method="POST" enctype="multipart/form-data">
 							<div class="form-group">
 								
 								<h4>Batch Year</h4>
@@ -89,14 +95,14 @@
 							   <option value="8">8</option>
 							   <option value="9">9</option>
 							   <option value="10">10</option>
-							   <option value="11s">11 (SCIENCE)</option>
-							   <option value="11c">11 (COMMERCE)</option>
-							   <option value="11s">12 (SCIENCE)</option>
-							   <option value="11c">12 (COMMERCE)</option>
+							   <option value="11S">11 (SCIENCE)</option>
+							   <option value="11C">11 (COMMERCE)</option>
+							   <option value="11S">12 (SCIENCE)</option>
+							   <option value="11C">12 (COMMERCE)</option>
 							   </select>
 							 </div>
-					 		
-							<div class="form-group">
+					 					 
+								<div class="form-group">
 							   <h4>Section</h4>
 							   <select name="section" class="form-control" id="sel2">
 							   <option value="default">Select</option>
@@ -105,31 +111,24 @@
 							   <option value="c">C</option>
 							   </select>
 							 </div>
-							
-							<div class="form-group">
-								<h4>Result Template</h4>
-								<select name="sem" class="form-control" id="sel3">
-								 <option value="default">Select</option>
-								</select>
-							</div>
-					
-							<div id="hide" class="form-group">
-							  <h4>Upload File</h4>
-							  <input type="file" name="file" class='form-control'>
-							</div>
+							 
+					 <div class="form-group">
+						<h4>Test Name</h4>
+						<select name="sem" class="form-control" id="sel3">
+						 <option value="default">Select</option>
+						 </select>
+                     </div>
+					 
+					 <div class="form-group">
+						<h4>Roll Number</h4>
+						<input type='number' name='rollno' placeholder='Roll Number' min='1' max='100' class="form-control">
+                     </div>
+					 
+					  <br/>
 					  
-						<br/>
-					  
-						<div align="center">
-							
-							<div class="col-md-6">
-							<button id='but' name='download' class='btn btn-success btn-block'>Download Template</button>
-							</div>
-							
-							<div class="col-md-6">
-							<input type='submit' name='Upload' value='Upload' class='btn btn-success btn-block'/>
-							</div>
-						</div>
+					  <div align="center">
+						<input type='submit' name='Download' value='Generate' class='btn btn-success btn-block'/>
+					</div>
 					 <br/>
 					 
 					</form>
@@ -159,7 +158,7 @@
 						else if($class == '11C')
 							$class = 'CLASS 11 COMMERCE ';
 						
-						$filename = $class.$sem.'.xlsx';
+						/*$filename = $class.$sem.'.xlsx';
 						$path = "../deb/";
 						$download_file = $path.$filename;
 						
@@ -173,7 +172,7 @@
 						ob_clean();
 						flush();
 						readfile($download_file);
-						exit;
+						exit;*/
 						}
 					}
 					?>
@@ -196,17 +195,17 @@
 	{
 			var clas= parseInt($(this).val());		
 		
-			if(clas==1)
+			if(clas<=5)
 			{
-				$("#sel3").load("./upload_template/primary.txt");
+				$("#sel3").load("../lib/report_card/primary.txt");
 			}
-			else if(clas<10)
+			else if(clas<=9)
 			{
-				$("#sel3").load("./upload_template/secondary.txt");
+				$("#sel3").load("../lib/report_card/secondary.txt");
 			}
 			else
 			{
-				$("#sel3").load("./upload_template/senior.txt");
+				$("#sel3").load("../lib/report_card/senior.txt");
 			}
 			
 		});

@@ -1,131 +1,212 @@
 <?php
-session_start();
-	if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
+    //session_start();
+	/*if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
 	{
 		die(header("location: ../index.php"));
-	}
+	}*/
 	?>
+	
 	<!DOCTYPE html>
-<html lang="en">
-<head>
 
+<head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Result Analysis System</title>
+	<title>Download Result</title>
 	<link href="../lib/css/bootstrap.css" rel="stylesheet">
 	<link href="../lib/css/style.css" rel="stylesheet">
-
+	
+	<style>
+				
+		a:hover
+		{
+			text-decoration: none;
+		}
+	
+	</style>
+	
 </head>
 
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-  
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-    </div>
+	<div class="container-fluid">
 	
-	<div align="center" class="col-sm-3">
-	<img class="img-circle img-responsive" width="50%" src="lib/image/logo.jpg"/>
-	</div>
-	 <div class="col-sm-9" align="center">
-		<h2 style="color: #fff;">GYAN GANGA INTERNATIONAL SCHOOL</h2>
-		<h3 style="color: #fff;">RESULT ANALYSIS SYSTEM</h3>
-	 </div>
-    <div class="collapse navbar-collapse" id="defaultNavbar1">    
-      <ul class="nav navbar-nav navbar-right">
-       <li><a href="./professor_dashboard.php">Dashboard</a></li>
-      </ul>
-    </div>
-    <!-- /.navbar-collapse --> 
-  </div>
-  <!-- /.container-fluid --> 
-</nav>
-<div class="container-fluid">
-  <div class="row">
- 
-  				<div class="col-md-6 col-md-offset-3">
-  				<div class="container-fluid jumbotron">  	
+		<!--HEADER-->
+		<div class="row header">
+			<div align="center">
+				<img class="img-responsive" src="../lib/image/logo.png"/>
+			</div>
+		</div>
+		
+		<!--BODY-->	
+		<div class="container-fluid">
+			<div class="ht col-md-10 col-md-offset-1">
 				
-					<div align='center'>
-					<h2>DOWNLOAD RESULT</h2>
-					</div>  		
+				<div align="center" class="col-md-3 subhead sidebarlong">
+					<h3>Welcome, Prateek</h3>
+					<?php echo "Date: ".date("d-m-Y")."<br/>";
+					echo "Time: ".date("h:i:sa");
+					?>
+					<hr/>
 					<br/>
-   					<form action="professor_save.php" method="POST">
-						<div class="form-group">
-						<h4>Batch Number</h4>
-						<select name="batch" class="form-control">
-						 <option value="131">2013-2017</option>
-                     <option value="141">2014-2019</option>
-						 <option value='151'>2015-2019</option>
-						 <option value='161'>2016-2020</option>
-						 <option value='171'>2017-2021</option>
-						 <option value='181'>2018-2022</option>
-						 </select>
-						 </div>
-					 
+					<a href="./professor_dashboard.php"><button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/home.png"/><br/>Home</button></a>
+					<br/>
+					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/reset.png"/><br/>Reset Password</button>
+					<br/>
+					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
+				</div>
+				
+				<div class="col-md-7 col-md-offset-1 row">
+					<div class="container-fluid subhead">  	
+				
+						<div align='center'>
+							<h2>DOWNLOAD RESULT</h2>
+							<br/>
+						</div>
+					
+						<form action="" method="POST" enctype="multipart/form-data">
+							<div class="form-group">
+								
+								<h4>Batch Year</h4>
+								<select name="year" class="form-control" id="sel1">
+									 <option value="2017">2017</option>
+									 <option value="2018">2018</option>
+									 <option value="2019">2019</option>
+									 <option value="2020">2020</option>
+									 <option value="2021">2021</option>
+									 <option value="2022">2022</option>
+									 <option value="2023">2023</option>
+									 <option value="2024">2024</option>
+									 <option value="2025">2025</option>							 
+								 </select>
+							</div>
+				 				 
+					
+							 <div class="form-group">
+							   <h4>Class</h4>
+							   <select name="class" class="form-control" id="sel2">
+							   <option value="default">Select</option>
+							   <option value="1">1</option>
+							   <option value="2">2</option>
+							   <option value="3">3</option>
+							   <option value="4">4</option>
+							   <option value="5">5</option>
+							   <option value="6">6</option>
+							   <option value="7">7</option>
+							   <option value="8">8</option>
+							   <option value="9">9</option>
+							   <option value="10">10</option>
+							   <option value="11S">11 (SCIENCE)</option>
+							   <option value="11C">11 (COMMERCE)</option>
+							   <option value="11S">12 (SCIENCE)</option>
+							   <option value="11C">12 (COMMERCE)</option>
+							   </select>
+							 </div>
+					 					 
+								<div class="form-group">
+							   <h4>Section</h4>
+							   <select name="section" class="form-control" id="sel2">
+							   <option value="default">Select</option>
+							   <option value="a">A</option>
+							   <option value="b">B</option>
+							   <option value="c">C</option>
+							   </select>
+							 </div>
+					 					 
 					 <div class="form-group">
-                    <h4>Branch</h4>
-                    <select name="branch" class="form-control" id="sel2">
-                       <option value="ce">CE</option>
-                       <option value="cs">CSE</option>
-		       <option value="ec">EC</option>
-		       <option value="ee">EE</option>
-		       <option value="ex">EX</option>
-		       <option value="it">IT</option>
-		       <option value="me">ME</option>
-                    
-                       </select>
-                     </div>
-					 
-					 <div class="form-group">
-                    <h4>Semester</h4>
-                    <select name="sem" class="form-control" id="sel3" >
-                     <option value='1'>1</option>
-                     <option value='2'>2</option>
-                     <option value='3'>3</option>
-                     <option value='4'>4</option>
-					 <option value='5'>5</option>
-                     <option value='6'>6</option>
-                     <option value='7'>7</option>
-                     <option value='8'>8</option>
+                    <h4>Exam</h4>
+                    <select name="sem" class="form-control" id="sel3">
+					 <option value="default">Select</option>
                      </select>
                      </div>
-					 			
-					<br/>
-					<div align="center" class='col-md-6 col-md-offset-3'>
-					 <div>
-						<button type="submit" name="view" class="btn btn-block btn-success">View</button>
-						</div>
-						
-					 <br/>
-					 <div>
-						<button type="submit" name="download" class="btn btn-success btn-block">Download</button>
-						</div>
-					</form>
-					<br/>
+					 
+					  <br/>
+					  
+					  <div align="center">
+						<input type='submit' name='Download' value='Download' class='btn btn-success btn-block'/>
 					</div>
+					 <br/>
+					 
+					</form>
 				</div>
-			
+			</div>	
+				
+					<?php
+									
+					/*if(isset($_POST["download"]))
+					{
+						$sem = $_POST['sem'];
+						$year = $_POST['year'];
+						$class = $_POST['class'];
+						if($class!='default')
+						{
+							
+						if($class <= 4)
+							$class = 'CLASS 1-4 ';
+						else if($class == 5)
+							$class = 'CLASS 5 ';
+						else if($class <= 8)
+							$class = 'CLASS 6-8 ';
+						else if($class == 9)
+							$class = 'CLASS 9 ';
+						else if($class == '11S')
+							$class = 'CLASS 11 SCIENCE ';
+						else if($class == '11C')
+							$class = 'CLASS 11 COMMERCE ';
+						
+						$filename = $class.$sem.'.xlsx';
+						$path = "../deb/";
+						$download_file = $path.$filename;
+						
+						header('Content-Description: File Transfer');
+						header('Content-Type: application/octet-stream');
+						header('Content-Disposition: attachment; filename='.basename($download_file));
+						header('Expires: 0');
+						header('Cache-Control: must-revalidate');
+						header('Pragma: public');
+						header('Content-Length: ' . filesize($download_file));
+						ob_clean();
+						flush();
+						readfile($download_file);
+						exit;
+						}
+					}*/
+					?>
+				</div>
+			</div>
 		</div>
-    </div>
-  </div>
-  <hr>
-  <div class="row">
- <div class="footer" align="center">
-<br/>
-      <p>Copyright &copy; &middot;Gyan Ganga Group of Institutions&middot; All Rights Reserved</p>
-    </div>
-  </div>
-  <hr>
-</div>
+		
+		<!--FOOTER-->
+		<div class="footer" align="center">
+			<br/>
+			<p>Copyright &copy; &middot;Gyan Ganga Group of Institutions&middot; All Rights Reserved</p>
+		</div>
+	
+	<script src="../lib/js/jquery.min.js"></script>
+	<script src="../lib/js/bootstrap.js"></script>
+	
+	<script>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src="lib/js/jquery.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
-<script src="lib/js/bootstrap.js"></script>
+	$("#sel2").on('change', function() 
+	{
+			var clas= parseInt($(this).val());		
+		
+			if(clas==1)
+			{
+				$("#sel3").load("../lib/upload_template/primary.txt");
+			}
+			else if(clas<10)
+			{
+				$("#sel3").load("../lib/upload_template/secondary.txt");
+			}
+			else
+			{
+				$("#sel3").load("../lib/upload_template/senior.txt");
+			}
+			
+		});
+		
+	</script>
+	
 </body>
+
 </html>

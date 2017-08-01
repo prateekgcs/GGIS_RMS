@@ -1,13 +1,17 @@
- <?php
-	require_once('./professor_session_check.php');
- ?>
-
- <!DOCTYPE html>
+<?php
+    //session_start();
+	/*if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
+	{
+		die(header("location: ../index.php"));
+	}*/
+	?>
+	
+	<!DOCTYPE html>
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Upload Result</title>
+	<title>Download Result</title>
 	<link href="../lib/css/bootstrap.css" rel="stylesheet">
 	<link href="../lib/css/style.css" rel="stylesheet">
 	
@@ -39,12 +43,13 @@
 				
 				<div align="center" class="col-md-3 subhead sidebarlong">
 					<h3>Welcome, Prateek</h3>
-						<?php echo "Date: ".date("d-m-Y")."<br/>";
-						echo "Time: ".date("h:i:sa");
+					<?php echo "Date: ".date("d-m-Y")."<br/>";
+					echo "Time: ".date("h:i:sa");
 					?>
 					<hr/>
 					<br/>
-					<a href="./professor_dashboard.php"><button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/home.png"/><br/>Home</button></a><br/>
+					<a href="./professor_dashboard.php"><button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/home.png"/><br/>Home</button></a>
+					<br/>
 					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/reset.png"/><br/>Reset Password</button>
 					<br/>
 					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
@@ -54,7 +59,8 @@
 					<div class="container-fluid subhead">  	
 				
 						<div align='center'>
-							<h2>UPLOAD RESULT</h2>
+							<h2>GENERATE REPORT CARD</h2>
+							<br/>
 						</div>
 					
 						<form action="" method="POST" enctype="multipart/form-data">
@@ -89,10 +95,10 @@
 							   <option value="8">8</option>
 							   <option value="9">9</option>
 							   <option value="10">10</option>
-							   <option value="11s">11 (SCIENCE)</option>
-							   <option value="11c">11 (COMMERCE)</option>
-							   <option value="11s">12 (SCIENCE)</option>
-							   <option value="11c">12 (COMMERCE)</option>
+							   <option value="11S">11 (SCIENCE)</option>
+							   <option value="11C">11 (COMMERCE)</option>
+							   <option value="11S">12 (SCIENCE)</option>
+							   <option value="11C">12 (COMMERCE)</option>
 							   </select>
 							 </div>
 					 		
@@ -106,77 +112,24 @@
 							   </select>
 							 </div>
 							
-							<div class="form-group">
-								<h4>Result Template</h4>
-								<select name="sem" class="form-control" id="sel3">
-								 <option value="default">Select</option>
-								</select>
-							</div>
-					
-							<div id="hide" class="form-group">
-							  <h4>Upload File</h4>
-							  <input type="file" name="file" class='form-control'>
-							</div>
-					  
-						<br/>
-					  
-						<div align="center">
 							
-							<div class="col-md-6">
-							<button id='but' name='download' class='btn btn-success btn-block'>Download Template</button>
-							</div>
-							
-							<div class="col-md-6">
-							<input type='submit' name='Upload' value='Upload' class='btn btn-success btn-block'/>
-							</div>
-						</div>
+					 <div class="form-group">
+                    <h4>Exam</h4>
+                    <select name="sem" class="form-control" id="sel3">
+					 <option value="default">Select</option>
+                     </select>
+                     </div>
+					 
+					  <br/>
+					  
+					  <div align="center">
+						<input type='submit' name='View' value='Generate' class='btn btn-success btn-block'/>
+					</div>
 					 <br/>
 					 
 					</form>
 				</div>
 			</div>	
-				
-					<?php
-									
-					if(isset($_POST["download"]))
-					{
-						$sem = $_POST['sem'];
-						$year = $_POST['year'];
-						$class = $_POST['class'];
-						if($class!='default')
-						{
-							
-						if($class <= 4)
-							$class = 'CLASS 1-4 ';
-						else if($class == 5)
-							$class = 'CLASS 5 ';
-						else if($class <= 8)
-							$class = 'CLASS 6-8 ';
-						else if($class == 9)
-							$class = 'CLASS 9 ';
-						else if($class == '11S')
-							$class = 'CLASS 11 SCIENCE ';
-						else if($class == '11C')
-							$class = 'CLASS 11 COMMERCE ';
-						
-						$filename = $class.$sem.'.xlsx';
-						$path = "../deb/";
-						$download_file = $path.$filename;
-						
-						header('Content-Description: File Transfer');
-						header('Content-Type: application/octet-stream');
-						header('Content-Disposition: attachment; filename='.basename($download_file));
-						header('Expires: 0');
-						header('Cache-Control: must-revalidate');
-						header('Pragma: public');
-						header('Content-Length: ' . filesize($download_file));
-						ob_clean();
-						flush();
-						readfile($download_file);
-						exit;
-						}
-					}
-					?>
 				</div>
 			</div>
 		</div>
@@ -198,15 +151,15 @@
 		
 			if(clas==1)
 			{
-				$("#sel3").load("./upload_template/primary.txt");
+				$("#sel3").load("../lib/report_card/primary.txt");
 			}
 			else if(clas<10)
 			{
-				$("#sel3").load("./upload_template/secondary.txt");
+				$("#sel3").load("../lib/report_card/secondary.txt");
 			}
 			else
 			{
-				$("#sel3").load("./upload_template/senior.txt");
+				$("#sel3").load("../lib/report_card/senior.txt");
 			}
 			
 		});
