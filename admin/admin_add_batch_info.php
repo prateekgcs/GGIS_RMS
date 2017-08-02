@@ -107,6 +107,11 @@
 					  
 						<div align="center">
 							
+							<div class="col-md-6">
+							<button id='but' name='download' class='btn btn-success btn-block'>Download Template</button>
+							</div>
+							
+							<div class="col-md-6">
 							<input type='submit' name='Upload' value='Upload' class='btn btn-success btn-block'/>
 							</div>
 						</div>
@@ -118,34 +123,33 @@
 				
 					<?php
 									
-					/*if(isset($_POST["download"]))
+					if(isset($_POST["download"]))
 					{
-						$sem = $_POST['sem'];
 						$year = $_POST['year'];
-						$class = $_POST['class'];
-						if($class!='default')
+						$clas = $_POST['class'];
+						if($clas!='default')
 						{
 							
-						if($class <= 4)
+						if($clas <= 4)
 							$class = 'CLASS 1-4 ';
-						else if($class == 5)
+						else if($clas == 5)
 							$class = 'CLASS 5 ';
-						else if($class <= 8)
+						else if($clas <= 8)
 							$class = 'CLASS 6-8 ';
-						else if($class == 9)
+						else if($clas == 9)
 							$class = 'CLASS 9 ';
-						else if($class == '11S')
+						else if($clas == '11S')
 							$class = 'CLASS 11 SCIENCE ';
-						else if($class == '11C')
+						else if($clas == '11C')
 							$class = 'CLASS 11 COMMERCE ';
 						
-						$filename = $class.$sem.'.xlsx';
-						$path = "../deb/";
+						$filename = "CLASS 1-12 STUDENT INFO.xlsx";
+						$path = "../files/templates/";
 						$download_file = $path.$filename;
 						
 						header('Content-Description: File Transfer');
 						header('Content-Type: application/octet-stream');
-						header('Content-Disposition: attachment; filename='.basename($download_file));
+						header('Content-Disposition: attachment; filename=CLASS '.$clas.' ('.$year.')_INFO');
 						header('Expires: 0');
 						header('Cache-Control: must-revalidate');
 						header('Pragma: public');
@@ -155,7 +159,7 @@
 						readfile($download_file);
 						exit;
 						}
-					}*/
+					}
 					?>
 				</div>
 			</div>

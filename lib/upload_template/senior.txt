@@ -1,7 +1,7 @@
-<option value="ut-1">Unit Test 1</option>
+<option value="UT-1">Unit Test 1</option>
                      
-<option value="ut-2">Unit Test 2</option>
+<option value="UT-2">Unit Test 2</option>
 					 				 
-<option value="ut-3">Unit Test 3</option>
+<option value="UT-3">Unit Test 3</option>
                     
-<option value="ae">Annual Examination</option>
+<option value="AE">Annual Examination</option>

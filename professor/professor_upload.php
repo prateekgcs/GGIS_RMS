@@ -139,7 +139,7 @@
 								$class = 'CLASS 11 COMMERCE ';
 							
 							$filename = $class.$sem.'.xlsx';
-							$path = "../deb/";
+							$path = "../files/templates/";
 							$download_file = $path.$filename;
 							
 							header('Content-Description: File Transfer');

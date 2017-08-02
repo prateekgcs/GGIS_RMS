@@ -1,6 +1,49 @@
 <?php
 	require_once('./admin_session_check.php');
-?>
+							
+					if(isset($_POST["download"]))
+					{
+						$temp = $_POST['temp'];
+						$year = $_POST['year'];
+						$clas = $_POST['clas'];
+						$class = '';
+						
+						if($clas!='default')
+						{
+							if($clas <= 4)
+								$class = 'CLASS 1-4 ';
+							else if($clas == 5)
+								$class = 'CLASS 5 ';
+							else if($clas <= 8)
+								$class = 'CLASS 6-8 ';
+							else if($clas == 9)
+								$class = 'CLASS 9 ';
+							else if($clas == '11S')
+								$class = 'CLASS 11 SCIENCE ';
+							else if($clas == '11C')
+								$class = 'CLASS 11 COMMERCE ';
+							
+							$filename = $class.$temp.'.xlsx';
+							$path = "../files/templates/";
+							$download_file = $path.$filename;
+							
+							header('Content-Description: File Transfer');
+							header('Content-Type: application/octet-stream');
+							header('Content-Disposition: attachment; filename='.basename($download_file));
+							header('Expires: 0');
+							header('Cache-Control: must-revalidate');
+							header('Pragma: public');
+							header('Content-Length: ' . filesize($download_file));
+							ob_clean();
+							flush();
+							readfile($download_file);
+							exit;
+						}
+					}
+					
+	
+	?>
+
 <!DOCTYPE html>
 
 <head>
@@ -56,11 +99,11 @@
 							<h2>UPLOAD RESULT</h2>
 						</div>
 					
-						<form action="" method="POST" enctype="multipart/form-data">
+						<form action="" method="POST">
 							<div class="form-group">
 								
 								<h4>Batch Year</h4>
-								<select name="year" class="form-control" id="sel1">
+								<select name="year" class="form-control" id="year">
 									 <option value="2017">2017</option>
 									 <option value="2018">2018</option>
 									 <option value="2019">2019</option>
@@ -76,7 +119,7 @@
 					
 							 <div class="form-group">
 							   <h4>Class</h4>
-							   <select name="class" class="form-control" id="sel2">
+							   <select name="clas" class="form-control" id="clas">
 							   <option value="default">Select</option>
 							   <option value="1">1</option>
 							   <option value="2">2</option>
@@ -97,7 +140,7 @@
 					 		
 							<div class="form-group">
 							   <h4>Section</h4>
-							   <select name="section" class="form-control" id="sel2">
+							   <select name="section" class="form-control" id="section">
 							   <option value="default">Select</option>
 							   <option value="a">A</option>
 							   <option value="b">B</option>
@@ -107,7 +150,7 @@
 							
 							<div class="form-group">
 								<h4>Result Template</h4>
-								<select name="sem" class="form-control" id="sel3">
+								<select name="temp" class="form-control" id="temp">
 								 <option value="default">Select</option>
 								</select>
 							</div>
@@ -134,48 +177,7 @@
 					</form>
 				</div>
 			</div>	
-				
-					<?php
-									
-					if(isset($_POST["download"]))
-					{
-						$sem = $_POST['sem'];
-						$year = $_POST['year'];
-						$class = $_POST['class'];
-						if($class!='default')
-						{
-							
-						if($class <= 4)
-							$class = 'CLASS 1-4 ';
-						else if($class == 5)
-							$class = 'CLASS 5 ';
-						else if($class <= 8)
-							$class = 'CLASS 6-8 ';
-						else if($class == 9)
-							$class = 'CLASS 9 ';
-						else if($class == '11S')
-							$class = 'CLASS 11 SCIENCE ';
-						else if($class == '11C')
-							$class = 'CLASS 11 COMMERCE ';
-						
-						$filename = $class.$sem.'.xlsx';
-						$path = "../deb/";
-						$download_file = $path.$filename;
-						
-						header('Content-Description: File Transfer');
-						header('Content-Type: application/octet-stream');
-						header('Content-Disposition: attachment; filename='.basename($download_file));
-						header('Expires: 0');
-						header('Cache-Control: must-revalidate');
-						header('Pragma: public');
-						header('Content-Length: ' . filesize($download_file));
-						ob_clean();
-						flush();
-						readfile($download_file);
-						exit;
-						}
-					}
-					?>
+
 				</div>
 			</div>
 		</div>
@@ -191,21 +193,21 @@
 	
 	<script>
 
-	$("#sel2").on('change', function() 
+	$("#clas").on('change', function() 
 	{
 			var clas= parseInt($(this).val());		
 		
-			if(clas==1)
+			if(clas<=5)
 			{
-				$("#sel3").load("./upload_template/primary.txt");
+				$("#temp").load("../lib/upload_template/primary.txt");
 			}
 			else if(clas<10)
 			{
-				$("#sel3").load("./upload_template/secondary.txt");
+				$("#temp").load("../lib/upload_template/secondary.txt");
 			}
 			else
 			{
-				$("#sel3").load("./upload_template/senior.txt");
+				$("#temp").load("../lib/upload_template/senior.txt");
 			}
 			
 		});

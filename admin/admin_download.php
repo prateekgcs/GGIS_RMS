@@ -181,21 +181,21 @@
 	
 	<script>
 
-	$("#sel2").on('change', function() 
+	$("#class").on('change', function() 
 	{
 			var clas= parseInt($(this).val());		
 		
 			if(clas==1)
 			{
-				$("#sel3").load("./upload_template/primary.txt");
+				$("#class").load("../lib/upload_template/primary.txt");
 			}
 			else if(clas<10)
 			{
-				$("#sel3").load("./upload_template/secondary.txt");
+				$("#class").load("../lib/upload_template/secondary.txt");
 			}
 			else
 			{
-				$("#sel3").load("./upload_template/senior.txt");
+				$("#class").load("../lib/upload_template/senior.txt");
 			}
 			
 		});
