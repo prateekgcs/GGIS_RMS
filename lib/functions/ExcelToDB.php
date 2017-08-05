@@ -30,7 +30,7 @@
         if($count > 0) die("<div style='font-size:20px' class='alert alert-info text-center'> <strong>Data Already Exists!<strong><br/> Result for selected batch has been uploaded earlier. Please truncate existing data in order to upload new data.</div> </div> </div> <hr> <div class='row'> <div class='footer' align='center'><br/><p>Copyright &copy; &middot;Gyan Ganga Group of Institutions&middot; All Rights Reserved</p></div></div><hr></div>");
 				
         $tmp_name = $_FILES['file']['tmp_name'];
-        $path="../Uploads/";
+        $path = __DIR__ . '\..\uploads\\';
         $exten = ".xlsx";
         $filename = $path.$tname.$exten;
 
@@ -54,24 +54,48 @@
  
  
  <?php
+ 
+	
+	function connecttt()
+	{
+
+		try 
+		{
+			$servername = "localhost";
+			$username = "root";
+			$password = "";
+			$dbname = "ggis_rms";
+			$link = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8",$username,$password);
+			//printf("Connection Successful!");
+			return $link;
+		}
+		catch(PDOException $e)
+		{
+			echo "Connection failed: " . $e->getMessage();
+		}
+	}
+	
+	require_once ( __DIR__ . './PHPExcel.php');
+?>
+
+	
+<?php
 	
 	// CLASS 1-4
 	
     function UploadResult1to4pt($tablename)
-    {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+    {		  
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `total` DOUBLE NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
-		  if(!($sqlinsert->execute())) die ("Error!");
+		  $sqlinsert = $link->prepare($queryinsert);
+		  if(!($sqlinsert->execute())) 
+			  die ("Error1!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -94,28 +118,39 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','$total','$attendance','$remarks')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$total);
+				$sqlinsert->bindParam(9,$attendance);
+				$sqlinsert->bindParam(10,$remarks);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error");
 			}
           }
+		  echo "UPLOADED!";
     }
 	
 	function UploadResult1to4sa($tablename)
     {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+        		  
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `total` DOUBLE NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
-		  if(!($sqlinsert->execute())) die ("Error!");
+		  $sqlinsert = $link->prepare($queryinsert);
+		  if(!($sqlinsert->execute())) die ("Error1!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -138,28 +173,37 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','$total','$attendance','$remarks')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$total);
+				$sqlinsert->bindParam(9,$attendance);
+				$sqlinsert->bindParam(10,$remarks);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error2!");
 			}
           }
     }
 	
 	function UploadResult1to4ns($tablename)
     {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `total` DOUBLE NOT NULL) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `total` VARCHAR(50) NOT NULL) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -179,29 +223,36 @@
             $total = $worksheet->getCell('H'.$row)->getValue();
             
 			if($rollno != '' && $name != '')
-			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','$total')";  
+			{				
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$total);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error!");
 			}
           }
     }
 
 	function UploadResult1to4sea($tablename)
     {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `total` DOUBLE NOT NULL) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `total` VARCHAR(50) NOT NULL) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -222,9 +273,19 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','$total')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$total);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error!");
 			}
           }
     }
@@ -232,20 +293,17 @@
 	//CLASS 5
 	
 	function UploadResult5pt($tablename)
-    {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+    {  
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `s6` DOUBLE NOT NULL ,`total` DOUBLE NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -269,28 +327,38 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','s6','$total','$attendance','$remarks')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$total);
+				$sqlinsert->bindParam(10,$attendance);
+				$sqlinsert->bindParam(11,$remarks);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error!");
 			}
           }
     }
 	
 	function UploadResult5ns($tablename)
-    {
-		require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+    {  
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `s6` DOUBLE NOT NULL, `total` DOUBLE NOT NULL) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL, `total` VARCHAR(50) NOT NULL) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -312,28 +380,36 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','s6','$total')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$total);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error!");
 			}
           }
     }
 
 	function UploadResult5sa($tablename)
     {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+          $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `s6` DOUBLE NOT NULL ,`total` DOUBLE NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -357,28 +433,38 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','s6','$total','$attendance','$remarks')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$total);
+				$sqlinsert->bindParam(10,$attendance);
+				$sqlinsert->bindParam(11,$remarks);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error!");
 			}
           }
     }
 	
 	function UploadResult5sea($tablename)
     {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `s6` DOUBLE NOT NULL, `total` DOUBLE NOT NULL) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL, `total` VARCHAR(50) NOT NULL) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -400,30 +486,38 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','s6','$total')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$total);
+							
+				if(!($sqlinsert->execute())) 
+					die ("Error!");
 			}
           }
     }
 	
 	// CLASS 6-9
 	
-		function UploadResult6to9pt($tablename)
-    {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+	function UploadResult6to9pt($tablename)
+    {		  
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `s6` DOUBLE NOT NULL ,`total` DOUBLE NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -447,28 +541,38 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','s6','$total','$attendance','$remarks')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$total);
+				$sqlinsert->bindParam(10,$attendance);
+				$sqlinsert->bindParam(11,$remarks);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error!");
 			}
           }
     }
 	
 	function UploadResult6to9ns($tablename)
-    {
-		require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+    {		  
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `s6` DOUBLE NOT NULL, `total` DOUBLE NOT NULL) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL, `total` VARCHAR(50) NOT NULL) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -490,8 +594,18 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','s6','$total')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$total);
+				
 				if(!($sqlinsert->execute())) die ("Error!");
 			}
           }
@@ -499,19 +613,16 @@
 	
 	function UploadResult6to9sea($tablename)
     {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `s6` DOUBLE NOT NULL, `total` DOUBLE NOT NULL) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL, `total` VARCHAR(50) NOT NULL) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -533,8 +644,18 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','s6','$total')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$total);
+				
 				if(!($sqlinsert->execute())) die ("Error!");
 			}
           }
@@ -542,19 +663,17 @@
 	
 	function UploadResult6to9ae($tablename)
     {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+ 
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `s6` DOUBLE NOT NULL ,`total` DOUBLE NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -578,8 +697,20 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','s6','$total','$attendance','$remarks')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$total);
+				$sqlinsert->bindParam(10,$attendance);
+				$sqlinsert->bindParam(11,$remarks);
+				
 				if(!($sqlinsert->execute())) die ("Error!");
 			}
           }
@@ -589,19 +720,16 @@
 	
 	function UploadResult11c($tablename)
     {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `s6` DOUBLE NOT NULL , `s7` DOUBLE NOT NULL , `s8` DOUBLE NOT NULL, `s9` DOUBLE NOT NULL ,`total` DOUBLE NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL , `s7` VARCHAR(50) NOT NULL , `s8` VARCHAR(50) NOT NULL, `s9` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -627,29 +755,43 @@
             $remarks = $worksheet->getCell('N'.$row)->getValue();
             
 			if($rollno != '' && $name != '')
-			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','s6','s7','s8','s9','$total','$attendance','$remarks')";  
+			{				
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$s7);
+				$sqlinsert->bindParam(10,$s8);
+				$sqlinsert->bindParam(11,$s9);
+				$sqlinsert->bindParam(12,$total);
+				$sqlinsert->bindParam(13,$attendance);
+				$sqlinsert->bindParam(14,$remarks);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error!");
 			}
           }
     }
 	
 	function UploadResult11s($tablename)
     {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+
+		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` DOUBLE NOT NULL , `s2` DOUBLE NOT NULL , `s3` DOUBLE NOT NULL , `s4` DOUBLE NOT NULL , `s5` DOUBLE NOT NULL , `s6` DOUBLE NOT NULL , `s7` DOUBLE NOT NULL , `s8` DOUBLE NOT NULL ,`total` DOUBLE NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE $tablename ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL , `s7` VARCHAR(50) NOT NULL , `s8` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -675,28 +817,41 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','s6','s7','s8','$total','$attendance','$remarks')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$s7);
+				$sqlinsert->bindParam(10,$s8);
+				$sqlinsert->bindParam(11,$total);
+				$sqlinsert->bindParam(12,$attendance);
+				$sqlinsert->bindParam(13,$remarks);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error!");
 			}
           }
     }
 	
 	function UploadResultcos($tablename)
     {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+
+		  $link = connecttt();
           
 		  $queryinsert = " CREATE TABLE $tablename ( `sch_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `f1` VARCHAR(5) NOT NULL , `f2` VARCHAR(5) NOT NULL , `f3` VARCHAR(5) NOT NULL , `f4` VARCHAR(5) NOT NULL , `f5` VARCHAR(5) NOT NULL , `f6` VARCHAR(5) NOT NULL , `f7` VARCHAR(5) NOT NULL , `f8` VARCHAR(5) NOT NULL ) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -713,32 +868,43 @@
             $s3 = $worksheet->getCell('E'.$row)->getValue();
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
-            $total = $worksheet->getCell('H'.$row)->getValue();
+            $s6 = $worksheet->getCell('H'.$row)->getValue();
+            $s7 = $worksheet->getCell('I'.$row)->getValue();
+            $s8 = $worksheet->getCell('J'.$row)->getValue();
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','$total')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$s7);
+				$sqlinsert->bindParam(10,$s8);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error!");
 			}
           }
     }
 	
 	function UploadResultdis($tablename)
     {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		  
-		  $link = connect();
+		  $link = connecttt();
           
 		  $queryinsert = " CREATE TABLE $tablename ( `sch_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `f1` VARCHAR(5) NOT NULL , `f2` VARCHAR(5) NOT NULL , `f3` VARCHAR(5) NOT NULL , `f4` VARCHAR(5) NOT NULL , `f5` VARCHAR(5) NOT NULL , `f6` VARCHAR(5) NOT NULL , `f7` VARCHAR(5) NOT NULL , `f8` VARCHAR(5) NOT NULL ) ";
 		  
-		  $sqlcreate = $link->prepare($querycreate);
+		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die ("Error!");
 		  
-		  $path="../Uploads/";
+		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
-          $class = $classname;
+          $class = $tablename;
           $filename = $path.$class.$exten;
 
           $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
@@ -755,34 +921,45 @@
             $s3 = $worksheet->getCell('E'.$row)->getValue();
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
-            $total = $worksheet->getCell('H'.$row)->getValue();
+            $s6 = $worksheet->getCell('H'.$row)->getValue();
+            $s7 = $worksheet->getCell('I'.$row)->getValue();
+            $s8 = $worksheet->getCell('J'.$row)->getValue();
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO $tablename VALUES ('$rollno','$name','$s1','$s2','$s3','$s4','$s5','$total')";  
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
-				if(!($sqlinsert->execute())) die ("Error!");
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$s6);
+				$sqlinsert->bindParam(9,$s7);
+				$sqlinsert->bindParam(10,$s8);
+				
+				if(!($sqlinsert->execute())) 
+					die ("Error!");
 			}
           }
     }
 	
 	function CreateStudentInfo($tablename)
     {
-        require_once '../sql/conn.php';
-		$link = connect();
+        
+		$link = connecttt();
           
-		$queryinsert = " CREATE TABLE $tablename ( `sno` INT NOT NULL , `scholar_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `religion` VARCHAR(20) NOT NULL , `gender` VARCHAR(10) NOT NULL , `category` VARCHAR(10) NOT NULL , `fname` VARCHAR(80) NOT NULL , `mname` VARCHAR(80) NOT NULL , `dob` VARCHAR(15) NOT NULL , `address` VARCHAR(150) NOT NULL , `mno` VARCHAR(10) NOT NULL , `bg` VARCHAR(10) NOT NULL , `height` DOUBLE NOT NULL , `weight` DOUBLE NOT NULL , `house` VARCHAR(20) NOT NULL ) ";
+		$queryinsert = " CREATE TABLE $tablename ( `sno` INT NOT NULL , `scholar_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `religion` VARCHAR(20) NOT NULL , `gender` VARCHAR(10) NOT NULL , `category` VARCHAR(10) NOT NULL , `fname` VARCHAR(80) NOT NULL , `mname` VARCHAR(80) NOT NULL , `dob` VARCHAR(15) NOT NULL , `address` VARCHAR(150) NOT NULL , `mno` VARCHAR(10) NOT NULL , `bg` VARCHAR(10) NOT NULL , `height` VARCHAR(50) NOT NULL , `weight` VARCHAR(50) NOT NULL , `house` VARCHAR(20) NOT NULL ) ";
 		  
-		$sqlcreate = $link->prepare($querycreate);
+		$sqlinsert = $link->prepare($queryinsert);
 		if(!($sqlinsert->execute())) die ("Error!");
 	}
 	
 	function UploadStudentInfo($tablename)
-    {
-        require_once '../sql/conn.php';
-        require_once './PHPExcel.php';
-		
-          $link = connect();
+    {		
+          $link = connecttt();
           $path="../../Uploads/";
           $exten = ".xlsx";
           $filename = $path.$tablename.$exten;
@@ -809,9 +986,26 @@
 			$height = $worksheet->getCell('M'.$row)->getValue();
             $weight = $worksheet->getCell('N'.$row)->getValue();
             $house = $worksheet->getCell('O'.$row)->getValue();
-          
-            $queryinsert = "INSERT INTO `".$tablename."` VALUES ('$sno','$admno','$name','$religion','$category','$fname','$mname','$dob','$address','$mno','$bg','height','weight','house')"; 			
-			$sqlinsert = $link->prepare($queryinsert);
+			            
+			if($rollno != '' && $name != '')
+			{
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?)";
+				$sqlinsert = $link->prepare($queryinsert);
+				$sqlinsert->bindParam(1,$sno);
+				$sqlinsert->bindParam(2,$admno);
+				$sqlinsert->bindParam(3,$name);
+				$sqlinsert->bindParam(4,$religion);
+				$sqlinsert->bindParam(5,$category);
+				$sqlinsert->bindParam(6,$fname);
+				$sqlinsert->bindParam(7,$mname);
+				$sqlinsert->bindParam(8,$dob);
+				$sqlinsert->bindParam(9,$address);
+				$sqlinsert->bindParam(10,$mno);
+				$sqlinsert->bindParam(11,$bg);
+				$sqlinsert->bindParam(12,$height);
+				$sqlinsert->bindParam(13,$weight);
+				$sqlinsert->bindParam(14,$house);
+			  
             if(!($sqlinsert->execute())) 
 				die ($sqlinsert->errorInfo());
           }

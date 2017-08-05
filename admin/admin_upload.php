@@ -201,10 +201,8 @@
 								if(!(move_uploaded_file($tmp_name, $filename))) die("Can't Upload File!");
 										
 								//upload excel to database
-								UploadExcel($tname);  
-
+								UploadResult1to4pt($tname);  
 							}
-
 						}
 					?>
 				</div>
