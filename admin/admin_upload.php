@@ -181,6 +181,7 @@
 						require_once('../lib/sql/conn.php');
 						require_once('../lib/functions/check_uploaded.php');
 						require_once('../lib/functions/fetch_bitmap.php');
+						require_once('../lib/functions/ExcelToDB.php');
 						if(isset($_POST['upload']) && $_FILES['file']['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 						{
 							$year = $_POST['year'];
