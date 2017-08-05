@@ -1,13 +1,55 @@
 <?php
-	require_once('./professor_session_check.php');
- ?>
+	require_once('./admin_session_check.php');
+							
+					if(isset($_POST["download"]))
+					{
+						$temp = $_POST['temp'];
+						$year = $_POST['year'];
+						$clas = $_POST['clas'];
+						$class = '';
+						
+						if($clas!='default')
+						{
+							if($clas <= 4)
+								$class = 'CLASS 1-4 ';
+							else if($clas == 5)
+								$class = 'CLASS 5 ';
+							else if($clas <= 8)
+								$class = 'CLASS 6-8 ';
+							else if($clas == 9)
+								$class = 'CLASS 9 ';
+							else if($clas == '11S')
+								$class = 'CLASS 11 SCIENCE ';
+							else if($clas == '11C')
+								$class = 'CLASS 11 COMMERCE ';
+							
+							$filename = $class.$temp.'.xlsx';
+							$path = "../files/templates/";
+							$download_file = $path.$filename;
+							
+							header('Content-Description: File Transfer');
+							header('Content-Type: application/octet-stream');
+							header('Content-Disposition: attachment; filename='.basename($download_file));
+							header('Expires: 0');
+							header('Cache-Control: must-revalidate');
+							header('Pragma: public');
+							header('Content-Length: ' . filesize($download_file));
+							ob_clean();
+							flush();
+							readfile($download_file);
+							exit;
+						}
+					}
+					
+	
+	?>
 
- <!DOCTYPE html>
+<!DOCTYPE html>
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Upload Result</title>
+	<title>Admin Upload</title>
 	<link href="../lib/css/bootstrap.css" rel="stylesheet">
 	<link href="../lib/css/style.css" rel="stylesheet">
 	
@@ -38,14 +80,14 @@
 			<div class="ht col-md-10 col-md-offset-1">
 				
 				<div align="center" class="col-md-3 subhead sidebarlong">
-					<h3>Welcome</br><?php printf($_SESSION['prof_name']); ?></h3>
-						<?php echo "Date: ".date("d-m-Y")."<br/>";
-						echo "Time: ".date("h:i:sa");
+					<h3>Welcome</br><?php printf($_SESSION['admin_name']); ?></h3>
+					<?php echo "Date: ".date("d-m-Y")."<br/>";
+					echo "Time: ".date("h:i:sa");
 					?>
 					<hr/>
 					<br/>
-					<a href="./professor_dashboard.php"><button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/home.png"/><br/>Home</button></a><br/>
-					<button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/reset.png"/><br/>Reset Password</button>
+					<a href="./admin_dashboard.php"><button class="btn btn-primary btn-block"><img width="10%" src="../lib/image/home.png"/><br/>Home</button></a><br/>
+					<button onclick="location.href='./admin_reset_password.php'" class="btn btn-primary btn-block"><img width="10%" src="../lib/image/reset.png"/><br/>Reset Password</button>
 					<br/>
 					<button onclick="location.href='../lib/signout.php'" class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
 				</div>
@@ -57,7 +99,7 @@
 							<h2>UPLOAD RESULT</h2>
 						</div>
 					
-						<form action="" method="POST" enctype="multipart/form-data">
+						<form action="" method="POST">
 							<div class="form-group">
 								
 								<h4>Batch Year</h4>
@@ -77,18 +119,39 @@
 					
 							 <div class="form-group">
 							   <h4>Class</h4>
-							   <input type="text" value="<?php printf($_SESSION['prof_class']); ?>" name="class" class="form-control" id="class" readonly/>
+							   <select name="clas" class="form-control" id="clas">
+							   <option value="default">Select</option>
+							   <option value="1">1</option>
+							   <option value="2">2</option>
+							   <option value="3">3</option>
+							   <option value="4">4</option>
+							   <option value="5">5</option>
+							   <option value="6">6</option>
+							   <option value="7">7</option>
+							   <option value="8">8</option>
+							   <option value="9">9</option>
+							   <option value="10">10</option>
+							   <option value="11s">11 (SCIENCE)</option>
+							   <option value="11c">11 (COMMERCE)</option>
+							   <option value="11s">12 (SCIENCE)</option>
+							   <option value="11c">12 (COMMERCE)</option>
+							   </select>
 							 </div>
 					 		
 							<div class="form-group">
 							   <h4>Section</h4>
-							   <input type="text" value="<?php printf($_SESSION['prof_section']); ?>" name="section" class="form-control" id="section" readonly/>
+							   <select name="section" class="form-control" id="section">
+							   <option value="default">Select</option>
+							   <option value="a">A</option>
+							   <option value="b">B</option>
+							   <option value="c">C</option>
+							   </select>
 							 </div>
 							
 							<div class="form-group">
 								<h4>Result Template</h4>
-								<select name="sem" class="form-control" id="template">
-								 <!--option value="default">Select</option-->
+								<select name="temp" class="form-control" id="temp">
+								 <option value="default">Select</option>
 								</select>
 							</div>
 					
@@ -114,48 +177,7 @@
 					</form>
 				</div>
 			</div>	
-				
-					<?php
-									
-					if(isset($_POST["download"]))
-					{
-						$sem = $_POST['sem'];
-						$year = $_POST['year'];
-						$class = $_POST['class'];
-						
-						if($class!='default')
-						{
-							if($class <= 4)
-								$class = 'CLASS 1-4 ';
-							else if($class == 5)
-								$class = 'CLASS 5 ';
-							else if($class <= 8)
-								$class = 'CLASS 6-8 ';
-							else if($class == 9)
-								$class = 'CLASS 9 ';
-							else if($class == '11S')
-								$class = 'CLASS 11 SCIENCE ';
-							else if($class == '11C')
-								$class = 'CLASS 11 COMMERCE ';
-							
-							$filename = $class.$sem.'.xlsx';
-							$path = "../files/templates/";
-							$download_file = $path.$filename;
-							
-							header('Content-Description: File Transfer');
-							header('Content-Type: application/octet-stream');
-							header('Content-Disposition: attachment; filename='.basename($download_file));
-							header('Expires: 0');
-							header('Cache-Control: must-revalidate');
-							header('Pragma: public');
-							header('Content-Length: ' . filesize($download_file));
-							ob_clean();
-							flush();
-							readfile($download_file);
-							exit;
-						}
-					}
-					?>
+
 				</div>
 			</div>
 		</div>
@@ -171,24 +193,24 @@
 	
 	<script>
 
-	window.onload = function() 
+	$("#clas").on('change', function() 
 	{
-			var clas= parseInt($('#class').val());		
+			var clas= parseInt($(this).val());		
 		
 			if(clas<=5)
 			{
-				$("#template").load("../lib/upload_template/primary.txt");
+				$("#temp").load("../lib/upload_template/primary.txt");
 			}
 			else if(clas<10)
 			{
-				$("#template").load("../lib/upload_template/secondary.txt");
+				$("#temp").load("../lib/upload_template/secondary.txt");
 			}
 			else
 			{
-				$("#template").load("../lib/upload_template/senior.txt");
+				$("#temp").load("../lib/upload_template/senior.txt");
 			}
 			
-		}
+		});
 		
 	</script>
 	
