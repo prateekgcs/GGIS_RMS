@@ -141,7 +141,6 @@
 							<div class="form-group">
 							   <h4>Section</h4>
 							   <select name="section" class="form-control" id="section">
-							   <option value="default">Select</option>
 							   <option value="a">A</option>
 							   <option value="b">B</option>
 							   <option value="c">C</option>
