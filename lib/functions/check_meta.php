@@ -1,5 +1,5 @@
 <?php
-    require_once('./sql/conn.php');
+    require_once('../sql/conn.php');
     $conn = connect();
     function metaCheck($year,$class)
     {

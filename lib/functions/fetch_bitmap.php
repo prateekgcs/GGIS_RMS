@@ -1,5 +1,7 @@
 <?php
-    require_once('./conn.php');
+
+    require_once("./signout.php");
+    
     function getBitMap($year,$class,$section)
     {
         $conn = connect();

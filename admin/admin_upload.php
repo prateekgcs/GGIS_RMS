@@ -8,7 +8,7 @@
 						$clas = $_POST['clas'];
 						$class = '';
 						
-						if($clas!='default')
+						if($class!='default')
 						{
 							if($clas <= 4)
 								$class = 'CLASS 1-4 ';
@@ -99,7 +99,7 @@
 							<h2>UPLOAD RESULT</h2>
 						</div>
 					
-						<form action="" method="POST">
+						<form action="" method="POST" enctype="multipart/form-data">
 							<div class="form-group">
 								
 								<h4>Batch Year</h4>
@@ -169,12 +169,33 @@
 							</div>
 							
 							<div class="col-md-6">
-							<input type='submit' name='Upload' value='Upload' class='btn btn-success btn-block'/>
+							<input type='submit' name='upload' value='Upload' class='btn btn-success btn-block'/>
 							</div>
 						</div>
 					 <br/>
 					 
 					</form>
+				</div>
+				<div>
+					<?php
+
+						require_once('../lib/sql/conn.php');
+						require_once('../lib/functions/check_uploaded.php');
+						require_once('../lib/functions/fetch_bitmap.php');
+						if(isset($_POST['upload']) && $_FILES['file']['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+						{
+							$year = $_POST['year'];
+							$class = $_POST['clas'];
+							$section = $_POST['section'];
+							$test_type = $_POST['temp'];
+							$bitmap = getBitMap($year,$class,$section);
+							if(checkAll($bitmap,$test_type,$class))
+							{
+								printf("<script>alert('Fuck Yeah!');</script>");
+							}
+
+						}
+					?>
 				</div>
 			</div>	
 

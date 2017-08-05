@@ -1,4 +1,18 @@
 <?php
+    function checkAll($bitmap,$test_type,$class)
+    {
+        $bool = 0;
+
+        if($class<=5)
+            $bool = checkOnetoFive($bitmap,$test_type);
+        else if($class>=6 && $class<=9)
+            $bool = checkSixToNine($bitmap,$test_type);
+        else if($class>=11) 
+            $bool = checkEleven($bitmap,$test_type);
+
+        return $bool;
+    }
+
     function checkOnetoFive($bitmap,$test_type)
     {
         $a = str_split($bitmap);

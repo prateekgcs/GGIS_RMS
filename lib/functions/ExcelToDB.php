@@ -1,4 +1,3 @@
- 
  <?php
 		
 			/*if(isset($_POST['upload']) && $_FILES['file']['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
