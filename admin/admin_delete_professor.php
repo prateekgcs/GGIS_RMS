@@ -80,7 +80,34 @@
 								$name = ucwords($result['fname'].$result['mname'].$result['lname']);
 								$class = ucwords($result['class'].$result['section']);
 								printf("Name: $name</br> Class:  $class");
-								printf("</br> <button onclick=\" alert('Are you 🐷?'); \"></button>");
+								printf("
+									</br><button onclick=\" confirmBox(); \" class='btn btn-danger btn-block'>Delete</button>
+									<script>
+										function confirmBox()
+										{
+											var r = confirm(\"Are you 🐷?\");
+											if (r == true) {
+												window.location.href='./admin_delete_professor.php?delete=1&email=$email';
+											} else {
+												window.location.href='./admin_delete_professor.php';
+											}
+										}
+									</script>");
+							}
+
+							if(isset($_GET['delete'])&&isset($_GET['email']))
+							{
+								$email = $_GET['email'];
+								$query = "DELETE FROM professor_info WHERE email = ?";
+								$stmt = $conn->prepare($query);
+								$stmt->bindParam(1,$email);
+								if(!$stmt->execute()) die("<script>alert('Internal Error!');</script>");
+								printf("
+										<script>
+											alert('Account Deleted');
+											window.location.href='./admin_manage_user.php';
+										</script>
+									");
 							}
 						?>
 					</div>

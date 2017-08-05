@@ -1,5 +1,7 @@
 <?php
 	require_once('./admin_session_check.php');
+	require_once('../lib/sql/conn.php');
+	$conn = connect();	
 ?>
 <!DOCTYPE html>
 
@@ -59,11 +61,11 @@
 					<form action="" method="POST">
 					<br/>
 						<h4>Enter Email</h4>
-						<input class="form-control" type="email" name="eid">
+						<input class="form-control" type="email" name="email">
 						<br/>
 						<div class="form-group">
 							   <h4>Category</h4>
-							   <select name="class" class="form-control">
+							   <select name="category" class="form-control">
 							   <option value="fname">First Name</option>
 							   <option value="mname">Middle Name</option>
 							   <option value="lname">Last Name</option>
@@ -71,13 +73,49 @@
 							   <option value="email">Email</option>
 							   <option value="contact">Contact</option>
 							    <option value="email">Class</option>
-							   <option value="Section">Section</option>
+							   <option value="section">Section</option>
 							   </select>
 							 </div>
 						<br/>
 						<button type="submit" name="view" class="btn btn-success btn-block">Search</button>
 					</form>
 					
+				</div>
+				<div>
+					<?php
+						if(isset($_POST['view']))
+						{
+							$email = $_POST['email'];
+							$category = $_POST['category'];
+							$query = "SELECT $category FROM professor_info WHERE email = ?";
+							$stmt = $conn->prepare($query);
+							$stmt->bindParam(1,$email);
+							if(!$stmt->execute()) die("<script>alert('Internal Error!');</script>");
+							$result = $stmt->fetch(PDO::FETCH_ASSOC);
+							$value = ucwords($result["$category"]);
+							printf("<form action='' method='POST'>
+							<input type='text' name='value' value='$value'/>
+							<input type='hidden' name='email' value='$email'>
+							<input type='hidden' name='category' value='$category'>
+							<input type='submit' name='update' value='Update'/>
+							</form>");
+						}
+						if(isset($_POST['update']))
+						{
+							$email = $_POST['email'];
+							$value = $_POST['value'];
+							$category = $_POST['category'];
+							$query = "UPDATE professor_info SET $category = ? WHERE email = ?";
+							$stmt = $conn->prepare($query);
+							$stmt->bindParam(1,$value);
+							$stmt->bindParam(2,$email);
+							if(!$stmt->execute()) die("<script>alert('Internal Error!');</script>");
+							printf("<script>
+										alert('User Updated!');
+										window.location.href='./admin_manage_user.php';
+									</script>");
+						}
+					?>
 				</div>
 			</div>	
 			</div>
