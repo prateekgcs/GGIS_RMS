@@ -11,7 +11,6 @@ function connect()
 		$link = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8",$username,$password);
 		//printf("Connection Successful!");
 		return $link;
-		return $conn;
 	}
 	catch(PDOException $e)
 	{
