@@ -1,5 +1,7 @@
 <?php
 	require_once('./admin_session_check.php');
+	require_once('../lib/sql/conn.php');
+	$conn = connect();
 ?> 
 <!DOCTYPE html>
 
@@ -59,12 +61,29 @@
 					<form action="" method="POST">
 					<br/>
 						<h4>Enter Email</h4>
-						<input class="form-control" type="email" name="eid">
+						<input class="form-control" type="email" name="email">
 						<br/>
 						<br/>
 						<button type="submit" name="view" class="btn btn-success btn-block">Search</button>
 					</form>
 					
+					<div>
+						<?php
+							if(isset($_POST['view']))
+							{
+								$email = $_POST['email'];
+								$query = "SELECT * FROM  professor_info where email = ?";
+								$stmt = $conn->prepare($query);
+								$stmt->bindParam(1,$email);
+								if(!$stmt->execute()) die("<script>alert('Internal Error!');</script>");
+								$result = $stmt->fetch(PDO::FETCH_ASSOC);
+								$name = ucwords($result['fname'].$result['mname'].$result['lname']);
+								$class = ucwords($result['class'].$result['section']);
+								printf("Name: $name</br> Class:  $class");
+								printf("</br> <button onclick=\" alert('Are you 🐷?'); \"></button>");
+							}
+						?>
+					</div>
 				</div>
 			</div>	
 			</div>
@@ -82,57 +101,3 @@
 </body>
 
 </html>
-<?php
-					
-					/*if(isset($_POST['view']))
-					{
-						$email=$_POST['eid'];
-						
-						$query="SELECT * FROM professor_info WHERE email=?";
-						$sql=$conn->prepare($query);
-						$sql->bindParam(1,$email);
-						
-						if(!($row=$sql->execute()))
-						{
-							die("ERROR!");
-						}
-						
-						$row = $sql->fetch(PDO::FETCH_ASSOC);
-						
-						$name = $row['fname']." ".$row['mname']." ".$row['lname'];
-						$gender = $row['gender'];
-						$contact = $row['contact'];
-						$dept = $row['department'];
-						
-						
-						$table = "<div align='center'><h3>USER DETAILS</h3></div>
-								  <table class='table table-striped table-bordered'>
-								  <tr><td><b>Name</b></td><td>$name</td></tr>
-								  <tr><td><b>Gender</b></td><td>$gender</td></tr>
-								  <tr><td><b>Email</b></td><td>$email</td></tr>
-								  <tr><td><b>Department</b></td><td>$dept</td></tr>
-								  <tr><td><b>Contact</b></td><td>$contact</td></tr>
-								  <tr><td colspan=2><a href='admin_delete_professor.php?email=$email'><button class='btn btn-danger' name='delete'>Delete</button></a></td></tr>
-								  </table>";
-						
-						echo $table;
-						
-					}
-					
-					if(isset($_GET['email']))
-					{
-						$email=$_GET['email'];
-						
-						$query="DELETE FROM professor_info WHERE email=?";
-						$sql=$conn->prepare($query);
-						$sql->bindParam(1,$email);
-						
-						if(!($row=$sql->execute()))
-						{
-							die("ERROR!");
-						}
-						
-						printf("<div style='font-size:20px' class='alert alert-success text-center'> <strong>Delete Successful!<strong><br/> Data has been successfully removed from the database.</div>");
-						
-					}*/
-				?>
