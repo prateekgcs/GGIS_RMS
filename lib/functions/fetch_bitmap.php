@@ -23,6 +23,7 @@
         $conn = connectt();
         $class = $class.strtoupper($section);
         $query = "SELECT `$class` FROM batch_info WHERE year = ?";
+        //printf(("<script>alert('$class');</script>"));
         $stmt = $conn->prepare($query);
         $stmt->bindParam(1,$year);
         if(!$stmt->execute()) die("<script>alert('Internal Error!');</script>");

@@ -188,10 +188,21 @@
 							$class = $_POST['clas'];
 							$section = $_POST['section'];
 							$test_type = $_POST['temp'];
+							$tname = $year.'_'.$class.'_'.strtoupper($section).'_'.$test_type;
 							$bitmap = getBitMap($year,$class,$section);
-							if(checkAll($bitmap,$test_type,$class))
+							if(!checkAll($bitmap,$test_type,$class))
 							{
-								printf("<script>alert('Fuck Yeah!');</script>");
+								$tmp_name = $_FILES['file']['tmp_name'];
+								$path="../lib/uploads/";
+								$exten = ".xlsx";
+								$filename = $path.$tname.$exten;
+
+								//move uploaded file from temp location to Uploads folder
+								if(!(move_uploaded_file($tmp_name, $filename))) die("Can't Upload File!");
+										
+								//upload excel to database
+								UploadExcel($tname);  
+
 							}
 
 						}
