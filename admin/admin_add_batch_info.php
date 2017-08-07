@@ -119,6 +119,53 @@
 					 
 					</form>
 				</div>
+				<div>
+					<?php
+
+						require_once('../lib/sql/conn.php');
+						require_once('../lib/functions/ExcelToDB.php');
+						require_once('../lib/functions/check_meta.php');
+						if(isset($_POST['upload']) && $_FILES['file']['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+						{
+							$year = $_POST['year'];
+							$class = $_POST['clas'];
+							$section = $_POST['section'];
+							$test_type = $_POST['temp'];
+							$tname = $year.'_'.$class.'_info';
+							
+							
+							$tmp_name = $_FILES['file']['tmp_name'];
+							$path="../lib/uploads/";
+							$exten = ".xlsx";
+							$filename = $path.$tname.$exten;
+							$val = metaCheck($year,$class);
+							
+							
+							if($val == 2)
+							{
+								die("<script>alert('Batch info not uploaded!');</script>");
+							}
+
+							//move uploaded file from temp location to Uploads folder
+							if(!(move_uploaded_file($tmp_name, $filename))) die("Can't Upload File!");
+
+							//upload excel to database
+							if($val==0)
+							{
+								CreateStudentInfo($tablename);
+								UploadStudentInfo($tablename);
+							}
+							else if($val==1)
+							{
+								UploadStudentInfo($tablename);
+							}	
+
+							$num = 2;
+							metaUpdate($year,$class,$num); 
+							
+						}
+					?>
+				</div>
 			</div>	
 				
 					<?php
