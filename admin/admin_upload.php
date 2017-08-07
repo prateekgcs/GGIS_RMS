@@ -209,7 +209,7 @@
 								if(!(move_uploaded_file($tmp_name, $filename))) die("Can't Upload File!");
 										
 								//upload excel to database
-								UploadResult1to4pt($tname); 
+								UploadResultAll($class,$test_type,$tname);
 
 								updateAll($bitmap,$test_type,$year,$class,$section); 
 							}

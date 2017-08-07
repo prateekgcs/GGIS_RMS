@@ -84,44 +84,87 @@
 	function UploadResultAll($class,$test_type,$tablename)
 	{
 		if($class<5)
-			$class = 1;
+			$name = 'UploadResult1to4';
 		else if($class == 5)
-			$class = 5;
+			$name = 'UploadResult5';
 		else if($class>5 && $class<10)
-			$class = 6;
-		else if($class == 11)
-			$class = 11;
+			$name = 'UploadResult6to9';
+		else if($class == '11s')
+			$name = 'UploadResult11s';
+		else if($class == '11c')
+			$name = 'UploadResult11c';
+        else 
+            die("<script>alert('Incorrect Input!');</script>");
 
-		switch($class)
+		switch($name)
 		{
-			case '1':
+			case 'UploadResult1to4':
 			{
-				switch($test_type)
-				{
-					case 'PT-1':
-					{
-
-					}
-					break;
-				}
+				if($test_type == 'PT-1' || $test_type == 'PT-2')
+					$name .= 'pt';
+				else if($test_type == 'SA-1' || $test_type == 'SA-2')
+					$name .= 'sa';
+				else if($test_type == 'NS-1' || $test_type == 'NS-2')
+					$name .= 'ns';
+				else if($test_type == 'SEA-1' || $test_type == 'SEA-2')
+					$name .= 'sea';
+                else if($test_type == 'D-1' || $test_type == 'D-1')
+                    $name = 'UploadResultd';
+                else if($test_type == 'CSA-1' || $test_type == 'CSA-2')
+                    $name = 'UploadResultcsa';
 			}
 			break;
-			case '5':
+			case 'UploadResult5':
 			{
-
+				if($test_type == 'PT-1' || $test_type == 'PT-2')
+					$name .= 'pt';
+				else if($test_type == 'SA-1' || $test_type == 'SA-2')
+					$name .= 'sa';
+				else if($test_type == 'NS-1' || $test_type == 'NS-2')
+					$name .= 'ns';
+				else if($test_type == 'SEA-1' || $test_type == 'SEA-2')
+					$name .= 'sea';
+                else if($test_type == 'D-1' || $test_type == 'D-1')
+                    $name = 'UploadResultd';
+                else if($test_type == 'CSA-1' || $test_type == 'CSA-2')
+                    $name = 'UploadResultcsa';
 			}
 			break;
-			case '6':
+			case 'UploadResult6to9':
 			{
-
+				if($test_type == 'PT-1' || $test_type == 'PT-2' || $test_type == 'PT-3')
+					$name .= 'pt';
+				else if($test_type == 'AE')
+					$name .= 'ae';
+				else if($test_type == 'NS')
+					$name .= 'ns';
+				else if($test_type == 'SEA')
+					$name .= 'sea';	
+                else if($test_type == 'D')
+                    $name = 'UploadResultd';
+                else if($test_type == 'CSA')
+                    $name = 'UploadResultcsa';
 			}
 			break;
-			case '11':
+            case 'UploadResult11s':
 			{
-
+				if($test_type == 'D')
+                    $name = 'UploadResultd';
+                else if($test_type == 'CSA')
+                    $name = 'UploadResultcsa';
+			}
+			break;
+            case 'UploadResult11c':
+			{
+				if($test_type == 'D')
+                    $name = 'UploadResultd';
+                else if($test_type == 'CSA')
+                    $name = 'UploadResultcsa';
 			}
 			break;
 		}
+
+        call_user_func($name, $tablename);
 	}
 
 	// CLASS 1-4
@@ -882,7 +925,7 @@
           }
     }
 	
-	function UploadResultcos($tablename)
+	function UploadResultcsa($tablename)
     {
 
 		  $link = connecttt();
@@ -936,7 +979,7 @@
           }
     }
 	
-	function UploadResultdis($tablename)
+	function UploadResultd($tablename)
     {
 		  $link = connecttt();
           
