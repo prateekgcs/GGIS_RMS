@@ -182,6 +182,8 @@
 						require_once('../lib/functions/check_uploaded.php');
 						require_once('../lib/functions/fetch_bitmap.php');
 						require_once('../lib/functions/ExcelToDB.php');
+						require_once('../lib/functions/update_bitmap.php');
+						require_once('../lib/functions/check_meta.php');
 						if(isset($_POST['upload']) && $_FILES['file']['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 						{
 							$year = $_POST['year'];
@@ -196,12 +198,20 @@
 								$path="../lib/uploads/";
 								$exten = ".xlsx";
 								$filename = $path.$tname.$exten;
-
+								$val = metaCheck($year,$class);
+								
+								if($val==0)
+									die("<script>alert('Batch not created!');</script>");
+								else if($val==1)
+									die("<script>alert('Batch info not uploaded!');</script>");
+								
 								//move uploaded file from temp location to Uploads folder
 								if(!(move_uploaded_file($tmp_name, $filename))) die("Can't Upload File!");
 										
 								//upload excel to database
-								UploadResult1to4pt($tname);  
+								UploadResult1to4pt($tname); 
+
+								updateAll($bitmap,$test_type,$year,$class,$section); 
 							}
 						}
 					?>

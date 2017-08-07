@@ -5,7 +5,7 @@
   
 	<option value="COS">Co-Scholastic Area</option>
        
-	<option value="DIS">Discipline</option>
+	<option value="D">Discipline</option>
  
 	<option value="SA-1">Summitive Assessment-1</option>   
                      
@@ -18,7 +18,7 @@
   
 	<option value="COS">Co-Scholastic Area</option>
        
-	<option value="DIS">Discipline</option>
+	<option value="D">Discipline</option>
  
 	<option value="SA-2">Summitive Assessment-2</option>
 </optgroup>  					       

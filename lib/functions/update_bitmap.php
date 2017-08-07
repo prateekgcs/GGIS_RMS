@@ -1,4 +1,29 @@
 <?php
+    require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/sql/conn.php');
+    
+    function updateAll($bitmap,$test_type,$year,$class,$section)
+    {
+        if($class<=5)
+            $bitmap = updateOnetoFive($bitmap,$test_type);
+        else if($class>=6 && $class<=9)
+            $bitmap = updateSixToNine($bitmap,$test_type);
+        else if($class>=11) 
+            $bitmap = updateEleven($bitmap,$test_type);
+
+        rewriteBitmap($bitmap,$year,$class,$section);
+    }
+
+    function rewriteBitmap($bitmap,$year,$class,$section)
+    {
+        $conn = connect();
+        $class = $class.strtoupper($section);
+        $query = "UPDATE batch_info SET $class = ? WHERE year = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(1,$bitmap);
+        $stmt->bindParam(2,$year);
+        if(!$stmt->execute()) die("<script>alert('Internal error!');</script>");
+    }
+
     function updateOneToFive($bitmap,$test_type)
     {
         $a = str_split($bitmap);

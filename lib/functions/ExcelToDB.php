@@ -81,6 +81,49 @@
 	
 <?php
 	
+	function UploadResultAll($class,$test_type,$tablename)
+	{
+		if($class<5)
+			$class = 1;
+		else if($class == 5)
+			$class = 5;
+		else if($class>5 && $class<10)
+			$class = 6;
+		else if($class == 11)
+			$class = 11;
+
+		switch($class)
+		{
+			case '1':
+			{
+				switch($test_type)
+				{
+					case 'PT-1':
+					{
+
+					}
+					break;
+				}
+			}
+			break;
+			case '5':
+			{
+
+			}
+			break;
+			case '6':
+			{
+
+			}
+			break;
+			case '11':
+			{
+
+			}
+			break;
+		}
+	}
+
 	// CLASS 1-4
 	
     function UploadResult1to4pt($tablename)
@@ -1008,6 +1051,7 @@
 			  
             if(!($sqlinsert->execute())) 
 				die ($sqlinsert->errorInfo());
+			}
           }
     }
 	
