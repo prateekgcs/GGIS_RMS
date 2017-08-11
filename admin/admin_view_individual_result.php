@@ -108,7 +108,7 @@
 							 </div>
 							 
 					 <div class="form-group">
-						<h4>Test Name</h4>
+						<h4>Report Card</h4>
 						<select name="sem" class="form-control" id="sel3">
 						 <option value="default">Select</option>
 						 </select>
@@ -129,48 +129,6 @@
 					</form>
 				</div>
 			</div>	
-				
-					<?php
-									
-					if(isset($_POST["download"]))
-					{
-						$sem = $_POST['sem'];
-						$year = $_POST['year'];
-						$class = $_POST['class'];
-						if($class!='default')
-						{
-							
-						if($class <= 4)
-							$class = 'CLASS 1-4 ';
-						else if($class == 5)
-							$class = 'CLASS 5 ';
-						else if($class <= 8)
-							$class = 'CLASS 6-8 ';
-						else if($class == 9)
-							$class = 'CLASS 9 ';
-						else if($class == '11S')
-							$class = 'CLASS 11 SCIENCE ';
-						else if($class == '11C')
-							$class = 'CLASS 11 COMMERCE ';
-						
-						/*$filename = $class.$sem.'.xlsx';
-						$path = "../deb/";
-						$download_file = $path.$filename;
-						
-						header('Content-Description: File Transfer');
-						header('Content-Type: application/octet-stream');
-						header('Content-Disposition: attachment; filename='.basename($download_file));
-						header('Expires: 0');
-						header('Cache-Control: must-revalidate');
-						header('Pragma: public');
-						header('Content-Length: ' . filesize($download_file));
-						ob_clean();
-						flush();
-						readfile($download_file);
-						exit;*/
-						}
-					}
-					?>
 				</div>
 			</div>
 		</div>
@@ -192,15 +150,15 @@
 		
 			if(clas<=5)
 			{
-				$("#sel3").load("./primary.txt");
+				$("#sel3").load("../lib/upload_template/primary.txt");
 			}
 			else if(clas<=9)
 			{
-				$("#sel3").load("./secondary.txt");
+				$("#sel3").load("../lib/upload_template/secondary.txt");
 			}
 			else
 			{
-				$("#sel3").load("./senior.txt");
+				$("#sel3").load("../lib/upload_template/senior.txt");
 			}
 			
 		});
