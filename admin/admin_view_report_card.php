@@ -93,12 +93,12 @@
 					<div class="col-md-12">
 						<table>
 						<tr>
-						<td width='15%'><img class='img img-responsive' src='../lib/image/cbse.jpg'/></td>
+						<td width='15%'><img class='img img-responsive' src='../lib/image/cbse.png'/></td>
 					
 						<td><h3><b>Gyan Ganga International School</b></h3>
 						<p>Affiliated to C.B.S.E., Delhi, Affiliation No. 1030147<br/>Wardhman Square, By pass Junction Bheraghat Road, P.O.-Tewar, Jabalpur- 482003 (M.P.)<br/>Phone: 9893040336, 9893286946, 9893304495<br/>Website: gyanganga.ac.in, E-mail: gyangangajabalpur@gmail.com</p></td>
 				
-						<td width='15%'><img class='img img-responsive' src='../lib/image/slogo.jpg'/></td>
+						<td width='15%'><img class='img img-responsive' src='../lib/image/slogo.png'/></td>
 						</tr>
 						</table>
 					</div>

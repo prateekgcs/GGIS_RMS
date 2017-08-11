@@ -6,9 +6,7 @@
 						 
 <option value="NS">Notebook Submission</option>
 <option value="SEA">Subject Enrichment</option>
-      
 <option value="CSA">Co-Scholastic Area</option>
-       
 <option value="D">Discipline</option>
  
 <option value="AE">Annual Exam</option>

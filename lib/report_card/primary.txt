@@ -1,10 +1,27 @@
+<optgroup label="Term 1">
 <option value="pt-1">Pre Test-1</option>
                      
+<option value="ns-1">Notebook Submission-1</option>
+ 
+<option value="sea-1">Subject Enrichment-1</option>
+                                         
+<option value="sa-1">Summitive Assessment-1</option>
+</optgroup>
+
+<optgroup label="Term 2">
 <option value="pt-2">Pre Test-2</option>
 
-<option value="sa-1">Summitive Assessment-1</option>                     
+<option value="ns-2">Notebook Submission-2</option>
+ 
+<option value="sea-2">Subject Enrichment-2</option>
+                        
 <option value="sa-2">Summitive Assessment-2</option>
 
-					 
+
+</optgroup>
+
+<optgroup label="Overall Result">					 
 <option value="or">Overall Result</option>
+</optgroup>
+
                      

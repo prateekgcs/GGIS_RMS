@@ -2,24 +2,17 @@
 	<option value="PT-1">Pre Test-1</option>
 	<option value="NS-1">Notebook Submission</option>
 	<option value="SEA-1">Subject Enrichment</option>
-  
 	<option value="CSA-1">Co-Scholastic Area</option>
-       
 	<option value="D-1">Discipline</option>
- 
 	<option value="SA-1">Summitive Assessment-1</option>   
-                     
 </optgroup>
 
 <optgroup label="Term 2">
 	<option value="PT-2">Pre Test-2</option>
 	<option value="NS-2">Notebook Submission</option>
-	<option value="SEA-2">Subject Enrichment</option>
-  
+	<option value="SEA-2">Subject Enrichment</option>  
 	<option value="CSA-2">Co-Scholastic Area</option>
-       
 	<option value="D-2">Discipline</option>
- 
 	<option value="SA-2">Summitive Assessment-2</option>
 </optgroup>  					       
                      
