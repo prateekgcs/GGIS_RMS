@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width">
 	<title>Download Result</title>
 	<link href="../lib/css/bootstrap.css" rel="stylesheet">
 	<link href="../lib/css/style.css" rel="stylesheet">
@@ -149,9 +149,10 @@
 					</div>
 				</div>
 				
-				<div class='col-md-12 mtop'>
+				<div style="margin-top:20px;" class='container-fluid'>
+				<div class='col-md-12'>
 			
-					<table class='table table-centered' border="2">
+					<table id='ps' border="2">
 						<tr class='bold'>
 							<td>SCHOLASTIC AREA</td>
 							<td colspan="7">Term 1</td>
@@ -225,6 +226,7 @@
 						</tr>
 					</table>
 				</div>
+				</div>
 			
 				<br/>
 			
@@ -267,9 +269,10 @@
 					
 				</div>
 			
-				<div class="row">
+				<div class='container-fluid'>
+				<div style='padding-left: 20px;' class="row">
 			
-					<div id='p' class='col-md-6 mtop'>
+					<div id='p' class='col-md-6'>
 						<table border="2">
 							<tr class='bold'>
 								<td colspan="2">Co-Scholastic Area<br>(3 Point Grading Scale A,B,C)</td>
@@ -360,6 +363,7 @@
 						</tr>
 					</table>
 				</div>
+			</div>
 			</div>
 
 	<div class="row mtop">
