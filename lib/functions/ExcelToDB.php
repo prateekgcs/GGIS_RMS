@@ -65,7 +65,11 @@
 			$username = "root";
 			$password = "";
 			$dbname = "ggis_rms";
-			$link = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8",$username,$password);
+			$link = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8",$username,$password, array(
+    PDO::ATTR_EMULATE_PREPARES=>false,
+    PDO::MYSQL_ATTR_DIRECT_QUERY=>false,
+    PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
+));
 			//printf("Connection Successful!");
 			return $link;
 		}
@@ -204,21 +208,27 @@
             
 			if($rollno != '' && $name != '')
 			{
-				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?)";
-				$sqlinsert = $link->prepare($queryinsert);
-				$sqlinsert->bindParam(1,$rollno);
-				$sqlinsert->bindParam(2,$name);
-				$sqlinsert->bindParam(3,$s1);
-				$sqlinsert->bindParam(4,$s2);
-				$sqlinsert->bindParam(5,$s3);
-				$sqlinsert->bindParam(6,$s4);
-				$sqlinsert->bindParam(7,$s5);
-				$sqlinsert->bindParam(8,$total);
-				$sqlinsert->bindParam(9,$attendance);
-				$sqlinsert->bindParam(10,$remarks);
-				
-				if(!($sqlinsert->execute())) 
-					die ("Error");
+				try
+				{
+					$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?)";
+					$sqlinsert = $link->prepare($queryinsert);
+					$sqlinsert->bindParam(1,$rollno);
+					$sqlinsert->bindParam(2,$name);
+					$sqlinsert->bindParam(3,$s1);
+					$sqlinsert->bindParam(4,$s2);
+					$sqlinsert->bindParam(5,$s3);
+					$sqlinsert->bindParam(6,$s4);
+					$sqlinsert->bindParam(7,$s5);
+					$sqlinsert->bindParam(8,$total);
+					$sqlinsert->bindParam(9,$attendance);
+					$sqlinsert->bindParam(10,$remarks);
+					$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
 		  echo "UPLOADED!";
@@ -232,7 +242,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) die (print_r($sqlinsert->errorInfo()));
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -259,6 +269,8 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -271,9 +283,13 @@
 				$sqlinsert->bindParam(8,$total);
 				$sqlinsert->bindParam(9,$attendance);
 				$sqlinsert->bindParam(10,$remarks);
-				
-				if(!($sqlinsert->execute())) 
-					die ("Error2!");
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -285,57 +301,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `total` VARCHAR(50) NOT NULL) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
-		  
-		  $path = __DIR__ . '\..\uploads\\';
-          $exten = ".xlsx";
-          $class = $tablename;
-          $filename = $path.$class.$exten;
-
-          $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
-          $excelObject = $excelReader->load($filename);
-          $worksheet = $excelObject->getActiveSheet();
-          $lastRow = $worksheet->getHighestDataRow();
-		  
-          for($row = 6; $row<=$lastRow; $row++)
-          {
-            $rollno = $worksheet->getCell('A'.$row)->getValue();
-            $name = $worksheet->getCell('B'.$row)->getValue();
-            $s1 = $worksheet->getCell('C'.$row)->getValue();
-            $s2 = $worksheet->getCell('D'.$row)->getValue();
-            $s3 = $worksheet->getCell('E'.$row)->getValue();
-            $s4 = $worksheet->getCell('F'.$row)->getValue();
-            $s5 = $worksheet->getCell('G'.$row)->getValue();
-            $total = $worksheet->getCell('H'.$row)->getValue();
-            
-			if($rollno != '' && $name != '')
-			{				
-				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?)";
-				$sqlinsert = $link->prepare($queryinsert);
-				$sqlinsert->bindParam(1,$rollno);
-				$sqlinsert->bindParam(2,$name);
-				$sqlinsert->bindParam(3,$s1);
-				$sqlinsert->bindParam(4,$s2);
-				$sqlinsert->bindParam(5,$s3);
-				$sqlinsert->bindParam(6,$s4);
-				$sqlinsert->bindParam(7,$s5);
-				$sqlinsert->bindParam(8,$total);
-				
-				if(!($sqlinsert->execute())) 
-					echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
-			}
-          }
-    }
-
-	function UploadResult1to4sea($tablename)
-    {
-		  $link = connecttt();
-          
-		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `total` VARCHAR(50) NOT NULL) ";
-		  
-		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) 
-			  echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -360,6 +326,8 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{				
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -370,9 +338,69 @@
 				$sqlinsert->bindParam(6,$s4);
 				$sqlinsert->bindParam(7,$s5);
 				$sqlinsert->bindParam(8,$total);
-				
-				if(!($sqlinsert->execute())) 
-					echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
+			}
+          }
+    }
+
+	function UploadResult1to4sea($tablename)
+    {
+		  $link = connecttt();
+          
+		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `total` VARCHAR(50) NOT NULL) ";
+		  
+		  $sqlinsert = $link->prepare($queryinsert);
+		  if(!($sqlinsert->execute())) 
+			  die(print_r($queryinsert->errorInfo()));
+		  
+		  $path = __DIR__ . '\..\uploads\\';
+          $exten = ".xlsx";
+          $class = $tablename;
+          $filename = $path.$class.$exten;
+
+          $excelReader = PHPExcel_IOFactory::createReaderForFile($filename);
+          $excelObject = $excelReader->load($filename);
+          $worksheet = $excelObject->getActiveSheet();
+          $lastRow = $worksheet->getHighestDataRow();
+		  
+          for($row = 6; $row<=$lastRow; $row++)
+          {
+            $rollno = $worksheet->getCell('A'.$row)->getValue();
+            $name = $worksheet->getCell('B'.$row)->getValue();
+            $s1 = $worksheet->getCell('C'.$row)->getValue();
+            $s2 = $worksheet->getCell('D'.$row)->getValue();
+            $s3 = $worksheet->getCell('E'.$row)->getValue();
+            $s4 = $worksheet->getCell('F'.$row)->getValue();
+            $s5 = $worksheet->getCell('G'.$row)->getValue();
+            $total = $worksheet->getCell('H'.$row)->getValue();
+            
+			if($rollno != '' && $name != '')
+			{
+				try
+				{
+				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?)";
+				$sqlinsert = $link->prepare($queryinsert);
+				$sqlinsert->bindParam(1,$rollno);
+				$sqlinsert->bindParam(2,$name);
+				$sqlinsert->bindParam(3,$s1);
+				$sqlinsert->bindParam(4,$s2);
+				$sqlinsert->bindParam(5,$s3);
+				$sqlinsert->bindParam(6,$s4);
+				$sqlinsert->bindParam(7,$s5);
+				$sqlinsert->bindParam(8,$total);
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -386,7 +414,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -414,6 +442,9 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
+					
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -427,9 +458,13 @@
 				$sqlinsert->bindParam(9,$total);
 				$sqlinsert->bindParam(10,$attendance);
 				$sqlinsert->bindParam(11,$remarks);
-				
-				if(!($sqlinsert->execute())) 
-					echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -441,7 +476,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL, `total` VARCHAR(50) NOT NULL) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -467,6 +502,8 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -478,9 +515,13 @@
 				$sqlinsert->bindParam(7,$s5);
 				$sqlinsert->bindParam(8,$s6);
 				$sqlinsert->bindParam(9,$total);
-				
-				if(!($sqlinsert->execute())) 
-					echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -492,7 +533,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) die (print_r($sqlinsert->errorInfo()));
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -520,6 +561,8 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -533,9 +576,13 @@
 				$sqlinsert->bindParam(9,$total);
 				$sqlinsert->bindParam(10,$attendance);
 				$sqlinsert->bindParam(11,$remarks);
-				
-				if(!($sqlinsert->execute())) 
-					die (print_r($sqlinsert->errorInfo()));
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -547,7 +594,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL, `total` VARCHAR(50) NOT NULL) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -573,6 +620,8 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -584,9 +633,13 @@
 				$sqlinsert->bindParam(7,$s5);
 				$sqlinsert->bindParam(8,$s6);
 				$sqlinsert->bindParam(9,$total);
-							
-				if(!($sqlinsert->execute())) 
-					echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();		
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -600,7 +653,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -628,6 +681,8 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -641,9 +696,13 @@
 				$sqlinsert->bindParam(9,$total);
 				$sqlinsert->bindParam(10,$attendance);
 				$sqlinsert->bindParam(11,$remarks);
-				
-				if(!($sqlinsert->execute())) 
-					echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -655,7 +714,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL, `total` VARCHAR(50) NOT NULL) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -681,6 +740,8 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -692,8 +753,13 @@
 				$sqlinsert->bindParam(7,$s5);
 				$sqlinsert->bindParam(8,$s6);
 				$sqlinsert->bindParam(9,$total);
-				
-				if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -705,7 +771,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL, `total` VARCHAR(50) NOT NULL) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -731,6 +797,8 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -742,8 +810,13 @@
 				$sqlinsert->bindParam(7,$s5);
 				$sqlinsert->bindParam(8,$s6);
 				$sqlinsert->bindParam(9,$total);
-				
-				if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -756,7 +829,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -784,6 +857,8 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,? ,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -797,8 +872,13 @@
 				$sqlinsert->bindParam(9,$total);
 				$sqlinsert->bindParam(10,$attendance);
 				$sqlinsert->bindParam(11,$remarks);
-				
-				if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -812,7 +892,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL , `s7` VARCHAR(50) NOT NULL , `s8` VARCHAR(50) NOT NULL, `s9` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -842,7 +922,9 @@
             $remarks = $worksheet->getCell('N'.$row)->getValue();
             
 			if($rollno != '' && $name != '')
-			{				
+			{		
+				try
+				{
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -859,9 +941,13 @@
 				$sqlinsert->bindParam(12,$total);
 				$sqlinsert->bindParam(13,$attendance);
 				$sqlinsert->bindParam(14,$remarks);
-				
-				if(!($sqlinsert->execute())) 
-					echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -874,7 +960,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(100) NOT NULL , `s1` VARCHAR(50) NOT NULL , `s2` VARCHAR(50) NOT NULL , `s3` VARCHAR(50) NOT NULL , `s4` VARCHAR(50) NOT NULL , `s5` VARCHAR(50) NOT NULL , `s6` VARCHAR(50) NOT NULL , `s7` VARCHAR(50) NOT NULL , `s8` VARCHAR(50) NOT NULL ,`total` VARCHAR(50) NOT NULL , `attendance` INT NOT NULL , `remarks` VARCHAR(500) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -904,6 +990,8 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -919,9 +1007,13 @@
 				$sqlinsert->bindParam(11,$total);
 				$sqlinsert->bindParam(12,$attendance);
 				$sqlinsert->bindParam(13,$remarks);
-				
-				if(!($sqlinsert->execute())) 
-					echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -934,7 +1026,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `sch_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `f1` VARCHAR(5) NOT NULL , `f2` VARCHAR(5) NOT NULL , `f3` VARCHAR(5) NOT NULL , `f4` VARCHAR(5) NOT NULL , `f5` VARCHAR(5) NOT NULL , `f6` VARCHAR(5) NOT NULL , `f7` VARCHAR(5) NOT NULL , `f8` VARCHAR(5) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -961,6 +1053,8 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -973,9 +1067,13 @@
 				$sqlinsert->bindParam(8,$s6);
 				$sqlinsert->bindParam(9,$s7);
 				$sqlinsert->bindParam(10,$s8);
-				
-				if(!($sqlinsert->execute())) 
-					echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -987,7 +1085,7 @@
 		  $queryinsert = " CREATE TABLE `$tablename` ( `sch_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `f1` VARCHAR(5) NOT NULL , `f2` VARCHAR(5) NOT NULL , `f3` VARCHAR(5) NOT NULL , `f4` VARCHAR(5) NOT NULL , `f5` VARCHAR(5) NOT NULL , `f6` VARCHAR(5) NOT NULL , `f7` VARCHAR(5) NOT NULL , `f8` VARCHAR(5) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
-		  if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 		  
 		  $path = __DIR__ . '\..\uploads\\';
           $exten = ".xlsx";
@@ -1014,6 +1112,9 @@
             
 			if($rollno != '' && $name != '')
 			{
+				try
+				{
+					
 				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?)";
 				$sqlinsert = $link->prepare($queryinsert);
 				$sqlinsert->bindParam(1,$rollno);
@@ -1026,9 +1127,13 @@
 				$sqlinsert->bindParam(8,$s6);
 				$sqlinsert->bindParam(9,$s7);
 				$sqlinsert->bindParam(10,$s8);
-				
-				if(!($sqlinsert->execute())) 
-					echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+				$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
     }
@@ -1041,13 +1146,13 @@
 		$queryinsert = " CREATE TABLE `$tablename` ( `sno` INT NOT NULL , `scholar_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `religion` VARCHAR(20) NOT NULL , `gender` VARCHAR(10) NOT NULL , `category` VARCHAR(10) NOT NULL , `fname` VARCHAR(80) NOT NULL , `mname` VARCHAR(80) NOT NULL , `dob` VARCHAR(15) NOT NULL , `address` VARCHAR(150) NOT NULL , `mno` VARCHAR(10) NOT NULL , `bg` VARCHAR(10) NOT NULL , `height` VARCHAR(50) NOT NULL , `weight` VARCHAR(50) NOT NULL , `house` VARCHAR(20) NOT NULL ) ";
 		  
 		$sqlinsert = $link->prepare($queryinsert);
-		if(!($sqlinsert->execute())) echo mysql_errno($link) . ": " . mysql_error($link) . "\n";;
+		if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
 	}
 	
 	function UploadStudentInfo($tablename)
     {		
           $link = connecttt();
-          $path="../../Uploads/";
+          $path =  __DIR__ .'\..\uploads\\';
           $exten = ".xlsx";
           $filename = $path.$tablename.$exten;
 
@@ -1056,7 +1161,7 @@
           $worksheet = $excelObject->getActiveSheet();
           $lastRow = $worksheet->getHighestDataRow();
 
-          for($row = 6; $row<=$lastRow; $row++)
+          for($row = 7; $row<=$lastRow; $row++)
           {
             $sno = $worksheet->getCell('A'.$row)->getValue();
             $admno = $worksheet->getCell('B'.$row)->getValue();
@@ -1074,29 +1179,37 @@
             $weight = $worksheet->getCell('N'.$row)->getValue();
             $house = $worksheet->getCell('O'.$row)->getValue();
 			            
-			if($rollno != '' && $name != '')
+			if($sno!='')
 			{
-				$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?)";
-				$sqlinsert = $link->prepare($queryinsert);
-				$sqlinsert->bindParam(1,$sno);
-				$sqlinsert->bindParam(2,$admno);
-				$sqlinsert->bindParam(3,$name);
-				$sqlinsert->bindParam(4,$religion);
-				$sqlinsert->bindParam(5,$category);
-				$sqlinsert->bindParam(6,$fname);
-				$sqlinsert->bindParam(7,$mname);
-				$sqlinsert->bindParam(8,$dob);
-				$sqlinsert->bindParam(9,$address);
-				$sqlinsert->bindParam(10,$mno);
-				$sqlinsert->bindParam(11,$bg);
-				$sqlinsert->bindParam(12,$height);
-				$sqlinsert->bindParam(13,$weight);
-				$sqlinsert->bindParam(14,$house);
-			  
-            if(!($sqlinsert->execute())) 
-				die ($sqlinsert->errorInfo());
+				try
+				{
+					$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?)";
+					$sqlinsert = $link->prepare($queryinsert);
+					$sqlinsert->bindParam(1,$sno);
+					$sqlinsert->bindParam(2,$admno);
+					$sqlinsert->bindParam(3,$name);
+					$sqlinsert->bindParam(4,$religion);
+					$sqlinsert->bindParam(5,$gender);
+					$sqlinsert->bindParam(6,$category);
+					$sqlinsert->bindParam(7,$fname);
+					$sqlinsert->bindParam(8,$mname);
+					$sqlinsert->bindParam(9,$dob);
+					$sqlinsert->bindParam(10,$address);
+					$sqlinsert->bindParam(11,$mno);
+					$sqlinsert->bindParam(12,$bg);
+					$sqlinsert->bindParam(13,$height);
+					$sqlinsert->bindParam(14,$weight);
+					$sqlinsert->bindParam(15,$house);
+					$sqlinsert->execute();
+				} 
+				catch(PDOException $error) 
+				{
+					echo 'Queryfailed: ' . $error->getMessage();
+					die();
+				}
 			}
           }
+		  echo "Uploaded";
     }
 	
  ?>

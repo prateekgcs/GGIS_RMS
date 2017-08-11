@@ -125,12 +125,11 @@
 						require_once('../lib/sql/conn.php');
 						require_once('../lib/functions/ExcelToDB.php');
 						require_once('../lib/functions/check_meta.php');
-						if(isset($_POST['upload']) && $_FILES['file']['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+						
+						if(isset($_POST['Upload']) && $_FILES['file']['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 						{
 							$year = $_POST['year'];
-							$class = $_POST['clas'];
-							$section = $_POST['section'];
-							$test_type = $_POST['temp'];
+							$class = $_POST['class'];
 							$tname = $year.'_'.$class.'_info';
 							
 							
@@ -152,12 +151,12 @@
 							//upload excel to database
 							if($val==0)
 							{
-								CreateStudentInfo($tablename);
-								UploadStudentInfo($tablename);
+								CreateStudentInfo($tname);
+								UploadStudentInfo($tname);
 							}
 							else if($val==1)
 							{
-								UploadStudentInfo($tablename);
+								UploadStudentInfo($tname);
 							}	
 
 							$num = 2;
