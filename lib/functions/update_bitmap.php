@@ -1,14 +1,14 @@
 <?php
     require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/sql/conn.php');
     
-    function updateAll($bitmap,$test_type,$year,$class,$section)
+    function updateAll($bitmap,$test_type,$year,$class,$section,$num=1)
     {
         if($class<=5)
-            $bitmap = updateOnetoFive($bitmap,$test_type);
+            $bitmap = updateOnetoFive($bitmap,$test_type,$num);
         else if($class>=6 && $class<=9)
-            $bitmap = updateSixToNine($bitmap,$test_type);
+            $bitmap = updateSixToNine($bitmap,$test_type,$num);
         else if($class>=11) 
-            $bitmap = updateEleven($bitmap,$test_type);
+            $bitmap = updateEleven($bitmap,$test_type,$num);
 
         rewriteBitmap($bitmap,$year,$class,$section);
     }
@@ -24,7 +24,7 @@
         if(!$stmt->execute()) die("<script>alert('Internal error!');</script>");
     }
 
-    function updateOneToFive($bitmap,$test_type)
+    function updateOneToFive($bitmap,$test_type,$num=1)
     {
         $a = str_split($bitmap);
         $test_type = strtoupper($test_type);
@@ -33,62 +33,62 @@
         {
             case 'PT-1':
             {
-                $a[0] = 1;
+                $a[0] = $num;
             }
             break;
             case 'NS-1':
             {
-                $a[1] = 1;  
+                $a[1] = $num;  
             }
             break;
             case 'SEA-1':
             {
-                $a[2] = 1;  
+                $a[2] = $num;  
             }
             break;
             case 'CSA-1':
             {
-                $a[3] = 1;    
+                $a[3] = $num;    
             }
             break;
             case 'D-1':
             {
-                $a[4] = 1;    
+                $a[4] = $num;    
             }
             break;
             case 'SA-1':
             {
-                $a[5] = 1;    
+                $a[5] = $num;    
             }
             break;
             case 'PT-2':
             {
-                $a[6] = 1;    
+                $a[6] = $num;    
             }
             break;
             case 'NS-2':
             {
-                $a[7] = 1;    
+                $a[7] = $num;    
             }
             break;
             case 'SEA-2':
             {
-                $a[8] = 1;    
+                $a[8] = $num;    
             }
             break;
             case 'CSA-2':
             {
-                $a[9] = 1;     
+                $a[9] = $num;     
             }
             break;
             case 'D-2':
             {
-                $a[10] = 1;    
+                $a[10] = $num;    
             }
             break;
             case 'SA-2':
             {
-                $a[11] = 1;    
+                $a[11] = $num;    
             }
             break;
         }
@@ -97,7 +97,7 @@
         return $bitmap;
     }
 
-    function updateSixToNine($bitmap,$test_type)
+    function updateSixToNine($bitmap,$test_type,$num=1)
     {
         $a = str_split($bitmap);
         $test_type = strtoupper($test_type);
@@ -106,42 +106,42 @@
         {
             case 'PT-1':
             {
-                $a[0] = 1;
+                $a[0] = $num;
             }
             break;
             case 'PT-2':
             {
-                $a[1] = 1;  
+                $a[1] = $num;  
             }
             break;
             case 'PT-3':
             {
-                $a[2] = 1;  
+                $a[2] = $num;  
             }
             break;
             case 'NS':
             {
-                $a[3] = 1;    
+                $a[3] = $num;    
             }
             break;
             case 'SEA':
             {
-                $a[4] = 1;    
+                $a[4] = $num;    
             }
             break;
             case 'CSA':
             {
-                $a[5] = 1;    
+                $a[5] = $num;    
             }
             break;
             case 'D':
             {
-                $a[6] = 1;    
+                $a[6] = $num;    
             }
             break;
             case 'AE':
             {
-                $a[7] = 1;    
+                $a[7] = $num;    
             }
             break;
         }
@@ -150,7 +150,7 @@
         return $bitmap;
     }
 
-    function updateEleven($bitmap,$test_type)
+    function updateEleven($bitmap,$test_type,$num=1)
     {
         $a = str_split($bitmap);
         $test_type = strtoupper($test_type);
@@ -159,32 +159,32 @@
         {
             case 'UT-1':
             {
-                $a[0] = 1;
+                $a[0] = $num;
             }
             break;
             case 'UT-2':
             {
-                $a[1] = 1;  
+                $a[1] = $num;  
             }
             break;
             case 'UT-3':
             {
-                $a[2] = 1;  
+                $a[2] = $num;  
             }
             break;
             case 'CSA':
             {
-                $a[3] = 1;    
+                $a[3] = $num;    
             }
             break;
             case 'D':
             {
-                $a[4] = 1;    
+                $a[4] = $num;    
             }
             break;
             case 'AE':
             {
-                $a[5] = 1;    
+                $a[5] = $num;    
             }
             break;
         }

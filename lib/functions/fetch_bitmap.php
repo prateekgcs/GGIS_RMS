@@ -29,5 +29,23 @@
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $bitmap = $result[$class];
         return $bitmap;
-    }   
+    }  
+    function checkDependency($year,$class)
+    {
+        $bitmaps = array(
+                    getBitMap($year,$class,'A'),
+                    getBitMap($year,$class,'B'),
+                    getBitMap($year,$class,'C')
+        );
+        $bool = 0;
+        foreach($bitmaps as $bitmap)
+        {
+            $arrs = str_split($bitmap);
+            foreach($arrs as $arr)
+            {
+                $bool = $bool + $arr;
+            }
+        }
+        return $bool;
+    } 
 ?>

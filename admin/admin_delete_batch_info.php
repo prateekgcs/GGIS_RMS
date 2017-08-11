@@ -98,21 +98,16 @@
 							   </select>
 							 </div>
 					 							
-							<div id="hide" class="form-group">
-							  <h4>Upload File</h4>
-							  <input type="file" name="file" class='form-control'>
-							</div>
+							
 					  
 						<br/>
 					  
 						<div align="center">
 							
-							<div class="col-md-6">
-							<button id='but' name='download' class='btn btn-success btn-block'>Download Template</button>
-							</div>
+							
 							
 							<div class="col-md-6">
-							<input type='submit' name='Upload' value='Upload' class='btn btn-success btn-block'/>
+							<input type='submit' name='search' value='Search' class='btn btn-success btn-block'/>
 							</div>
 						</div>
 					 <br/>
@@ -125,88 +120,68 @@
 						require_once('../lib/sql/conn.php');
 						require_once('../lib/functions/ExcelToDB.php');
 						require_once('../lib/functions/check_meta.php');
+						require_once('../lib/functions/fetch_bitmap.php');
 						
-						if(isset($_POST['Upload']) && $_FILES['file']['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+						if(isset($_POST['search']))
 						{
 							$year = $_POST['year'];
 							$class = $_POST['class'];
 							$tname = $year.'_'.$class.'_info';
-							
-							
-							$tmp_name = $_FILES['file']['tmp_name'];
-							$path="../lib/uploads/";
-							$exten = ".xlsx";
-							$filename = $path.$tname.$exten;
 							$val = metaCheck($year,$class);
-							
-							
-							if($val == 2)
+							$bool = checkDependency($year,$class)*-1;
+	
+							if($val < 2)
 							{
-								die("<script>alert('Batch info already uploaded!');</script>");
+								die("<script>alert('Batch info not uploaded!');</script>");
 							}
 
-							//move uploaded file from temp location to Uploads folder
-							if(!(move_uploaded_file($tmp_name, $filename))) die("Can't Upload File!");
-
-							//upload excel to database
-							if($val==0)
+							if($bool)
 							{
-								CreateStudentInfo($tname);
-								UploadStudentInfo($tname);
+								die("<script>alert('Delete exam data for this class first!');</script>");
 							}
-							else if($val==1)
-							{
-								UploadStudentInfo($tname);
-							}	
 
-							$num = 2;
-							metaUpdate($year,$class,$num); 
-							
+							printf("
+									<h3>Batch Info to be deleted: 
+									</br>Class: $class
+									</br>Year: $year</h3>
+									</br><button onclick=\" confirmBox(); \" class='btn btn-danger btn-block'>Delete</button>
+									</br>
+									<script>
+										function confirmBox()
+										{
+											var r = confirm(\"Are you 🐷?\");
+											if (r == true) {
+												window.location.href='./admin_delete_batch_info.php?delete=1&tname=$tname';
+											} else {
+												window.location.href='./admin_delete_batch_info.php';
+											}
+										}
+									</script>");	
+
+	
+						}
+
+						if(isset($_GET['delete'])&&isset($_GET['tname']))
+						{
+							$conn = connect();
+							$delete = $_GET['delete'];
+							$tname = strtolower($_GET['tname']);
+							if($delete)
+							{
+								$query = "DROP TABLE `$tname`";
+								$stmt = $conn->prepare($query);
+								if(!$stmt->execute()) die("<script>alert('Internal Error');</script>");
+								$num = 0;
+								$arr = explode("_",$tname);
+								metaUpdate($arr[0],$arr[1],$num); 
+								printf("<script>alert('Data deleted succesfully!');window.location.href='./admin_dashboard.php';</script>");
+							}
 						}
 					?>
 				</div>
 			</div>	
 				
-					<?php
-									
-					if(isset($_POST["download"]))
-					{
-						$year = $_POST['year'];
-						$clas = $_POST['class'];
-						if($clas!='default')
-						{
-							
-						if($clas <= 4)
-							$class = 'CLASS 1-4 ';
-						else if($clas == 5)
-							$class = 'CLASS 5 ';
-						else if($clas <= 8)
-							$class = 'CLASS 6-8 ';
-						else if($clas == 9)
-							$class = 'CLASS 9 ';
-						else if($clas == '11S')
-							$class = 'CLASS 11 SCIENCE ';
-						else if($clas == '11C')
-							$class = 'CLASS 11 COMMERCE ';
-						
-						$filename = "CLASS 1-12 STUDENT INFO.xlsx";
-						$path = "../files/templates/";
-						$download_file = $path.$filename;
-						
-						header('Content-Description: File Transfer');
-						header('Content-Type: application/octet-stream');
-						header('Content-Disposition: attachment; filename=CLASS '.$clas.' ('.$year.')_INFO.xlsx');
-						header('Expires: 0');
-						header('Cache-Control: must-revalidate');
-						header('Pragma: public');
-						header('Content-Length: ' . filesize($download_file));
-						ob_clean();
-						flush();
-						readfile($download_file);
-						exit;
-						}
-					}
-					?>
+					
 				</div>
 			</div>
 		</div>
