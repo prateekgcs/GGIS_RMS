@@ -187,6 +187,7 @@
 						<td rowspan="2">Grade</td>
 						<td rowspan="2">Rank</td>
 					</tr>
+					
 					<tr class='bold'>
 						<td>10</td>
 						<td>5</td>

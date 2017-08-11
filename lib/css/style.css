@@ -3,7 +3,8 @@
 
 @media print 
 {
-	@page {
+	@page 
+	{
 		size: A4;
 		margin: 0px;
     }
@@ -28,6 +29,8 @@
 	{
 		margin-top:0px;
 		padding-top:0px;
+		page-break-after: avoid;
+		page-break-before: avoid;
 		page-break-inside: avoid;
 		transform: scale(.90);		
 	}

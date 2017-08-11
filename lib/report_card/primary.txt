@@ -5,7 +5,7 @@
  
 <option value="sea-1">Subject Enrichment-1</option>
                                          
-<option value="sa-1">Summitive Assessment-1</option>
+<option value="t-1">Term-1</option>
 </optgroup>
 
 <optgroup label="Term 2">
@@ -15,7 +15,7 @@
  
 <option value="sea-2">Subject Enrichment-2</option>
                         
-<option value="sa-2">Summitive Assessment-2</option>
+<option value="t-2">Term-2</option>
 
 
 </optgroup>

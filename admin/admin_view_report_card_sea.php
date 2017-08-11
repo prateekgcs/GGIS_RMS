@@ -108,7 +108,7 @@
 				
 						<div align='center' class="col-md-12">
 							<h3>Report Card</h3>
-							<h4>Class: IX <br/>Academic Session: 2017-18 <br/><b>Periodic Test-2</b></h4>
+							<h4>Class: IX <br/>Academic Session: 2017-18 <br/><b>Subject Enrichment-1</b></h4>
 						</div>
 			
 						<div class='row'>
