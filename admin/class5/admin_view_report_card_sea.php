@@ -2,10 +2,10 @@
 	/*session_start();
 	if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
 	{
-		die(header("location: ../index.php"));
+		die(header("location: ../../index.php"));
 	}
-	require_once '../lib/sql/conn.php';
-    	include("../lib/fusioncharts/fusioncharts.php");
+	require_once '../../lib/sql/conn.php';
+    	include("../../lib/fusioncharts/fusioncharts.php");
 	$conn = connect();*/
 
 ?>
@@ -16,8 +16,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Download Result</title>
-	<link href="../lib/css/bootstrap.css" rel="stylesheet">
-	<link href="../lib/css/style.css" rel="stylesheet">
+	<link href="../../lib/css/bootstrap.css" rel="stylesheet">
+	<link href="../../lib/css/style.css" rel="stylesheet">
 	
 	<style>
 		.bold
@@ -77,7 +77,7 @@
 		<!--HEADER-->
 		<div class="row header">
 			<div align="center">
-				<img class="img-responsive" src="../lib/image/logo.png"/>
+				<img class="img-responsive" src="../../lib/image/logo.png"/>
 			</div>
 		</div>
 		
@@ -94,12 +94,12 @@
 							<div class="col-md-12">
 								<table>
 									<tr>
-									<td width='15%'><img class='img img-responsive' src='../lib/image/cbse.png'/></td>
+									<td width='15%'><img class='img img-responsive' src='../../lib/image/cbse.png'/></td>
 								
 									<td><h3><b>Gyan Ganga International School</b></h3>
 									<p>Affiliated to C.B.S.E., Delhi, Affiliation No. 1030147<br/>Wardhman Square, By pass Junction Bheraghat Road, P.O.-Tewar, Jabalpur- 482003 (M.P.)<br/>Phone: 9893040336, 9893286946, 9893304495<br/>Website: gyanganga.ac.in, E-mail: gyangangajabalpur@gmail.com</p></td>
 							
-									<td width='15%'><img class='img img-responsive' src='../lib/image/slogo.png'/></td>
+									<td width='15%'><img class='img img-responsive' src='../../lib/image/slogo.png'/></td>
 									</tr>
 								</table>
 							</div>
@@ -108,7 +108,7 @@
 				
 						<div align='center' class="col-md-12">
 							<h3>Report Card</h3>
-							<h4>Class: IX <br/>Academic Session: 2017-18 <br/><b>Notebook Submission-1</b></h4>
+							<h4>Class: V <br/>Academic Session: 2017-18 <br/><b>Subject Enrichment-1</b></h4>
 						</div>
 			
 						<div class='row'>
@@ -192,7 +192,7 @@
 									<td></td>
 								</tr>
 								<tr>
-									<td>Computer Sc.</td>
+									<td>Sanskrit</td>
 									<td></td>
 								</tr>
 								<tr>
@@ -252,8 +252,8 @@
 			<p>Copyright &copy; &middot;Gyan Ganga Group of Institutions&middot; All Rights Reserved</p>
 		</div>
 	
-	<script src="../lib/js/jquery.min.js"></script>
-	<script src="../lib/js/bootstrap.js"></script>
+	<script src="../../lib/js/jquery.min.js"></script>
+	<script src="../../lib/js/bootstrap.js"></script>
 	
 		
 </body>

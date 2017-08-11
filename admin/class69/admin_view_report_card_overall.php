@@ -2,10 +2,10 @@
 	/*session_start();
 	if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
 	{
-		die(header("location: ../index.php"));
+		die(header("location: ../../index.php"));
 	}
-	require_once '../lib/sql/conn.php';
-    	include("../lib/fusioncharts/fusioncharts.php");
+	require_once '../../lib/sql/conn.php';
+    	include("../../lib/fusioncharts/fusioncharts.php");
 	$conn = connect();*/
 
 ?>
@@ -16,8 +16,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Download Result</title>
-	<link href="../lib/css/bootstrap.css" rel="stylesheet">
-	<link href="../lib/css/style.css" rel="stylesheet">
+	<link href="../../lib/css/bootstrap.css" rel="stylesheet">
+	<link href="../../lib/css/style.css" rel="stylesheet">
 	
 	<style>
 		.bold
@@ -51,6 +51,10 @@
 			border: black solid 1px !important;
 		}
 		
+		p
+		{
+			font-size: 12px;
+		}
 	</style>
 	
 	<script>
@@ -77,7 +81,7 @@
 		<!--HEADER-->
 		<div class="row header">
 			<div align="center">
-				<img class="img-responsive" src="../lib/image/logo.png"/>
+				<img class="img-responsive" src="../../lib/image/logo.png"/>
 			</div>
 		</div>
 		
@@ -93,12 +97,12 @@
 					<div class="col-md-12">
 						<table>
 						<tr>
-						<td width='15%'><img class='img img-responsive' src='../lib/image/cbse.png'/></td>
+						<td width='15%'><img class='img img-responsive' src='../../lib/image/cbse.png'/></td>
 					
 						<td><h3><b>Gyan Ganga International School</b></h3>
 						<p>Affiliated to C.B.S.E., Delhi, Affiliation No. 1030147<br/>Wardhman Square, By pass Junction Bheraghat Road, P.O.-Tewar, Jabalpur- 482003 (M.P.)<br/>Phone: 9893040336, 9893286946, 9893304495<br/>Website: gyanganga.ac.in, E-mail: gyangangajabalpur@gmail.com</p></td>
 				
-						<td width='15%'><img class='img img-responsive' src='../lib/image/slogo.png'/></td>
+						<td width='15%'><img class='img img-responsive' src='../../lib/image/slogo.png'/></td>
 						</tr>
 						</table>
 					</div>
@@ -107,7 +111,7 @@
 				
 				<div align='center' class="col-md-12">
 					<h3>Report Card</h3>
-					<h4>Class: IX <br/>Academic Session: 2017-18</h4>
+					<h4>Class: V <br/>Academic Session: 2017-18</h4>
 				</div>
 			
 				<div class='row'>
@@ -161,28 +165,22 @@
 				
 				<div class='col-md-12 mtop'>
 			
-					<table class='table table-centered' border="2">
+					<table border="2">
+					
 					<tr class='bold'>
-						<td rowspan="2">SCHOLASTIC AREA</td>
-						<td colspan="5" rowspan="2">SA 1</td>
-						<td colspan="5" rowspan="2">SA 2</td>
-						<td colspan="3">OVERALL</td>
+						<td colspan="12">SCHOLASTIC AREA</td>
 					</tr>
-					<tr class='bold'>
-						<td colspan="3">Term 1 (50)+Term 2 (50)</td>	
-					</tr>
+					
 					<tr class='bold'>
 						<td rowspan="2">Subjects</td>
-						<td>Per. Test</td>
-						<td>Note Book</td>
+						<td>PT 1</td>
+						<td>PT 2</td>
+						<td>PT 3</td>
+						<td>Avg of Best 2 PT</td>
+						<td>NS</td>
 						<td>SEA</td>
-						<td>Half Yearly</td>
 						<td>Total</td>
-						<td>Per. Test</td>
-						<td>Note Book</td>
-						<td>SEA</td>
-						<td>Half Yearly</td>
-						<td>Total</td>
+						<td>Annual Exam</td>
 						<td>Grand Total</td>
 						<td rowspan="2">Grade</td>
 						<td rowspan="2">Rank</td>
@@ -190,15 +188,13 @@
 					
 					<tr class='bold'>
 						<td>10</td>
-						<td>5</td>
-						<td>5</td>
-						<td>80</td>
-						<td>100</td>
+						<td>10</td>
+						<td>10</td>
 						<td>10</td>
 						<td>5</td>
 						<td>5</td>
+						<td>20</td>
 						<td>80</td>
-						<td>100</td>
 						<td>100</td>
 					</tr>
 					<tr>
@@ -214,8 +210,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td></td>
-						<td></td>
+					
 					</tr>
 					<tr>
 						<td class='left'>Hindi</td>
@@ -230,8 +225,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td></td>
-						<td></td>
+						
 					</tr>
 					<tr>
 						<td class='left'>Maths</td>
@@ -246,8 +240,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td></td>
-						<td></td>
+						
 					</tr>
 					<tr>
 						<td class='left'>Science</td>
@@ -262,8 +255,7 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td></td>
-						<td></td>
+					
 					</tr>
 					<tr>
 						<td class='left'>Social Studies</td>
@@ -278,11 +270,24 @@
 						<td></td>
 						<td></td>
 						<td></td>
+						
+					</tr>
+						<tr>
+						<td class='left'>Sanskrit</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td colspan="14"><b>8 Point Grading Scale: </b>A1(91% - 100%), A2(81% - 90%), B1(71% - 80%), B2(61% - 70%), C1(51%-60%), C2(41% - 50%), D(33% - 40%), E(32% & Below) *SE=Sub Enrichment</b></td>
+						<td colspan="12"><b>8 Point Grading Scale: </b>A1(91% - 100%), A2(81% - 90%), B1(71% - 80%), B2(61% - 70%), C1(51%-60%), C2(41% - 50%), D(33% - 40%), E(32% & Below) *SE=Sub Enrichment</b></td>
 					</tr>
 				</table>
 			</div>
@@ -326,17 +331,16 @@
 				</div>
 			</div>
 			
-			<div class="row">
+			<div style="padding-left:30px;" class="row">
 		
-			<div id='p' class='col-md-6 mtop'>
+			<div id='p' class='col-md-6'>
 			<table border="2">
 				<tr class='bold'>
-					<td colspan="3">Co-Scholastic Area<br>(3 Point Grading Scale A,B,C)</td>
+					<td colspan="3">Co-Scholastic Area<br>(5 Point Grading Scale A,B,C)</td>
 				</tr>
 				<tr class='bold'>
 					<td style="width:250px;" class='left'>Activity</td>
-					<td style="width:60px;">T1</td>
-					<td style="width:60px;">T2</td>
+					<td style="width:60px;">Grade</td>
 				</tr>
 				<tr>
 					<td class='left'>Work Education</td>
@@ -382,15 +386,14 @@
 			</div>
 			
 			
-			<div id='p' class='col-md-6 mtop'>
+			<div class='col-md-6'>
 			<table border="2">
 				<tr class='bold'>
-					<td colspan="3">Discipline<br>(3 Point Grading Scale A,B,C)</td>
+					<td colspan="3">Discipline<br>(5 Point Grading Scale A,B,C)</td>
 				</tr>
 				<tr class='bold'>
 					<td class='left'>Element</td>
-					<td style="width:60px;">T1</td>
-					<td style="width:60px;">T2</td>
+					<td style="width:60px;">Grade</td>
 				</tr>
 				<tr>
 					<td class='left'>Regularity & Punctuality</td>
@@ -438,27 +441,17 @@
 
 	<div class="row mtop">
 		
-		<div class='col-md-4'>
+		<div class='col-md-12'>
 		<table>
 			<tr>
 				<td>Attendance</td>
-				<td min-width='70%' style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td >Remarks</td>
+				<td style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			</tr>
 		</table>
 		</div>
-		
-		<div class='col-md-8'>
-		<table>
-			<tr>
-				<td>Remarks</td>
-				<td min-width='80%' style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			</tr>
-		</table>
-		</div>
-	</div>
-	
-	<div class='row mtop'>
-		<h4><b>Congratulations! Promoted to next Class.</b></h4>
 	</div>
 	
 	<div class='row'>
@@ -491,8 +484,8 @@
 			<p>Copyright &copy; &middot;Gyan Ganga Group of Institutions&middot; All Rights Reserved</p>
 		</div>
 	
-	<script src="../lib/js/jquery.min.js"></script>
-	<script src="../lib/js/bootstrap.js"></script>
+	<script src="../../lib/js/jquery.min.js"></script>
+	<script src="../../lib/js/bootstrap.js"></script>
 	
 		
 </body>

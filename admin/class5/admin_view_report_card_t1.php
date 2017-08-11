@@ -5,8 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
 	<title>Download Result</title>
-	<link href="../lib/css/bootstrap.css" rel="stylesheet">
-	<link href="../lib/css/style.css" rel="stylesheet">
+	<link href="../../lib/css/bootstrap.css" rel="stylesheet">
+	<link href="../../lib/css/style.css" rel="stylesheet">
 	
 	<style>
 	
@@ -67,7 +67,7 @@
 		<!--HEADER-->
 		<div class="row header">
 			<div align="center">
-				<img class="img-responsive" src="../lib/image/logo.png"/>
+				<img class="img-responsive" src="../../lib/image/logo.png"/>
 			</div>
 		</div>
 		
@@ -83,12 +83,12 @@
 					<div class="col-md-12">
 						<table>
 						<tr>
-						<td width='15%'><img class='img img-responsive' src='../lib/image/cbse.png'/></td>
+						<td width='15%'><img class='img img-responsive' src='../../lib/image/cbse.png'/></td>
 					
 						<td><h3><b>Gyan Ganga International School</b></h3>
 						<p>Affiliated to C.B.S.E., Delhi, Affiliation No. 1030147<br/>Wardhman Square, By pass Junction Bheraghat Road, P.O.-Tewar, Jabalpur- 482003 (M.P.)<br/>Phone: 9893040336, 9893286946, 9893304495<br/>Website: gyanganga.ac.in, E-mail: gyangangajabalpur@gmail.com</p></td>
 				
-						<td width='15%'><img class='img img-responsive' src='../lib/image/slogo.png'/></td>
+						<td width='15%'><img class='img img-responsive' src='../../lib/image/slogo.png'/></td>
 						</tr>
 						</table>
 					</div>
@@ -97,7 +97,7 @@
 				
 				<div align='center' class="col-md-12">
 					<h3>Report Card</h3>
-					<h4>Class: IX <br/>Academic Session: 2017-18</h4>
+					<h4>Class: V <br/>Academic Session: 2017-18</h4>
 				</div>
 			
 				<div class='row'>
@@ -222,6 +222,16 @@
 							<td></td>
 						</tr>
 						<tr>
+							<td class='left'>Sanskrit</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						
+						<tr>
 							<td colspan="7"><b>8 Point Grading Scale: </b>A1(91% - 100%), A2(81% - 90%), B1(71% - 80%), B2(61% - 70%), C1(51%-60%), C2(41% - 50%), D(33% - 40%), E(32% & Below) *SE=Sub Enrichment</b></td>
 						</tr>
 					</table>
@@ -279,7 +289,7 @@
 							</tr>
 							<tr class='bold'>
 								<td style="width:250px;" class='left'>Activity</td>
-								<td style="width:60px;">T1</td>
+								<td style="width:60px;">Grade</td>
 							</tr>
 							
 							<tr>
@@ -325,18 +335,22 @@
 						<tr class='bold'>
 							<td colspan="2">Discipline<br>(3 Point Grading Scale A,B,C)</td>
 						</tr>
+						
 						<tr class='bold'>
 							<td class='left'>Element</td>
-							<td style="width:60px;">T1</td>
+							<td style="width:60px;">Grade</td>
 						</tr>
+						
 						<tr>
 							<td class='left'>Regularity & Punctuality</td>
 							<td></td>
 						</tr>
+						
 						<tr>
 							<td class='left'>Sincerity</td>
 							<td></td>
 						</tr>
+						
 						<tr>
 							<td class='left'>Behaviour & Values</td>
 							<td></td>
@@ -421,8 +435,8 @@
 			<p>Copyright &copy; &middot;Gyan Ganga Group of Institutions&middot; All Rights Reserved</p>
 		</div>
 	
-	<script src="../lib/js/jquery.min.js"></script>
-	<script src="../lib/js/bootstrap.js"></script>
+	<script src="../../lib/js/jquery.min.js"></script>
+	<script src="../../lib/js/bootstrap.js"></script>
 	
 		
 </body>

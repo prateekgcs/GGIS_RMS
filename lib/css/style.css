@@ -25,6 +25,11 @@
 		width: 300px;
 	}
 	
+	.headmargin
+	{
+		margin-top: 200px;
+	}
+	
 	body 
 	{
 		margin-top:0px;
