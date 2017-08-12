@@ -41,6 +41,11 @@
 			border: black solid 1px !important;
 		}
 		
+		p
+		{
+			font-size: 12px;
+		}
+
 	</style>
 	
 	<script>
@@ -73,19 +78,18 @@
 		
 		<!--BODY-->	
 		<div class='headmargin'>
-		<div class='container-fluid' id='report'>
-			<div style='border: 2px solid black' class='ht col-md-10 col-md-offset-1' >
-				
-				<div class='container-fluid'>
-				
-				<div class='row'>
-				
-					<div class='col-md-12'>
+		
 						<?php
 						if(isset($_GET['tname'])&&isset($_GET['rollno']))
 							{
 								require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/sql/conn.php'); 
 								
+								$pt1_max = 10;
+								$ns1_max = 5;
+								$sea1_max = 5;
+								$sa_max = 80;
+								$t1_max = 100;
+
 								$tname = $_GET['tname'];
 								$arr = explode('_',$tname);
 								$year = $arr[0];
@@ -127,6 +131,15 @@
 								$pt1_m4 = $marks['s4'];
 								$pt1_m5 = $marks['s5'];
 								$pt1_total = $marks['total'];
+								$query = "SELECT * FROM `$pt1_table` WHERE roll_no = '^'";
+								$stmt = $conn->prepare($query);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong2!');</script>");
+								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
+								$pt1_m1_max = $marks['s1'];
+								$pt1_m2_max = $marks['s2'];
+								$pt1_m3_max = $marks['s3'];
+								$pt1_m4_max = $marks['s4'];
+								$pt1_m5_max = $marks['s5'];
 
 
 								$query = "SELECT * FROM `$ns1_table` WHERE roll_no = ?";
@@ -140,6 +153,15 @@
 								$ns1_m4 = $marks['s4'];
 								$ns1_m5 = $marks['s5'];
 								$ns1_total = $marks['total'];
+								$query = "SELECT * FROM `$ns1_table` WHERE roll_no = '^'";
+								$stmt = $conn->prepare($query);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong2!');</script>");
+								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
+								$ns1_m1_max = $marks['s1'];
+								$ns1_m2_max = $marks['s2'];
+								$ns1_m3_max = $marks['s3'];
+								$ns1_m4_max = $marks['s4'];
+								$ns1_m5_max = $marks['s5'];
 
 
 								$query = "SELECT * FROM `$sea1_table` WHERE roll_no = ?";
@@ -153,9 +175,18 @@
 								$sea1_m4 = $marks['s4'];
 								$sea1_m5 = $marks['s5'];
 								$sea1_total = $marks['total'];
+								$query = "SELECT * FROM `$sea1_table` WHERE roll_no = '^'";
+								$stmt = $conn->prepare($query);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong2!');</script>");
+								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
+								$sea1_m1_max = $marks['s1'];
+								$sea1_m2_max = $marks['s2'];
+								$sea1_m3_max = $marks['s3'];
+								$sea1_m4_max = $marks['s4'];
+								$sea1_m5_max = $marks['s5'];
 
 
-								$query = "SELECT * FROM `$csa1_table` WHERE roll_no = ?";
+								$query = "SELECT * FROM `$csa1_table` WHERE sch_no = ?";
 								$stmt = $conn->prepare($query);
 								$stmt->bindParam(1,$rollno);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong!5');</script>");
@@ -165,10 +196,12 @@
 								$csa1_m3 = $marks['s3'];
 								$csa1_m4 = $marks['s4'];
 								$csa1_m5 = $marks['s5'];
-								$csa1_total = $marks['total'];
+								$csa1_m6 = $marks['s6'];
+								$csa1_m7 = $marks['s7'];
+								$csa1_m8 = $marks['s8'];
 
 
-								$query = "SELECT * FROM `$d1_table` WHERE roll_no = ?";
+								$query = "SELECT * FROM `$d1_table` WHERE sch_no = ?";
 								$stmt = $conn->prepare($query);
 								$stmt->bindParam(1,$rollno);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
@@ -178,7 +211,9 @@
 								$d1_m3 = $marks['s3'];
 								$d1_m4 = $marks['s4'];
 								$d1_m5 = $marks['s5'];
-								$d1_total = $marks['total'];
+								$d1_m6 = $marks['s6'];
+								$d1_m7 = $marks['s7'];
+								$d1_m8 = $marks['s8'];
 
 								$query = "SELECT * FROM `$tname` WHERE roll_no = ?";
 								$stmt = $conn->prepare($query);
@@ -193,6 +228,15 @@
 								$sa1_total = $marks['total'];
 								$attendance = $marks['attendance'];
 								$remarks = $marks['remarks'];
+								$query = "SELECT * FROM `$sa1_table` WHERE roll_no = '^'";
+								$stmt = $conn->prepare($query);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong2!');</script>");
+								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
+								$sa1_m1_max = $marks['s1'];
+								$sa1_m2_max = $marks['s2'];
+								$sa1_m3_max = $marks['s3'];
+								$sa1_m4_max = $marks['s4'];
+								$sa1_m5_max = $marks['s5'];
 
 								$query = "SELECT * FROM `$info_table` WHERE roll_no = ? AND section = ?";
 								$stmt = $conn->prepare($query);
@@ -207,7 +251,16 @@
 								$dob = $result['dob'];
 								$address = $result['address'];
 								$scholar_no = $result['scholar_no'];
-								$html = "<table>
+								$html = "
+								<div class='container-fluid' id='report'>
+								<div style='border: 2px solid black' class='ht col-md-10 col-md-offset-1' >
+									
+									<div class='container-fluid'>
+									
+									<div class='row'>
+									
+										<div class='col-md-12'>
+								<table>
 								<tr>
 								<td width='15%'><img class='img img-responsive' src='../../lib/image/cbse.png'/></td>
 							
@@ -230,25 +283,25 @@
 							<div id='p' class='col-md-6 mtop'>
 								<table>
 									<tr>
-										<td class='left'>Student's Name</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td class='left'>Student's Name:</td>
+										<td width='250px;' style='border-bottom: 1px solid black;'> $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									</tr>
 									
 									<tr>
-										<td class='left'>Father's Name</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'></td>
+										<td class='left'>Father's Name:</td>
+										<td width='250px;' style='border-bottom: 1px solid black;'> $fname</td>
 									</tr>
 									<tr>
-										<td class='left'>Mother's Name</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'></td>
+										<td class='left'>Mother's Name:</td>
+										<td width='250px;' style='border-bottom: 1px solid black;'> $mname</td>
 									</tr>
 									<tr>
-										<td class='left'>Date of Birth</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'></td>
+										<td class='left'>Date of Birth:</td>
+										<td width='250px;' style='border-bottom: 1px solid black;'> $dob</td>
 									</tr>
 									<tr>
-										<td class='left'>Address</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'></td>
+										<td class='left'>Address:</td>
+										<td width='250px;' style='border-bottom: 1px solid black;'> $address</td>
 									</tr>
 								</table>
 							
@@ -259,7 +312,7 @@
 								<table>
 									<tr align='center'>
 										<td style='border: 1px solid black;'>Roll No.</td>
-										<td style='border: 1px solid black;'>1</td>
+										<td style='border: 1px solid black;'> $rollno</td>
 									</tr>
 						
 									<tr>
@@ -268,7 +321,7 @@
 
 									<tr>
 										<td>Admission Number</td>
-										<td width='50%' style='border-bottom: 1px solid black;'></td>
+										<td width='50%' style='border-bottom: 1px solid black;'> $scholar_no</td>
 									</tr>
 										
 								</table>
@@ -295,55 +348,55 @@
 								</tr>
 								
 								<tr class='bold'>
-									<td>10</td>
-									<td>5</td>
-									<td>5</td>
-									<td>80</td>
-									<td>100</td>
+									<td>$pt1_max</td>
+									<td>$ns1_max</td>
+									<td>$sea1_max</td>
+									<td>$sa1_max</td>
+									<td>$t1_max</td>
 								</tr>
 								
 								<tr>
-									<td class='left'>English</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td class='left'>Hindi</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td class='left'>$s1</td>
+									<td>$pt1_m1</td>
+									<td>$ns1_m1</td>
+									<td>$sea1_m1</td>
+									<td>$sa1_m1</td>
 									<td></td>
 									<td></td>
 								</tr>
 								<tr>
-									<td class='left'>Maths</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td class='left'>Science</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td class='left'>$s2</td>
+									<td>$pt1_m2</td>
+									<td>$ns1_m2</td>
+									<td>$sea1_m2</td>
+									<td>$sa1_m2</td>
 									<td></td>
 									<td></td>
 								</tr>
 								<tr>
-									<td class='left'>Social Studies</td>
+									<td class='left'>$s3</td>
+									<td>$pt1_m3</td>
+									<td>$ns1_m3</td>
+									<td>$sea1_m3</td>
+									<td>$sa1_m3</td>
 									<td></td>
 									<td></td>
+								</tr>
+								<tr>
+									<td class='left'>$s4</td>
+									<td>$pt1_m4</td>
+									<td>$ns1_m4</td>
+									<td>$sea1_m4</td>
+									<td>$sa1_m4</td>
 									<td></td>
 									<td></td>
+								</tr>
+								<tr>
+									<td class='left'>$s5</td>
+									<td>$pt1_m5</td>
+									<td>$ns1_m5</td>
+									<td>$sea1_m5</td>
+									<td>$sa1_m5</td>
 									<td></td>
 									<td></td>
 								</tr>
@@ -411,37 +464,37 @@
 									
 									<tr>
 										<td class='left'>Work Education</td>
-										<td></td>
+										<td>$csa1_m1</td>
 									</tr>
 									
 									<tr>
 										<td class='left'>Art Education</td>
-										<td></td>
+										<td>$csa1_m2</td>
 									</tr>
 									
 									<tr>
 										<td class='left'>Health & Physical Education</td>
-										<td></td>
+										<td>$csa1_m3</td>
 									</tr>
 									<tr>
 										<td class='left'>Scientific Skills</td>
-										<td></td>
+										<td>$csa1_m4</td>
 									</tr>
 									<tr>
 										<td class='left'>Thinking Skills</td>
-										<td></td>
+										<td>$csa1_m5</td>
 									</tr>
 									<tr>
 										<td class='left'>Social Skills</td>
-										<td></td>
+										<td>$csa1_m6</td>
 									</tr>
 									<tr>
 										<td class='left'>Yoga/NCC</td>
-										<td></td>
+										<td>$csa1_m7</td>
 									</tr>
 									<tr>
 										<td class='left'>Sports</td>
-										<td></td>
+										<td>$csa1_m8</td>
 									</tr>
 								</table>
 							</div>
@@ -460,37 +513,37 @@
 								
 								<tr>
 									<td class='left'>Regularity & Punctuality</td>
-									<td></td>
+									<td>$d1_m1</td>
 								</tr>
 								
 								<tr>
 									<td class='left'>Sincerity</td>
-									<td></td>
+									<td>$d1_m2</td>
 								</tr>
 								
 								<tr>
 									<td class='left'>Behaviour & Values</td>
-									<td></td>
+									<td>$d1_m3</td>
 								</tr>
 								<tr>
 									<td class='left'>Respectfulness for Rules & Regulations</td>
-									<td></td>
+									<td>$d1_m4</td>
 								</tr>
 								<tr>
 									<td class='left'>Attitude Towards Teachers</td>
-									<td></td>
+									<td>$d1_m5</td>
 								</tr>
 								<tr>
 									<td class='left'>Attitude Towards School-mates</td>
-									<td></td>
+									<td>$d1_m6</td>
 								</tr>
 								<tr>
 									<td class='left'>Attitude Towards Society</td>
-									<td></td>
+									<td>$d1_m7</td>
 								</tr>
 								<tr>
 									<td class='left'>Attitude Towards Nstion</td>
-									<td></td>
+									<td>$d1_m8</td>
 								</tr>
 							</table>
 						</div>
@@ -502,8 +555,8 @@
 				<div class='col-md-4'>
 				<table>
 					<tr>
-						<td>Attendance</td>
-						<td min-width='70%' style='border-bottom: 1px solid black;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>Attendance: </td>
+						<td min-width='70%' style='border-bottom: 1px solid black;'> $attendance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					</tr>
 				</table>
 				</div>
@@ -511,8 +564,8 @@
 				<div class='col-md-8'>
 				<table>
 					<tr>
-						<td>Remarks</td>
-						<td min-width='80%' style='border-bottom: 1px solid black;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>Remarks: </td>
+						<td min-width='80%' style='border-bottom: 1px solid black;'> $remarks&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 					</tr>
 				</table>
 				</div>
@@ -531,22 +584,24 @@
 								<td id='p1'>Class Teacher</td>
 								<td id='p1'>Principal</td>
 							</tr>
-						</table>";
+						</table>
+						</div>
+						</div>
+						</div>
+						</div>
+						</div>";
 
 						echo $html;
 					}
 				?>
 			
-		</div>
-	</div>	
+		
 	
-	</div>
-	</div>
-</div>
+	
 	</div>	
 	
 	<div class='col-md-6 col-md-offset-3 headmargin'>
-			<button class='btn btn-danger btn-block' onclick='printDiv('report')'>Print</button>
+			<button class='btn btn-danger btn-block' onclick="printDiv('report')">Print</button>
 		</div>
 	</div>
 		
