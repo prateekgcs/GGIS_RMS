@@ -87,7 +87,7 @@
 								$pt1_max = 10;
 								$ns1_max = 5;
 								$sea1_max = 5;
-								$sa_max = 80;
+								$sa1_max = 80;
 								$t1_max = 100;
 
 								$tname = $_GET['tname'];
@@ -228,7 +228,7 @@
 								$sa1_total = $marks['total'];
 								$attendance = $marks['attendance'];
 								$remarks = $marks['remarks'];
-								$query = "SELECT * FROM `$sa1_table` WHERE roll_no = '^'";
+								$query = "SELECT * FROM `$tname` WHERE roll_no = '^'";
 								$stmt = $conn->prepare($query);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong2!');</script>");
 								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
