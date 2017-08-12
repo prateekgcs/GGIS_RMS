@@ -3,7 +3,8 @@
     require_once '../lib/sql/conn.php';
     $conn = connect();
  ?>
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 
 <head>
 	<meta charset="utf-8">
@@ -103,10 +104,7 @@
 						<br/>
 					  
 						<div align="center">
-							
-							
-							
-							<div class="col-md-6">
+							<div>
 							<input type='submit' name='search' value='Search' class='btn btn-success btn-block'/>
 							</div>
 						</div>
@@ -140,12 +138,12 @@
 								die("<script>alert('Delete exam data for this class first!');</script>");
 							}
 
-							printf("
-									<h3>Batch Info to be deleted: 
-									</br>Class: $class
+							printf("<div align='center'>
+									<h4>BATCH INFO TO BE DELETED: 
+									</br></br>Class: $class
 									</br>Year: $year</h3>
 									</br><button onclick=\" confirmBox(); \" class='btn btn-danger btn-block'>Delete</button>
-									</br>
+									</br></div>
 									<script>
 										function confirmBox()
 										{

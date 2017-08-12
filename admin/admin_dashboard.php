@@ -35,7 +35,7 @@
 		<div class="container-fluid">
 			<div class="ht col-md-10 col-md-offset-1">
 				
-				<div align="center" class="col-md-3 subhead sidebar">
+				<div align="center" style="margin-top: 50px; margin-bottom: 15px;" class="col-md-3 sidebarlong">
 					<h3>Welcome</br><?php printf($_SESSION['admin_name']); ?></h3>
 					<?php echo "Date: ".date("d-m-Y")."<br/>";
 					echo "Time: ".date("h:i:sa");
@@ -114,6 +114,29 @@
 							</a>
 						</div>				
 					</div>
+					
+					<div class="col-md-5 col-md-offset-1">
+						<div style="margin-bottom:20px;" align="center" class="card">
+							<a href="./admin_delete_exam.php">
+							<div class=" card card2 padd" id="cards">
+								<img class="card-img-top" width="20%" src="../lib/image/empty.png">
+									<h3 class="card-title">DELETE RESULT</h3>
+								</div>
+							</a>
+						</div>				
+					</div>
+					
+					<div class="col-md-5">
+						<div align="center" class="card">
+							<a href="./admin_delete_batch_info.php">
+							<div class=" card card1 padd" id="cards">
+								<img class="card-img-top" width="20%" src="../lib/image/empty.png">
+									<h3 class="card-title">DELETE BATCH INFO</h3>
+								</div>
+							</a>
+						</div>				
+					</div>
+					
 				</div>
 			</div>
 		</div>
