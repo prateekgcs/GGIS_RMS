@@ -261,7 +261,7 @@
             $s3 = $worksheet->getCell('E'.$row)->getValue();
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
-            $total = $worksheet->getCell('H'.$row)->getValue();
+            $total = $worksheet->getCell('H'.$row)->getCalculatedValue();
             $attendance = $worksheet->getCell('I'.$row)->getValue();
             $remarks = $worksheet->getCell('J'.$row)->getValue();
             
@@ -320,7 +320,7 @@
             $s3 = $worksheet->getCell('E'.$row)->getValue();
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
-            $total = $worksheet->getCell('H'.$row)->getValue();
+            $total = $worksheet->getCell('H'.$row)->getCalculatedValue();
             
 			if($rollno != '')
 			{
@@ -376,7 +376,7 @@
             $s3 = $worksheet->getCell('E'.$row)->getValue();
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
-            $total = $worksheet->getCell('H'.$row)->getValue();
+            $total = $worksheet->getCell('H'.$row)->getCalculatedValue();
             
 			if($rollno != '')
 			{
@@ -434,7 +434,7 @@
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
-            $total = $worksheet->getCell('I'.$row)->getValue();
+            $total = $worksheet->getCell('I'.$row)->getCalculatedValue();
             $attendance = $worksheet->getCell('J'.$row)->getValue();
             $remarks = $worksheet->getCell('K'.$row)->getValue();
             
@@ -496,7 +496,7 @@
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
-            $total = $worksheet->getCell('I'.$row)->getValue();
+            $total = $worksheet->getCell('I'.$row)->getCalculatedValue();
             
 			if($rollno != '')
 			{
@@ -553,7 +553,7 @@
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
-            $total = $worksheet->getCell('I'.$row)->getValue();
+            $total = $worksheet->getCell('I'.$row)->getCalculatedValue();
             $attendance = $worksheet->getCell('J'.$row)->getValue();
             $remarks = $worksheet->getCell('K'.$row)->getValue();
             
@@ -614,7 +614,7 @@
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
-            $total = $worksheet->getCell('I'.$row)->getValue();
+            $total = $worksheet->getCell('I'.$row)->getCalculatedValue();
             
 			if($rollno != '')
 			{
@@ -673,7 +673,7 @@
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
-            $total = $worksheet->getCell('I'.$row)->getValue();
+            $total = $worksheet->getCell('I'.$row)->getCalculatedValue();
             $attendance = $worksheet->getCell('J'.$row)->getValue();
             $remarks = $worksheet->getCell('K'.$row)->getValue();
             
@@ -734,7 +734,7 @@
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
-            $total = $worksheet->getCell('I'.$row)->getValue();
+            $total = $worksheet->getCell('I'.$row)->getCalculatedValue();
             
 			if($rollno != '')
 			{
@@ -791,7 +791,7 @@
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
-            $total = $worksheet->getCell('I'.$row)->getValue();
+            $total = $worksheet->getCell('I'.$row)->getCalculatedValue();
             
 			if($rollno != '')
 			{
@@ -849,7 +849,7 @@
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
-            $total = $worksheet->getCell('I'.$row)->getValue();
+            $total = $worksheet->getCell('I'.$row)->getCalculatedValue();
             $attendance = $worksheet->getCell('J'.$row)->getValue();
             $remarks = $worksheet->getCell('K'.$row)->getValue();
             
@@ -915,7 +915,7 @@
 			$s7 = $worksheet->getCell('I'.$row)->getValue();
 			$s8 = $worksheet->getCell('J'.$row)->getValue();
 			$s9 = $worksheet->getCell('K'.$row)->getValue();
-            $total = $worksheet->getCell('L'.$row)->getValue();
+            $total = $worksheet->getCell('L'.$row)->getCalculatedValue();
             $attendance = $worksheet->getCell('M'.$row)->getValue();
             $remarks = $worksheet->getCell('N'.$row)->getValue();
             
@@ -982,7 +982,7 @@
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
 			$s7 = $worksheet->getCell('I'.$row)->getValue();
 			$s8 = $worksheet->getCell('J'.$row)->getValue();
-			$total = $worksheet->getCell('K'.$row)->getValue();
+			$total = $worksheet->getCell('K'.$row)->getCalculatedValue();
             $attendance = $worksheet->getCell('L'.$row)->getValue();
             $remarks = $worksheet->getCell('M'.$row)->getValue();
             
