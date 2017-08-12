@@ -1,4 +1,18 @@
 <?php
+	function checkAvailable($class,$bitmap,$test_type)
+	{
+		if($class<=5)
+			$foo = 'oneToFive';
+		else if($class>5 && $class<10)
+			$foo = 'sixToNine';
+		else if( $class=='11s' || $class=='11c' )
+			$foo = 'eleven';
+		else
+			printf("<script>alert('Something went wrong!');</script>");
+
+		call_user_func_array($foo, array($bitmap, $test_type));
+	}
+
 	function oneToFive($bitmap,$test_type)
 	{
 		$a = str_split($bitmap);

@@ -58,7 +58,7 @@
 							<br/>
 						</div>
 					
-						<form action="./admin_view_report_card.php" method="POST" enctype="multipart/form-data">
+						<form action="" method="POST" enctype="multipart/form-data">
 							<div class="form-group">
 								
 								<h4>Batch Year</h4>
@@ -109,7 +109,7 @@
 							 
 					 <div class="form-group">
 						<h4>Report Card</h4>
-						<select name="sem" class="form-control" id="sel3">
+						<select name="type" class="form-control" id="sel3">
 						 <option value="default">Select</option>
 						 </select>
                      </div>
@@ -122,11 +122,65 @@
 					  <br/>
 					  
 					  <div align="center">
-						<input type='submit' name='Download' value='Generate' class='btn btn-success btn-block'/>
+						<input type='submit' name='generate' value='Generate' class='btn btn-success btn-block'/>
 					</div>
 					 <br/>
 					 
 					</form>
+				</div>
+				<div>
+					<?php
+						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/functions/check_available.php');
+						if(isset($_POST['generate']))
+						{
+							$year = $_POST['year'];
+							$class = $_POST['class'];
+							$section = $_POST['section'];
+							$test_type = $_POST['type'];
+							$rollno = $_POST['rollno'];
+
+							if($test_type == 'or')
+							{	
+								$test_type = 'overall';
+								$tab = 'final-1';
+							}
+							else if($test_type == 't-1')
+							{	
+								$test_type = 't1';
+								$tab = 'sa-1';
+							}
+							else if($test_type == 't-2')
+							{	
+								$test_type = 't2';
+								$tab = 'sa-2';
+							}
+							else
+							{
+								$tab = $test_type;
+							}
+
+							if($class<5)
+								$folder = 'class14';
+							else if($class==5)
+								$folder = 'class5';
+							else if($class>5 && $class<10)
+								$folder = 'class69';
+							else if( $class=='11s' || $class=='11c' )
+								$folder = 'class11';
+							else
+								printf("<script>alert('Something went wrong!');</script>");
+
+							$file = 'admin_view_report_card_'.strtolower($test_type);
+
+							$tname = $year.'_'.$class.'_'.strtolower($section).'_'.$tab;
+
+							$root = $_SERVER['DOCUMENT_ROOT']; 
+							$path = $root.'/GGIS_RMS/admin/'.$folder.'/'.$file.".php?tname=$tname&rollno=$rollno";
+
+							echo $path;
+						}
+
+					?>
 				</div>
 			</div>	
 				</div>
