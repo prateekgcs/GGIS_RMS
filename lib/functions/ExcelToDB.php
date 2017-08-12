@@ -65,7 +65,7 @@
 			$username = "root";
 			$password = "";
 			$dbname = "ggis_rms";
-			$link = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8",$username,$password, array(
+			$link = new PDO("mysql:host=$servername;dbname=$dbname;charset=uts8",$username,$password, array(
 				PDO::ATTR_EMULATE_PREPARES=>false,
 				PDO::MYSQL_ATTR_DIRECT_QUERY=>false,
 				PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION ));
@@ -205,7 +205,7 @@
             $attendance = $worksheet->getCell('I'.$row)->getValue();
             $remarks = $worksheet->getCell('J'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -266,7 +266,7 @@
             $attendance = $worksheet->getCell('I'.$row)->getValue();
             $remarks = $worksheet->getCell('J'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -323,7 +323,7 @@
             $s5 = $worksheet->getCell('G'.$row)->getValue();
             $total = $worksheet->getCell('H'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{				
@@ -379,7 +379,7 @@
             $s5 = $worksheet->getCell('G'.$row)->getValue();
             $total = $worksheet->getCell('H'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -439,7 +439,7 @@
             $attendance = $worksheet->getCell('J'.$row)->getValue();
             $remarks = $worksheet->getCell('K'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -499,7 +499,7 @@
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
             $total = $worksheet->getCell('I'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -558,7 +558,7 @@
             $attendance = $worksheet->getCell('J'.$row)->getValue();
             $remarks = $worksheet->getCell('K'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -617,7 +617,7 @@
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
             $total = $worksheet->getCell('I'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -678,7 +678,7 @@
             $attendance = $worksheet->getCell('J'.$row)->getValue();
             $remarks = $worksheet->getCell('K'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -737,7 +737,7 @@
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
             $total = $worksheet->getCell('I'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -794,7 +794,7 @@
 			$s6 = $worksheet->getCell('H'.$row)->getValue();
             $total = $worksheet->getCell('I'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -854,7 +854,7 @@
             $attendance = $worksheet->getCell('J'.$row)->getValue();
             $remarks = $worksheet->getCell('K'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -920,7 +920,7 @@
             $attendance = $worksheet->getCell('M'.$row)->getValue();
             $remarks = $worksheet->getCell('N'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{		
 				try
 				{
@@ -987,7 +987,7 @@
             $attendance = $worksheet->getCell('L'.$row)->getValue();
             $remarks = $worksheet->getCell('M'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -1022,7 +1022,7 @@
 
 		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE `$tablename` ( `sch_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `f1` VARCHAR(5) NOT NULL , `f2` VARCHAR(5) NOT NULL , `f3` VARCHAR(5) NOT NULL , `f4` VARCHAR(5) NOT NULL , `f5` VARCHAR(5) NOT NULL , `f6` VARCHAR(5) NOT NULL , `f7` VARCHAR(5) NOT NULL , `f8` VARCHAR(5) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE `$tablename` ( `sch_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `s1` VARCHAR(5) NOT NULL , `s2` VARCHAR(5) NOT NULL , `s3` VARCHAR(5) NOT NULL , `s4` VARCHAR(5) NOT NULL , `s5` VARCHAR(5) NOT NULL , `s6` VARCHAR(5) NOT NULL , `s6` VARCHAR(5) NOT NULL , `s8` VARCHAR(5) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
@@ -1050,7 +1050,7 @@
             $s7 = $worksheet->getCell('I'.$row)->getValue();
             $s8 = $worksheet->getCell('J'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -1081,7 +1081,7 @@
     {
 		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE `$tablename` ( `sch_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `f1` VARCHAR(5) NOT NULL , `f2` VARCHAR(5) NOT NULL , `f3` VARCHAR(5) NOT NULL , `f4` VARCHAR(5) NOT NULL , `f5` VARCHAR(5) NOT NULL , `f6` VARCHAR(5) NOT NULL , `f7` VARCHAR(5) NOT NULL , `f8` VARCHAR(5) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE `$tablename` ( `sch_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `s1` VARCHAR(5) NOT NULL , `s2` VARCHAR(5) NOT NULL , `s3` VARCHAR(5) NOT NULL , `s4` VARCHAR(5) NOT NULL , `s5` VARCHAR(5) NOT NULL , `s6` VARCHAR(5) NOT NULL , `s6` VARCHAR(5) NOT NULL , `s8` VARCHAR(5) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
@@ -1109,7 +1109,7 @@
             $s7 = $worksheet->getCell('I'.$row)->getValue();
             $s8 = $worksheet->getCell('J'.$row)->getValue();
             
-			if($rollno != '' && $name != '')
+			if($rollno != '')
 			{
 				try
 				{
@@ -1141,7 +1141,7 @@
     {
 		$link = connecttt();
           
-		$queryinsert = " CREATE TABLE `$tablename` ( `scholar_no` VARCHAR(5) NOT NULL , `roll_no` INT NOT NULL ,`section` VARCHAR(2) NOT NULL , `name` VARCHAR(50) NOT NULL , `religion` VARCHAR(20) NOT NULL , `gender` VARCHAR(10) NOT NULL , `category` VARCHAR(10) NOT NULL , `fname` VARCHAR(80) NOT NULL , `mname` VARCHAR(80) NOT NULL , `dob` VARCHAR(15) NOT NULL , `address` VARCHAR(150) NOT NULL , `mno` VARCHAR(10) NOT NULL , `bg` VARCHAR(10) NOT NULL , `height` VARCHAR(50) NOT NULL , `weight` VARCHAR(50) NOT NULL , `house` VARCHAR(20) NOT NULL ) ";
+		$queryinsert = " CREATE TABLE `$tablename` ( `scholar_no` VARCHAR(5) NOT NULL , `roll_no` VARCHAR(5) NOT NULL ,`section` VARCHAR(2) NOT NULL , `name` VARCHAR(50) NOT NULL , `religion` VARCHAR(20) NOT NULL , `gender` VARCHAR(10) NOT NULL , `category` VARCHAR(10) NOT NULL , `fname` VARCHAR(80) NOT NULL , `mname` VARCHAR(80) NOT NULL , `dob` VARCHAR(15) NOT NULL , `address` VARCHAR(150) NOT NULL , `mno` VARCHAR(10) NOT NULL , `bg` VARCHAR(10) NOT NULL , `height` VARCHAR(50) NOT NULL , `weight` VARCHAR(50) NOT NULL , `house` VARCHAR(20) NOT NULL ) ";
 		  
 		$sqlinsert = $link->prepare($queryinsert);
 		if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));

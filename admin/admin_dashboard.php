@@ -130,7 +130,7 @@
 						<div align="center" class="card">
 							<a href="./admin_delete_batch_info.php">
 							<div class=" card card1 padd" id="cards">
-								<img class="card-img-top" width="20%" src="../lib/image/empty.png">
+								<img class="card-img-top" width="20%" src="../lib/image/delete_info.png">
 									<h3 class="card-title">DELETE BATCH INFO</h3>
 								</div>
 							</a>

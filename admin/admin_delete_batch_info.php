@@ -56,7 +56,7 @@
 					<div class="container-fluid subhead">  	
 				
 						<div align='center'>
-							<h3>UPLOAD BATCH INFORMATION</h3>
+							<h3>DELETE BATCH INFORMATION</h3>
 						</div>
 					
 						<form action="" method="POST" enctype="multipart/form-data">

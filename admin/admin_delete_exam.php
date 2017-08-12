@@ -54,7 +54,7 @@
 					<div class="container-fluid subhead">  	
 				
 						<div align='center'>
-							<h2>UPLOAD RESULT</h2>
+							<h2>DELETE RESULT DATA</h2>
 						</div>
 					
 						<form action="" method="POST" enctype="multipart/form-data">
@@ -117,10 +117,8 @@
 						<br/>
 					  
 						<div align="center">
-							
-														
-							
-						<input type='submit' name='search' value='Search' class='btn btn-success btn-block'/>
+
+							<input type='submit' name='search' value='Search' class='btn btn-success btn-block'/>
 							
 						</div>
 					 <br/>
@@ -140,20 +138,23 @@
 						{
 							$year = $_POST['year'];
 							$class = $_POST['clas'];
-							$section = $_POST['section'];
+							$section = strtoupper($_POST['section']);
 							$test_type = $_POST['temp'];
 							$tname = $year.'_'.$class.'_'.strtoupper($section).'_'.$test_type;
 							$bitmap = getBitMap($year,$class,$section);
 							if(checkAll($bitmap,$test_type,$class))
 							{
-								printf("
-									<h3>Exam to be deleted: 
+								printf("<div align='center'>
+									<h4>EXAM DETAILS TO BE DELETED:
+									</br>
+									</br>Year: $year
 									</br>Class: $class
 									</br>Section: $section
 									</br>Test: $test_type
-									</br>Year: $year</h3>
+									</h4>
 									</br><button onclick=\" confirmBox(); \" class='btn btn-danger btn-block'>Delete</button>
 									</br>
+									</div>
 									<script>
 										function confirmBox()
 										{
