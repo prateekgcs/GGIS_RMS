@@ -65,7 +65,7 @@
 			$username = "root";
 			$password = "";
 			$dbname = "ggis_rms";
-			$link = new PDO("mysql:host=$servername;dbname=$dbname;charset=uts8",$username,$password, array(
+			$link = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8",$username,$password, array(
 				PDO::ATTR_EMULATE_PREPARES=>false,
 				PDO::MYSQL_ATTR_DIRECT_QUERY=>false,
 				PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION ));
