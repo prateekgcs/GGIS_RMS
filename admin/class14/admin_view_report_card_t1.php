@@ -83,16 +83,20 @@
 						if(isset($_GET['tname'])&&isset($_GET['rollno']))
 							{
 								require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/sql/conn.php'); 
+								require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/functions/calculate_grade.php'); 
 								
 								$pt1_max = 10;
 								$ns1_max = 5;
 								$sea1_max = 5;
 								$sa1_max = 80;
-								$t1_max = 100;
+								$t1_max = $pt1_max + $ns1_max + $sea1_max + $sa1_max;
 
 								$tname = $_GET['tname'];
 								$arr = explode('_',$tname);
 								$year = $arr[0];
+								$next_year = new DateTime($year);
+								$next_year->add(new DateInterval('P1Y'));
+								$next_year = $next_year->format('y');
 								$class = $arr[1];
 								$section = strtoupper($arr[2]);
 								$arr = explode('-',$arr[3]);
@@ -141,6 +145,12 @@
 								$pt1_m4_max = $marks['s4'];
 								$pt1_m5_max = $marks['s5'];
 
+								$pt1_m1 = ($pt1_m1/$pt1_m1_max)*$pt1_max;
+								$pt1_m2 = ($pt1_m2/$pt1_m2_max)*$pt1_max;
+								$pt1_m3 = ($pt1_m3/$pt1_m3_max)*$pt1_max;
+								$pt1_m4 = ($pt1_m4/$pt1_m4_max)*$pt1_max;
+								$pt1_m5 = ($pt1_m5/$pt1_m5_max)*$pt1_max;
+
 
 								$query = "SELECT * FROM `$ns1_table` WHERE roll_no = ?";
 								$stmt = $conn->prepare($query);
@@ -162,6 +172,12 @@
 								$ns1_m3_max = $marks['s3'];
 								$ns1_m4_max = $marks['s4'];
 								$ns1_m5_max = $marks['s5'];
+
+								$ns1_m1 = ($ns1_m1/$ns1_m1_max)*$ns1_max;
+								$ns1_m2 = ($ns1_m2/$ns1_m2_max)*$ns1_max;
+								$ns1_m3 = ($ns1_m3/$ns1_m3_max)*$ns1_max;
+								$ns1_m4 = ($ns1_m4/$ns1_m4_max)*$ns1_max;
+								$ns1_m5 = ($ns1_m5/$ns1_m5_max)*$ns1_max;
 
 
 								$query = "SELECT * FROM `$sea1_table` WHERE roll_no = ?";
@@ -185,35 +201,12 @@
 								$sea1_m4_max = $marks['s4'];
 								$sea1_m5_max = $marks['s5'];
 
+								$sea1_m1 = ($sea1_m1/$sea1_m1_max)*$sea1_max;
+								$sea1_m2 = ($sea1_m2/$sea1_m2_max)*$sea1_max;
+								$sea1_m3 = ($sea1_m3/$sea1_m3_max)*$sea1_max;
+								$sea1_m4 = ($sea1_m4/$sea1_m4_max)*$sea1_max;
+								$sea1_m5 = ($sea1_m5/$sea1_m5_max)*$sea1_max;
 
-								$query = "SELECT * FROM `$csa1_table` WHERE sch_no = ?";
-								$stmt = $conn->prepare($query);
-								$stmt->bindParam(1,$rollno);
-								if(!$stmt->execute()) die("<script>alert('Something went wrong!5');</script>");
-								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$csa1_m1 = $marks['s1'];
-								$csa1_m2 = $marks['s2'];
-								$csa1_m3 = $marks['s3'];
-								$csa1_m4 = $marks['s4'];
-								$csa1_m5 = $marks['s5'];
-								$csa1_m6 = $marks['s6'];
-								$csa1_m7 = $marks['s7'];
-								$csa1_m8 = $marks['s8'];
-
-
-								$query = "SELECT * FROM `$d1_table` WHERE sch_no = ?";
-								$stmt = $conn->prepare($query);
-								$stmt->bindParam(1,$rollno);
-								if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
-								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$d1_m1 = $marks['s1'];
-								$d1_m2 = $marks['s2'];
-								$d1_m3 = $marks['s3'];
-								$d1_m4 = $marks['s4'];
-								$d1_m5 = $marks['s5'];
-								$d1_m6 = $marks['s6'];
-								$d1_m7 = $marks['s7'];
-								$d1_m8 = $marks['s8'];
 
 								$query = "SELECT * FROM `$tname` WHERE roll_no = ?";
 								$stmt = $conn->prepare($query);
@@ -238,6 +231,29 @@
 								$sa1_m4_max = $marks['s4'];
 								$sa1_m5_max = $marks['s5'];
 
+								$sa1_m1 = ($sa1_m1/$sa1_m1_max)*$sa1_max;
+								$sa1_m2 = ($sa1_m2/$sa1_m2_max)*$sa1_max;
+								$sa1_m3 = ($sa1_m3/$sa1_m3_max)*$sa1_max;
+								$sa1_m4 = ($sa1_m4/$sa1_m4_max)*$sa1_max;
+								$sa1_m5 = ($sa1_m5/$sa1_m5_max)*$sa1_max;
+
+								$total1 = (($pt1_m1 + $ns1_m1 + $sea1_m1 + $sa1_m1)/$t1_max)*100;
+								$total2 = (($pt1_m2 + $ns1_m2 + $sea1_m2 + $sa1_m2)/$t1_max)*100;
+								$total3 = (($pt1_m3 + $ns1_m3 + $sea1_m3 + $sa1_m3)/$t1_max)*100;
+								$total4 = (($pt1_m4 + $ns1_m4 + $sea1_m4 + $sa1_m4)/$t1_max)*100;
+								$total5 = (($pt1_m5 + $ns1_m5 + $sea1_m5 + $sa1_m5)/$t1_max)*100;
+
+								$g1 = calculateGrade($total1);
+								$g2 = calculateGrade($total2);
+								$g3 = calculateGrade($total3);
+								$g4 = calculateGrade($total4);
+								$g5 = calculateGrade($total5);
+
+								$g_total = $total1 + $total2 + $total3 + $total4 + $total5;
+								$g_max = $t1_max * 5;
+								$g_percent = ($g_total/$g_max) * 100;
+								$g_grade = calculateGrade($g_percent);
+
 								$query = "SELECT * FROM `$info_table` WHERE roll_no = ? AND section = ?";
 								$stmt = $conn->prepare($query);
 								$stmt->bindParam(1,$rollno);
@@ -251,6 +267,37 @@
 								$dob = $result['dob'];
 								$address = $result['address'];
 								$scholar_no = $result['scholar_no'];
+
+								$query = "SELECT * FROM `$csa1_table` WHERE sch_no = ?";
+								$stmt = $conn->prepare($query);
+								$stmt->bindParam(1,$scholar_no);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong!5');</script>");
+								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
+								$csa1_m1 = $marks['s1'];
+								$csa1_m2 = $marks['s2'];
+								$csa1_m3 = $marks['s3'];
+								$csa1_m4 = $marks['s4'];
+								$csa1_m5 = $marks['s5'];
+								$csa1_m6 = $marks['s6'];
+								$csa1_m7 = $marks['s7'];
+								$csa1_m8 = $marks['s8'];
+
+
+								$query = "SELECT * FROM `$d1_table` WHERE sch_no = ?";
+								$stmt = $conn->prepare($query);
+								$stmt->bindParam(1,$scholar_no);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
+								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
+								$d1_m1 = $marks['s1'];
+								$d1_m2 = $marks['s2'];
+								$d1_m3 = $marks['s3'];
+								$d1_m4 = $marks['s4'];
+								$d1_m5 = $marks['s5'];
+								$d1_m6 = $marks['s6'];
+								$d1_m7 = $marks['s7'];
+								$d1_m8 = $marks['s8'];
+
+
 								$html = "
 								<div class='container-fluid' id='report'>
 								<div style='border: 2px solid black' class='ht col-md-10 col-md-offset-1' >
@@ -276,7 +323,7 @@
 						
 						<div align='center' class='col-md-12'>
 							<h3>Report Card</h3>
-							<h4>Class: IX <br/>Academic Session: 2017-18</h4>
+							<h4>Class: IX <br/>Academic Session: $year-$next_year</h4>
 						</div>
 					
 						<div class='row'>
@@ -361,8 +408,8 @@
 									<td>$ns1_m1</td>
 									<td>$sea1_m1</td>
 									<td>$sa1_m1</td>
-									<td></td>
-									<td></td>
+									<td>$total1</td>
+									<td>$g1</td>
 								</tr>
 								<tr>
 									<td class='left'>$s2</td>
@@ -370,8 +417,8 @@
 									<td>$ns1_m2</td>
 									<td>$sea1_m2</td>
 									<td>$sa1_m2</td>
-									<td></td>
-									<td></td>
+									<td>$total2</td>
+									<td>$g2</td>
 								</tr>
 								<tr>
 									<td class='left'>$s3</td>
@@ -379,8 +426,8 @@
 									<td>$ns1_m3</td>
 									<td>$sea1_m3</td>
 									<td>$sa1_m3</td>
-									<td></td>
-									<td></td>
+									<td>$total3</td>
+									<td>$g3</td>
 								</tr>
 								<tr>
 									<td class='left'>$s4</td>
@@ -388,8 +435,8 @@
 									<td>$ns1_m4</td>
 									<td>$sea1_m4</td>
 									<td>$sa1_m4</td>
-									<td></td>
-									<td></td>
+									<td>$total4</td>
+									<td>$g4</td>
 								</tr>
 								<tr>
 									<td class='left'>$s5</td>
@@ -397,8 +444,8 @@
 									<td>$ns1_m5</td>
 									<td>$sea1_m5</td>
 									<td>$sa1_m5</td>
-									<td></td>
-									<td></td>
+									<td>$total5</td>
+									<td>$g5</td>
 								</tr>
 								
 								<tr>
@@ -415,7 +462,7 @@
 								<table class='table' border='2'>
 									<tr class='bold'>
 										<td style='min-width:70%; background-color:#eee;'>Overall Marks</td>
-										<td style='min-width:30%'>521.5/600</td>
+										<td style='min-width:30%'>$g_total/$g_max</td>
 									</tr>
 								</table>
 							</div>
@@ -424,7 +471,7 @@
 							<table class='table' border='2'>
 								<tr class='bold'>
 									<td style='min-width:60%; background-color:#eee;'>Percentage</td>
-									<td style='min-width:40%'>86.92</td>
+									<td style='min-width:40%'>$g_percent</td>
 								</tr>
 							</table>
 							</div>
@@ -433,7 +480,7 @@
 							<table class='table' border='2'>
 								<tr class='bold'>
 									<td style='min-width:60%; background-color:#eee;'>Grade</td>
-									<td style='min-width:40%'>A2</td>
+									<td style='min-width:40%'>$g_grade</td>
 								</tr>
 							</table>
 							</div>
@@ -442,7 +489,7 @@
 							<table class='table' border='2'>
 								<tr class='bold'>
 									<td style='min-width:60%;  background-color:#eee;'>Rank</td>
-									<td style='min-width:40%'>1</td>
+									<td style='min-width:40%'>___</td>
 								</tr>
 							</table>
 							</div>

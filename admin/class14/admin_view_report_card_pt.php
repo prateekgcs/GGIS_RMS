@@ -112,6 +112,9 @@
 
 								$arr = explode('_',$tname);
 								$year = $arr[0];
+								$next_year = new DateTime($year);
+								$next_year->add(new DateInterval('P1Y'));
+								$next_year = $next_year->format('y');
 								$class = $arr[1];
 								$section = strtoupper($arr[2]);
 								$arr = explode('-',$arr[3]);
@@ -150,7 +153,7 @@
 				
 						<div align='center' class='col-md-12'>
 							<h3>Report Card</h3>
-							<h4>Class: IX <br/>Academic Session: 2017-18 <br/><b>Periodic Test-$test_no</b></h4>
+							<h4>Class: IX <br/>Academic Session: $year-$next_year <br/><b>Periodic Test-$test_no</b></h4>
 						</div>
 			
 						<div class='row'>

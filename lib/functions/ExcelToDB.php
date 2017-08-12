@@ -110,7 +110,7 @@
 					$name .= 'ns';
 				else if($test_type == 'SEA-1' || $test_type == 'SEA-2')
 					$name .= 'sea';
-                else if($test_type == 'D-1' || $test_type == 'D-1')
+                else if($test_type == 'D-1' || $test_type == 'D-2')
                     $name = 'UploadResultd';
                 else if($test_type == 'CSA-1' || $test_type == 'CSA-2')
                     $name = 'UploadResultcsa';
@@ -126,7 +126,7 @@
 					$name .= 'ns';
 				else if($test_type == 'SEA-1' || $test_type == 'SEA-2')
 					$name .= 'sea';
-                else if($test_type == 'D-1' || $test_type == 'D-1')
+                else if($test_type == 'D-1' || $test_type == 'D-2')
                     $name = 'UploadResultd';
                 else if($test_type == 'CSA-1' || $test_type == 'CSA-2')
                     $name = 'UploadResultcsa';
