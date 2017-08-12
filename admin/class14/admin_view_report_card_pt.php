@@ -111,7 +111,29 @@
 								$remarks = $marks['remarks'];
 
 								$arr = explode('_',$tname);
-								
+								$year = $arr[0];
+								$class = $arr[1];
+								$section = strtoupper($arr[2]);
+								$arr = explode('-',$arr[3]);
+								$test_type = strtoupper($arr[0]);
+								$test_no = $arr[1];
+
+								$info_table = $year.'_'.$class.'_info';
+
+								$query = "SELECT * FROM `$info_table` WHERE roll_no = ? AND section = ?";
+								$stmt = $conn->prepare($query);
+								$stmt->bindParam(1,$rollno);
+								$stmt->bindParam(2,$section);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
+								$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+								$name = $result['name'];
+								$fname = $result['fname'];
+								$mname = $result['mname'];
+								$dob = $result['dob'];
+								$address = $result['address'];
+								$scholar_no = $result['scholar_no'];
+
 								$html0 = "<table>
 									<tr>
 									<td width='15%'><img class='img img-responsive' src='../../lib/image/cbse.png'/></td>
@@ -128,51 +150,51 @@
 				
 						<div align='center' class='col-md-12'>
 							<h3>Report Card</h3>
-							<h4>Class: IX <br/>Academic Session: 2017-18 <br/><b>Periodic Test-1</b></h4>
+							<h4>Class: IX <br/>Academic Session: 2017-18 <br/><b>Periodic Test-$test_no</b></h4>
 						</div>
 			
 						<div class='row'>
 							<div id='p' class='col-md-6 mtop'>
 								<table>
 									<tr>
-										<td class='left'>Student's Name</td>
-										<td min-width='80%' style='border-bottom: 1px solid black;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td class='left'>Student's Name:</td>
+										<td width='250px;' style='border-bottom: 1px solid black;'> $name</td>
 									</tr>
 									
 									<tr>
-										<td class='left'>Father's Name</td>
-										<td min-width='80%'' style='border-bottom: 1px solid black;'></td>
+										<td class='left'>Father's Name:</td>
+										<td width='250px;' style='border-bottom: 1px solid black;'> $fname</td>
 									</tr>
 									<tr>
-										<td class='left'>Mother's Name</td>
-										<td min-width='80%' style='border-bottom: 1px solid black;'></td>
+										<td class='left'>Mother's Name:</td>
+										<td width='250px;' style='border-bottom: 1px solid black;'> $mname</td>
 									</tr>
 									<tr>
-										<td class='left'>Date of Birth</td>
-										<td min-width='80%' style='border-bottom: 1px solid black;'></td>
+										<td class='left'>Date of Birth:</td>
+										<td width='250px;' style='border-bottom: 1px solid black;'> $dob</td>
 									</tr>
 									<tr>
-										<td class='left'>Address</td>
-										<td min-width='80%' style='border-bottom: 1px solid black;'></td>
+										<td class='left'>Address:</td>
+										<td width='250px;' style='border-bottom: 1px solid black;'> $address</td>
 									</tr>
 								</table>
 						
 							</div>
 			
-							<div id='p' class='col-md-4 mtop'>
+							<div class='col-md-4 mtop'>
 							
 								<table>
 									<tr align='center'>
 										<td style='border: 1px solid black;'>Roll No.</td>
-										<td style='border: 1px solid black;'>1</td>
+										<td style='border: 1px solid black;'> $rollno</td>
 									</tr>
 									<tr>
 										<td colspan='2'>&nbsp;</td>
 									</tr>
 										
 									<tr>
-										<td>Admission Number</td>
-										<td width='50%' style='border-bottom: 1px solid black;'></td>
+										<td>Admission Number:</td>
+										<td width='50%' style='border-bottom: 1px solid black;'> $scholar_no</td>
 									</tr>
 									
 								</table>
