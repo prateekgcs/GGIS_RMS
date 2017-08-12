@@ -66,10 +66,9 @@
 			$password = "";
 			$dbname = "ggis_rms";
 			$link = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8",$username,$password, array(
-    PDO::ATTR_EMULATE_PREPARES=>false,
-    PDO::MYSQL_ATTR_DIRECT_QUERY=>false,
-    PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION
-));
+				PDO::ATTR_EMULATE_PREPARES=>false,
+				PDO::MYSQL_ATTR_DIRECT_QUERY=>false,
+				PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION ));
 			//printf("Connection Successful!");
 			return $link;
 		}
@@ -202,7 +201,7 @@
             $s3 = $worksheet->getCell('E'.$row)->getValue();
             $s4 = $worksheet->getCell('F'.$row)->getValue();
             $s5 = $worksheet->getCell('G'.$row)->getValue();
-            $total = $worksheet->getCell('H'.$row)->getValue();
+            $total = $worksheet->getCell('H'.$row)->getCalculatedValue();
             $attendance = $worksheet->getCell('I'.$row)->getValue();
             $remarks = $worksheet->getCell('J'.$row)->getValue();
             
@@ -1140,10 +1139,9 @@
 	
 	function CreateStudentInfo($tablename)
     {
-        
 		$link = connecttt();
           
-		$queryinsert = " CREATE TABLE `$tablename` ( `sno` INT NOT NULL , `scholar_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `religion` VARCHAR(20) NOT NULL , `gender` VARCHAR(10) NOT NULL , `category` VARCHAR(10) NOT NULL , `fname` VARCHAR(80) NOT NULL , `mname` VARCHAR(80) NOT NULL , `dob` VARCHAR(15) NOT NULL , `address` VARCHAR(150) NOT NULL , `mno` VARCHAR(10) NOT NULL , `bg` VARCHAR(10) NOT NULL , `height` VARCHAR(50) NOT NULL , `weight` VARCHAR(50) NOT NULL , `house` VARCHAR(20) NOT NULL ) ";
+		$queryinsert = " CREATE TABLE `$tablename` ( `scholar_no` VARCHAR(5) NOT NULL , `roll_no` INT NOT NULL ,`section` VARCHAR(2) NOT NULL , `name` VARCHAR(50) NOT NULL , `religion` VARCHAR(20) NOT NULL , `gender` VARCHAR(10) NOT NULL , `category` VARCHAR(10) NOT NULL , `fname` VARCHAR(80) NOT NULL , `mname` VARCHAR(80) NOT NULL , `dob` VARCHAR(15) NOT NULL , `address` VARCHAR(150) NOT NULL , `mno` VARCHAR(10) NOT NULL , `bg` VARCHAR(10) NOT NULL , `height` VARCHAR(50) NOT NULL , `weight` VARCHAR(50) NOT NULL , `house` VARCHAR(20) NOT NULL ) ";
 		  
 		$sqlinsert = $link->prepare($queryinsert);
 		if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
@@ -1164,42 +1162,44 @@
           for($row = 7; $row<=$lastRow; $row++)
           {
             $sno = $worksheet->getCell('A'.$row)->getValue();
-            $admno = $worksheet->getCell('B'.$row)->getValue();
-            $name = $worksheet->getCell('C'.$row)->getValue();
-			$religion = $worksheet->getCell('D'.$row)->getValue();
-            $gender = $worksheet->getCell('E'.$row)->getValue();
-            $category = $worksheet->getCell('F'.$row)->getValue();
-			$fname = $worksheet->getCell('G'.$row)->getValue();
-            $mname = $worksheet->getCell('H'.$row)->getValue();
-            $dob = $worksheet->getCell('I'.$row)->getValue();
-            $address = $worksheet->getCell('J'.$row)->getValue();
-            $mno = $worksheet->getCell('K'.$row)->getValue();
-            $bg = $worksheet->getCell('L'.$row)->getValue();
-			$height = $worksheet->getCell('M'.$row)->getValue();
-            $weight = $worksheet->getCell('N'.$row)->getValue();
-            $house = $worksheet->getCell('O'.$row)->getValue();
+			$roll_no = $worksheet->getCell('B'.$row)->getValue();
+            $section = $worksheet->getCell('C'.$row)->getValue();
+            $name = $worksheet->getCell('D'.$row)->getValue();
+			$religion = $worksheet->getCell('E'.$row)->getValue();
+            $gender = $worksheet->getCell('F'.$row)->getValue();
+            $category = $worksheet->getCell('G'.$row)->getValue();
+			$fname = $worksheet->getCell('H'.$row)->getValue();
+            $mname = $worksheet->getCell('I'.$row)->getValue();
+            $dob = $worksheet->getCell('J'.$row)->getValue();
+            $address = $worksheet->getCell('K'.$row)->getValue();
+            $mno = $worksheet->getCell('L'.$row)->getValue();
+            $bg = $worksheet->getCell('M'.$row)->getValue();
+			$height = $worksheet->getCell('N'.$row)->getValue();
+            $weight = $worksheet->getCell('O'.$row)->getValue();
+            $house = $worksheet->getCell('P'.$row)->getValue();
 			            
 			if($sno!='')
 			{
 				try
 				{
-					$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?)";
+					$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?)";
 					$sqlinsert = $link->prepare($queryinsert);
 					$sqlinsert->bindParam(1,$sno);
-					$sqlinsert->bindParam(2,$admno);
-					$sqlinsert->bindParam(3,$name);
-					$sqlinsert->bindParam(4,$religion);
-					$sqlinsert->bindParam(5,$gender);
-					$sqlinsert->bindParam(6,$category);
-					$sqlinsert->bindParam(7,$fname);
-					$sqlinsert->bindParam(8,$mname);
-					$sqlinsert->bindParam(9,$dob);
-					$sqlinsert->bindParam(10,$address);
-					$sqlinsert->bindParam(11,$mno);
-					$sqlinsert->bindParam(12,$bg);
-					$sqlinsert->bindParam(13,$height);
-					$sqlinsert->bindParam(14,$weight);
-					$sqlinsert->bindParam(15,$house);
+					$sqlinsert->bindParam(2,$roll_no);
+					$sqlinsert->bindParam(3,$section);
+					$sqlinsert->bindParam(4,$name);
+					$sqlinsert->bindParam(5,$religion);
+					$sqlinsert->bindParam(6,$gender);
+					$sqlinsert->bindParam(7,$category);
+					$sqlinsert->bindParam(8,$fname);
+					$sqlinsert->bindParam(9,$mname);
+					$sqlinsert->bindParam(10,$dob);
+					$sqlinsert->bindParam(11,$address);
+					$sqlinsert->bindParam(12,$mno);
+					$sqlinsert->bindParam(13,$bg);
+					$sqlinsert->bindParam(14,$height);
+					$sqlinsert->bindParam(15,$weight);
+					$sqlinsert->bindParam(16,$house);
 					$sqlinsert->execute();
 				} 
 				catch(PDOException $error) 
