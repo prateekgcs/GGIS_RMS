@@ -29,7 +29,7 @@
         //printf(("<script>alert('$class');</script>"));
         $stmt = $conn->prepare($query);
         $stmt->bindParam(1,$year);
-        if(!$stmt->execute()) die("<script>alert('Internal Error!');</script>");
+        if(!$stmt->execute()) die("<script>alert('Internal Error! (Can't fetch bitmap)');</script>");
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $bitmap = $result[$class];
         return $bitmap;

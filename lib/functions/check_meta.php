@@ -8,7 +8,7 @@
         $query = "SELECT `$class` FROM meta_info WHERE year = ?";
         $stmt = $conn->prepare($query);
         $stmt->bindParam(1,$year);
-        if(!$stmt->execute()) die("<script>alert('Internal Error!');</script>");
+        if(!$stmt->execute()) die("<script>alert('Internal Error! (Meta Check)');</script>");
         $result = $stmt->fetch(PDO::FETCH_NUM);
         $val = $result[0];
         return $val;
@@ -22,6 +22,6 @@
         $stmt = $conn->prepare($query);
         $stmt->bindParam(1,$num);
         $stmt->bindParam(2,$year);
-        if(!$stmt->execute()) die("<script>alert('Internal Error!');</script>");
+        if(!$stmt->execute()) die("<script>alert('Internal Error! (Meta Update)');</script>");
     }
 ?>
