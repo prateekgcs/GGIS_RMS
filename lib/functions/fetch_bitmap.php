@@ -20,7 +20,6 @@
     function getBitMap($year,$class,$section)
     {
         $conn = connectt();
-		$class=strtoupper($class);
         if($class != '11s' && $class != '11c')
         {
             $class = $class.strtoupper($section);
