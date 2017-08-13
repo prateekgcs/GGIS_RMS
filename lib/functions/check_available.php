@@ -10,7 +10,8 @@
 		else
 			printf("<script>alert('Something went wrong!');</script>");
 
-		call_user_func_array($foo, array($bitmap, $test_type));
+		$bool = call_user_func_array($foo, array($bitmap, $test_type));
+		return $bool;
 	}
 
 	function oneToFive($bitmap,$test_type)
@@ -31,7 +32,7 @@
 			}
 			case 'SA-1':
 			{
-				if($a[0]&&$a[1]&&$a[2]&&$a[3]&&$a[4]&&a[5])
+				if($a[0]&&$a[1]&&$a[2]&&$a[3]&&$a[4]&&$a[5])
 				{
 					$bool = 1;
 					return $bool;
@@ -58,7 +59,7 @@
 			}
 			case 'AE':
 			{
-				if($a[0]&&$a[1]&&$a[2]&&$a[3]&&$a[4]&&$a[5]&&$a[6]&&$a[7]&&$a[8]&&$a[9]&&$a[10]&&a[11])
+				if($a[0]&&$a[1]&&$a[2]&&$a[3]&&$a[4]&&$a[5]&&$a[6]&&$a[7]&&$a[8]&&$a[9]&&$a[10]&&$a[11])
 				{
 					$bool = 1;
 					return $bool;
@@ -110,7 +111,7 @@
 			}
 			case 'AE':
 			{
-				if($a[0]&&$a[1]&&$a[2]&&$a[3]&&$a[4]&&$a[5]&&$a[6]&&a[7])
+				if($a[0]&&$a[1]&&$a[2]&&$a[3]&&$a[4]&&$a[5]&&$a[6]&&$a[7])
 				{
 					$bool = 1;
 					return $bool;
@@ -135,7 +136,7 @@
 		{
 			case 'UT-1':
 			{
-				if(a[0])
+				if($a[0])
 				{
 					$bool = 1;
 					return $bool;
@@ -144,7 +145,7 @@
 			}
 			case 'UT-2':
 			{
-				if(a[1])
+				if($a[1])
 				{
 					$bool = 1;
 					return $bool;
@@ -153,7 +154,7 @@
 			}
 			case 'UT-3':
 			{
-				if(a[2])
+				if($a[2])
 				{
 					$bool = 1;
 					return $bool;
@@ -162,7 +163,7 @@
 			}
 			case 'AE':
 			{
-				if(a[3]&&a[4]&&a[5])
+				if($a[3]&&a[4]&&$a[5])
 				{
 					$bool = 1;
 					return $bool;

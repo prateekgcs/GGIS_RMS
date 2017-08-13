@@ -100,8 +100,8 @@
 								$next_year = $next_year->format('y');
 								$class = $arr[1];
 								$section = strtoupper($arr[2]);
-								$arr = explode('-',$arr[3]);
-								$test_type = strtoupper($arr[0]);
+								//$arr = explode('-',$arr[3]);
+								$test_type = strtoupper($arr[3]);
 								$test_no = $arr[1];
 								$info_table = $year.'_'.$class.'_info';
 								$pt1_table = $year.'_'.$class.'_'.$section.'_pt-1';

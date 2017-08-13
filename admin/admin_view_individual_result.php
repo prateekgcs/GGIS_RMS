@@ -116,7 +116,7 @@
 					 
 					 <div class="form-group">
 						<h4>Roll Number</h4>
-						<input type='number' name='rollno' placeholder='Roll Number' min='1' max='100' class="form-control">
+						<input type='number' name='rollno' placeholder='Roll Number' min='1' max='100' class="form-control" required>
                      </div>
 					 
 					  <br/>
@@ -131,6 +131,9 @@
 				<div>
 					<?php
 						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/functions/check_available.php');
+						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/functions/fetch_bitmap.php');
+						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/functions/check_meta.php');
+						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/sql/conn.php');
 						if(isset($_POST['generate']))
 						{
 							$year = $_POST['year'];
@@ -138,26 +141,58 @@
 							$section = $_POST['section'];
 							$test_type = $_POST['type'];
 							$rollno = $_POST['rollno'];
+							$info_table = $year.'_'.$class.'_info';
+
+							$val = metaCheck($year,$class);
+
+							if($val<2) die("<script>alert('Batch not craeted!');</script>");
+
+							$conn = connect();
+							$query = "SELECT * FROM `$info_table` WHERE roll_no = ? AND section = ?";
+							$stmt = $conn->prepare($query);
+							$stmt->bindParam(1,$rollno);
+							$stmt->bindParam(2,strtoupper($section));
+							if(!$stmt->execute()) die("<script>alert('Cannot fetch student info!');</script>");
+							$count = $stmt->rowCount();
+							$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+							if($count == 0) die("<script>alert('Rollno not found!');</script>");
 
 							if($test_type == 'or')
 							{	
-								$test_type = 'overall';
-								$tab = 'final-1';
-							}
-							else if($test_type == 't-1')
-							{	
-								$test_type = 't1';
-								$tab = 'sa-1';
-							}
-							else if($test_type == 't-2')
-							{	
-								$test_type = 't2';
-								$tab = 'sa-2';
+								$file = 'overall';
+								$get_tname = 'AE';
+								$check = 'AE';
 							}
 							else
 							{
-								$tab = $test_type;
+								$get_tname = $test_type;
+								$check = $test_type;
 							}
+							
+							if($test_type == 'pt-1' || $test_type == 'pt-2')
+							{
+								$file = 'pt';
+							}
+							else if($test_type == 'ns-1' || $test_type == 'ns-2')
+							{
+								$file = 'ns';
+							}
+							else if($test_type == 'sea-1' || $test_type == 'sea-2')
+							{
+								$file = 'sea';
+							}
+							else if($test_type == 't-1')
+							{
+								$file = 't1';
+								$check = 'sa-1';
+							}
+							else if($test_type == 't-2')
+							{
+								$file = 't2';
+								$check = 'sa-2';
+							}
+
 
 							if($class<5)
 								$folder = 'class14';
@@ -168,16 +203,26 @@
 							else if( $class=='11s' || $class=='11c' )
 								$folder = 'class11';
 							else
-								printf("<script>alert('Something went wrong!');</script>");
+								die("<script>alert('Something went wrong!');</script>");
+							
+							
+							//echo $check;
+							$bitmap = getBitMap($year,$class,$section);
+							$bool = checkAvailable($class,$bitmap,$check);
 
-							$file = 'admin_view_report_card_'.strtolower($test_type);
+							if(!$bool)
+								die("<script>alert('Data required to view this report card are not yet uploaded!');</script>");
+							
+							$file = 'admin_view_report_card_'.strtolower($file);
 
-							$tname = $year.'_'.$class.'_'.strtolower($section).'_'.$tab;
+							$get_tname = $year.'_'.$class.'_'.strtolower($section).'_'.$get_tname;
 
 							$root = $_SERVER['DOCUMENT_ROOT']; 
-							$path = $root.'/GGIS_RMS/admin/'.$folder.'/'.$file.".php?tname=$tname&rollno=$rollno";
+							$path = './'.$folder.'/'.$file.".php?tname=$get_tname&rollno=$rollno";
+							
+							//echo $path;
 
-							echo $path;
+							printf("<script>window.location.href='$path';</script>");
 						}
 
 					?>
