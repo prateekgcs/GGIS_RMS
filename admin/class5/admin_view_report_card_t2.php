@@ -97,7 +97,7 @@
 				
 				<div align='center' class="col-md-12">
 					<h3>Report Card</h3>
-					<h4>Class: V <br/>Academic Session: 2017-18</h4>
+					<h4>Class: IX <br/>Academic Session: 2017-18</h4>
 				</div>
 			
 				<div class='row'>
@@ -214,15 +214,6 @@
 						</tr>
 						<tr>
 							<td class='left'>Social Studies</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td class='left'>Sanskrit</td>
 							<td></td>
 							<td></td>
 							<td></td>
