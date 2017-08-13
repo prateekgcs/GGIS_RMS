@@ -20,8 +20,10 @@
     function getBitMap($year,$class,$section)
     {
         $conn = connectt();
-        if($class > 3 && $class < 11)
+        if($class != '11s' && $class != '11c')
+        {
             $class = $class.strtoupper($section);
+        }
         $query = "SELECT `$class` FROM batch_info WHERE year = ?";
         //printf(("<script>alert('$class');</script>"));
         $stmt = $conn->prepare($query);
