@@ -100,7 +100,6 @@
 								<div class="form-group">
 							   <h4>Section</h4>
 							   <select name="section" class="form-control" id="sel2">
-							   <option value="default">Select</option>
 							   <option value="a">A</option>
 							   <option value="b">B</option>
 							   <option value="c">C</option>
@@ -134,6 +133,7 @@
 						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/functions/fetch_bitmap.php');
 						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/functions/check_meta.php');
 						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/sql/conn.php');
+						
 						if(isset($_POST['generate']))
 						{
 							$year = $_POST['year'];

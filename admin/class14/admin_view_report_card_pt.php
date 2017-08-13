@@ -161,24 +161,24 @@
 								<table>
 									<tr>
 										<td class='left'>Student's Name:</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'> $name</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$name</b></td>
 									</tr>
 									
 									<tr>
 										<td class='left'>Father's Name:</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'> $fname</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$fname</b></td>
 									</tr>
 									<tr>
 										<td class='left'>Mother's Name:</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'> $mname</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$mname</b></td>
 									</tr>
 									<tr>
 										<td class='left'>Date of Birth:</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'> $dob</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$dob</b></td>
 									</tr>
 									<tr>
 										<td class='left'>Address:</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'> $address</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$address</b></td>
 									</tr>
 								</table>
 						
@@ -188,8 +188,8 @@
 							
 								<table>
 									<tr align='center'>
-										<td style='border: 1px solid black;'>Roll No.</td>
-										<td style='border: 1px solid black;'> $rollno</td>
+										<td style='border: 1px solid black;'><b>Roll No.</b></td>
+										<td style='border: 1px solid black;'> <b>$rollno</b></td>
 									</tr>
 									<tr>
 										<td colspan='2'>&nbsp;</td>
@@ -197,7 +197,7 @@
 										
 									<tr>
 										<td>Admission Number:</td>
-										<td width='50%' style='border-bottom: 1px solid black;'> $scholar_no</td>
+										<td width='50%' style='border-bottom: 1px solid black;'> <b>$scholar_no</b></td>
 									</tr>
 									
 								</table>
@@ -239,8 +239,8 @@
 										</tr>
 									
 										<tr>
-											<td>TOTAL</td>
-											<td>$total</td>
+											<td class='bold'>TOTAL</td>
+											<td class='bold'>$total</td>
 										</tr>
 									</table>
 								</div>";
@@ -249,18 +249,18 @@
 							
 							<div id='p' class='col-md-5'>
 								<table>
-									<tr>
+									<tr align='center'>
 										<td>Attendance:</td>
-										<td min-width='70%%' style='border-bottom: 1px solid black;'>  $attendance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td width= '100px' style='border-bottom: 1px solid black;'> <b> $attendance</b></td>
 									</tr>
 								</table>
 							</div>
 							
 							<div id='p' class='col-md-7'>
 								<table>
-									<tr>
+									<tr align='center'>
 										<td>Remarks:</td>
-										<td min-width='100%%' style='border-bottom: 1px solid black;'>  $remarks &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td width='350px' style='border-bottom: 1px solid black;'><b>  $remarks</b> </td>
 									</tr>
 								</table>
 							</div>

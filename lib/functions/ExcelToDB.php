@@ -346,7 +346,7 @@
 			}
           }
     }
-
+	
 	function UploadResult1to4sea($tablename)
     {
 		  $link = connecttt();
@@ -401,6 +401,7 @@
 				}
 			}
           }
+		  
     }
 	
 	//CLASS 5
