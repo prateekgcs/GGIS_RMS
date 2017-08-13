@@ -24,6 +24,7 @@
         {
             $class = $class.strtoupper($section);
         }
+        $class = strtoupper($class);
         $query = "SELECT `$class` FROM batch_info WHERE year = ?";
         //printf(("<script>alert('$class');</script>"));
         $stmt = $conn->prepare($query);
