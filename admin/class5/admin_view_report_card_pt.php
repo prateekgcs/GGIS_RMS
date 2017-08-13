@@ -237,7 +237,10 @@
 											<td>$s5</td>
 											<td>$m5</td>
 										</tr>
-									
+										<tr>
+											<td>$s6</td>
+											<td>$m6</td>
+										</tr>
 										<tr>
 											<td class='bold'>TOTAL</td>
 											<td class='bold'>$total</td>
