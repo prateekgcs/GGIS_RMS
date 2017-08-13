@@ -108,11 +108,12 @@
 								$csa1_table = $year.'_'.$class.'_'.$section.'_csa-1';
 								$d1_table = $year.'_'.$class.'_'.$section.'_d-1';
 								$sea1_table = $year.'_'.$class.'_'.$section.'_sea-1';
-
+								$sa1_table = $year.'_'.$class.'_'.$section.'_sa-1';
+								
 								$conn = connect();
 								$tname = strtolower($_GET['tname']);
 								
-								$query = "SELECT * FROM `$tname`";
+								$query = "SELECT * FROM `$sa1_table`";
 								$stmt = $conn->prepare($query);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong1!');</script>");
 								$headings = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -208,7 +209,7 @@
 								$sea1_m5 = ($sea1_m5/$sea1_m5_max)*$sea1_max;
 
 
-								$query = "SELECT * FROM `$tname` WHERE roll_no = ?";
+								$query = "SELECT * FROM `$sa1_table` WHERE roll_no = ?";
 								$stmt = $conn->prepare($query);
 								$stmt->bindParam(1,$rollno);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
@@ -221,7 +222,8 @@
 								$sa1_total = $marks['total'];
 								$attendance = $marks['attendance'];
 								$remarks = $marks['remarks'];
-								$query = "SELECT * FROM `$tname` WHERE roll_no = '^'";
+								
+								$query = "SELECT * FROM `$sa1_table` WHERE roll_no = '^'";
 								$stmt = $conn->prepare($query);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong2!');</script>");
 								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -328,50 +330,50 @@
 					
 						<div class='row'>
 							<div id='p' class='col-md-6 mtop'>
-								<table>
+																<table>
 									<tr>
 										<td class='left'>Student's Name:</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'> $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$name</b></td>
 									</tr>
 									
 									<tr>
 										<td class='left'>Father's Name:</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'> $fname</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$fname</b></td>
 									</tr>
 									<tr>
 										<td class='left'>Mother's Name:</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'> $mname</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$mname</b></td>
 									</tr>
 									<tr>
 										<td class='left'>Date of Birth:</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'> $dob</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$dob</b></td>
 									</tr>
 									<tr>
 										<td class='left'>Address:</td>
-										<td width='250px;' style='border-bottom: 1px solid black;'> $address</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$address</b></td>
 									</tr>
 								</table>
-							
+						
 							</div>
-					
-							<div id='p' class='col-md-4 mtop'>
-								
+			
+							<div class='col-md-4 mtop'>
+							
 								<table>
 									<tr align='center'>
-										<td style='border: 1px solid black;'>Roll No.</td>
-										<td style='border: 1px solid black;'> $rollno</td>
+										<td style='border: 1px solid black;'><b>Roll No.</b></td>
+										<td style='border: 1px solid black;'> <b>$rollno</b></td>
 									</tr>
-						
 									<tr>
 										<td colspan='2'>&nbsp;</td>
-									</tr>							
-
-									<tr>
-										<td>Admission Number</td>
-										<td width='50%' style='border-bottom: 1px solid black;'> $scholar_no</td>
 									</tr>
 										
+									<tr>
+										<td>Admission Number:</td>
+										<td width='50%' style='border-bottom: 1px solid black;'> <b>$scholar_no</b></td>
+									</tr>
+									
 								</table>
+
 							</div>
 						</div>
 						
@@ -597,41 +599,37 @@
 					</div>
 					</div>
 
-			<div class='row mtop'>
-				
-				<div class='col-md-4'>
-				<table>
-					<tr>
-						<td>Attendance: </td>
-						<td min-width='70%' style='border-bottom: 1px solid black;'> $attendance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					</tr>
-				</table>
-				</div>
-				
-				<div class='col-md-8'>
-				<table>
-					<tr>
-						<td>Remarks: </td>
-						<td min-width='80%' style='border-bottom: 1px solid black;'> $remarks&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					</tr>
-				</table>
-				</div>
-			</div>
+			<div class='col-md-12 mtop'>
+							
+							<div id='p' class='col-md-5'>
+								<table>
+									<tr align='center'>
+										<td>Attendance:</td>
+										<td width= '100px' style='border-bottom: 1px solid black;'> <b> $attendance</b></td>
+									</tr>
+								</table>
+							</div>
+							
+							<div id='p' class='col-md-7'>
+								<table>
+									<tr align='center'>
+										<td>Remarks:</td>
+										<td width='350px' style='border-bottom: 1px solid black;'><b>  $remarks</b> </td>
+									</tr>
+								</table>
+							</div>
+						</div>
 			
-			<div class='row mtop'>
-				<h4><b>Congratulations! Promoted to next Class.</b></h4>
-			</div>
-			
-			<div class='row'>
-				<div class='row headmargin'>
-				
-						<table class='table-responsive table-centered t1' width='100%' >
-							<tr>
-								<td id='p1'>Date: </td>
-								<td id='p1'>Class Teacher</td>
-								<td id='p1'>Principal</td>
-							</tr>
-						</table>
+			<div id='p' class='col-md-12 mtop'>
+							
+							<div class='row headmargin'>
+								<table class='table-responsive table-centered' width='100%'>
+									<tr>
+										<td id='p1'>Date: </td>
+										<td id='p1'>Class Teacher</td>
+										<td id='p1'>Principal</td>
+									</tr>
+								</table>
 						</div>
 						</div>
 						</div>
