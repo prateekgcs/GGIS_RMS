@@ -464,7 +464,15 @@
 									<td>$total5</td>
 									<td>$g5</td>
 								</tr>
-								
+								<tr>
+									<td class='left'>$s6</td>
+									<td>$pt1_m6</td>
+									<td>$ns1_m6</td>
+									<td>$sea1_m6</td>
+									<td>$sa1_m6</td>
+									<td>$total6</td>
+									<td>$g6</td>
+								</tr>
 								<tr>
 									<td colspan='7'><b>8 Point Grading Scale: </b>A1(91% - 100%), A2(81% - 90%), B1(71% - 80%), B2(61% - 70%), C1(51%-60%), C2(41% - 50%), D(33% - 40%), E(32% & Below) *SE=Sub Enrichment</b></td>
 								</tr>

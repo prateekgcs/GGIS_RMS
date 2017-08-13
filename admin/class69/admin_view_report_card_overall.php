@@ -109,59 +109,58 @@
 					
 				</div>	
 				
-				<div align='center' class="col-md-12">
-					<h3>Report Card</h3>
-					<h4>Class: V <br/>Academic Session: 2017-18</h4>
-				</div>
-			
-				<div class='row'>
-					<div id='p' class="col-md-6 mtop">
-						<table>
-							<tr>
-								<td class='left'>Student's Name</td>
-								<td min-width="80%" style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-							</tr>
-							
-						    <tr>
-								<td class='left'>Father's Name</td>
-								<td min-width="80%" style="border-bottom: 1px solid black;"></td>
-							</tr>
-							<tr>
-								<td class='left'>Mother's Name</td>
-								<td min-width="80%" style="border-bottom: 1px solid black;"></td>
-							</tr>
-							<tr>
-								<td class='left'>Date of Birth</td>
-								<td min-width="80%" style="border-bottom: 1px solid black;"></td>
-							</tr>
-							<tr>
-								<td class='left'>Address</td>
-								<td min-width="80%" style="border-bottom: 1px solid black;"></td>
-							</tr>
-						</table>
-					
-					</div>
-			
-					<div id='p' class="col-md-4 mtop">
-						
-						<table>
-							<tr align='center'>
-								<td style="border: 1px solid black;">Roll No.</td>
-								<td style="border: 1px solid black;">1</td>
-							</tr>
-				
-							<tr>
-								<td colspan='2'>&nbsp;</td>
-							</tr>							
-
-							<tr>
-								<td>Admission Number</td>
-								<td width='50%' style="border-bottom: 1px solid black;"></td>
-							</tr>
-								
-						</table>
-					</div>
-				</div>
+				<div align='center' class='col-md-12'>
+											<h3>Report Card</h3>
+											<h4>Class: IX <br/>Academic Session: $year-$next_year</h4>
+										</div>
+									
+										<div class='row'>
+											<div id='p' class='col-md-6 mtop'>
+												<table>
+									<tr>
+										<td class='left'>Student's Name:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$name</b></td>
+									</tr>
+									
+									<tr>
+										<td class='left'>Father's Name:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$fname</b></td>
+									</tr>
+									<tr>
+										<td class='left'>Mother's Name:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$mname</b></td>
+									</tr>
+									<tr>
+										<td class='left'>Date of Birth:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$dob</b></td>
+									</tr>
+									<tr>
+										<td class='left'>Address:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$address</b></td>
+									</tr>
+								</table>
+											
+											</div>
+									
+											<div id='p' class='col-md-4 mtop'>
+												
+												<table>
+													<tr align='center'>
+														<td style='border: 1px solid black;'><b>Roll No.</b></td>
+														<td style='border: 1px solid black;'> <b>$rollno</b></td>
+													</tr>
+													<tr>
+														<td colspan='2'>&nbsp;</td>
+													</tr>
+														
+													<tr>
+														<td>Admission Number:</td>
+														<td width='50%' style='border-bottom: 1px solid black;'> <b>$scholar_no</b></td>
+													</tr>
+													
+												</table>
+											</div>
+										</div>
 				
 				<div class='col-md-12 mtop'>
 			
@@ -176,12 +175,12 @@
 						<td>PT 1</td>
 						<td>PT 2</td>
 						<td>PT 3</td>
-						<td>Avg of Best 2 PT</td>
+						<td width='50px'>Average of Best 2 PT</td>
 						<td>NS</td>
 						<td>SEA</td>
 						<td>Total</td>
-						<td>Annual Exam</td>
-						<td>Grand Total</td>
+						<td width='50px'>Annual Exam</td>
+						<td width='50px'>Grand Total</td>
 						<td rowspan="2">Grade</td>
 						<td rowspan="2">Rank</td>
 					</tr>
@@ -331,127 +330,163 @@
 				</div>
 			</div>
 			
-			<div style="padding-left:30px;" class="row">
-		
-			<div id='p' class='col-md-6'>
-			<table border="2">
-				<tr class='bold'>
-					<td colspan="3">Co-Scholastic Area<br>(5 Point Grading Scale A,B,C)</td>
-				</tr>
-				<tr class='bold'>
-					<td style="width:250px;" class='left'>Activity</td>
-					<td style="width:60px;">Grade</td>
-				</tr>
-				<tr>
-					<td class='left'>Work Education</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Art Education</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Health & Physical Education</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Scientific Skills</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Thinking Skills</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Social Skills</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Yoga/NCC</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Sports</td>
-					<td></td>
-					<td></td>
-				</tr>
-			</table>
-			</div>
-			
-			
-			<div class='col-md-6'>
-			<table border="2">
-				<tr class='bold'>
-					<td colspan="3">Discipline<br>(5 Point Grading Scale A,B,C)</td>
-				</tr>
-				<tr class='bold'>
-					<td class='left'>Element</td>
-					<td style="width:60px;">Grade</td>
-				</tr>
-				<tr>
-					<td class='left'>Regularity & Punctuality</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Sincerity</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Behaviour & Values</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Respectfulness for Rules & Regulations</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Attitude Towards Teachers</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Attitude Towards School-mates</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Attitude Towards Society</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td class='left'>Attitude Towards Nstion</td>
-					<td></td>
-					<td></td>
-				</tr>
-			</table>
-		</div>
-	</div>
+			<div class='row'>
+			<div class='col-md-10'>
+								
+				<div>
+					<table border='2'>
+						<tr class='bold'>
+							<td colspan='3'>Co-Scholastic Area<br>(3 Point Grading Scale A,B,C)</td>
+						</tr>
 
-	<div class="row mtop">
-		
-		<div class='col-md-12'>
-		<table>
-			<tr>
-				<td>Attendance</td>
-				<td style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td >Remarks</td>
-				<td style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			</tr>
-		</table>
+						<tr class='bold'>
+							<td style='width:250px;' class='left'>Activity</td>
+							<td style='width:60px;'>T1</td>
+							<td style='width:60px;'>T2</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Work Education</td>
+							<td>$csa1_m1</td>
+							<td>$csa2_m1</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Art Education</td>
+							<td>$csa1_m2</td>
+							<td>$csa2_m2</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Health & Physical Education</td>
+							<td>$csa1_m3</td>
+							<td>$csa2_m3</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Scientific Skills</td>
+							<td>$csa1_m4</td>
+							<td>$csa2_m4</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Thinking Skills</td>
+							<td>$csa1_m5</td>
+							<td>$csa2_m5</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Social Skills</td>
+							<td>$csa1_m6</td>
+							<td>$csa2_m6</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Yoga/NCC</td>
+							<td>$csa1_m7</td>
+							<td>$csa2_m7</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Sports</td>
+							<td>$csa1_m8</td>
+							<td>$csa2_m8</td>
+						</tr>
+					</table>
+				</div>
+									
+									
+				<div class=''>
+
+					<table border='2'>
+						<tr class='bold'>
+							<td colspan='3'>Discipline<br>(3 Point Grading Scale A,B,C)</td>
+						</tr>
+
+						<tr class='bold'>
+							<td class='left'>Element</td>
+							<td style='width:60px;'>T1</td>
+							<td style='width:60px;'>T2</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Regularity & Punctuality</td>
+							<td>$d1_m1</td>
+							<td>$d2_m1</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Sincerity</td>
+							<td>$d1_m2</td>
+							<td>$d2_m2</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Behaviour & Values</td>
+							<td>$d1_m3</td>
+							<td>$d2_m3</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Respectfulness for Rules & Regulations</td>
+							<td>$d1_m4</td>
+							<td>$d2_m4</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Attitude Towards Teachers</td>
+							<td>$d1_m5</td>
+							<td>$d2_m5</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Attitude Towards School-mates</td>
+							<td>$d1_m6</td>
+							<td>$d2_m6</td>
+						</tr>
+			
+						<tr>
+							<td class='left'>Attitude Towards Society</td>
+							<td>$d1_m7</td>
+							<td>$d2_m7</td>
+						</tr>
+
+						<tr>
+							<td class='left'>Attitude Towards Nstion</td>
+							<td>$d1_m8</td>
+							<td>$d2_m8</td>
+						</tr>
+
+					</table>
+				</div>
+			</div>
 		</div>
+	
+	<div class='col-md-12 mtop'>
+							
+		<div id='p' class='col-md-5'>
+			<table>
+				<tr align='center'>
+					<td>Attendance:</td>
+					<td width= '100px' style='border-bottom: 1px solid black;'> <b> $attendance</b></td>
+				</tr>
+			</table>
+		</div>		
+		
+		<div id='p' class='col-md-7'>
+			<table>
+				<tr align='center'>
+					<td>Remarks:</td>
+					<td width='350px' style='border-bottom: 1px solid black;'><b>  $remarks</b> </td>
+				</tr>
+			</table>
+		</div>
+		
+	</div>
+	<br/>
+	
+	<div class='mtop'>
+	<h4>Congratulations! Promoted to next class</h4>
 	</div>
 	
 	<div class='row'>
@@ -469,11 +504,10 @@
 	</div>	
 	
 	</div>
-	</div>
 </div>
-	</div>	
+		</div>	
 	
-	<div class='col-md-6 col-md-offset-3 headmargin'>
+		<div class='col-md-6 col-md-offset-3 headmargin'>
 			<button class='btn btn-danger btn-block' onclick="printDiv('report')">Print</button>
 		</div>
 	</div>

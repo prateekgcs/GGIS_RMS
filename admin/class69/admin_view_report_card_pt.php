@@ -1,15 +1,3 @@
-<?php
-	/*session_start();
-	if(!isset($_SESSION['username']) && empty($_SESSION['username'])) 
-	{
-		die(header("location: ../../index.php"));
-	}
-	require_once '../../lib/sql/conn.php';
-    	include("../../lib/fusioncharts/fusioncharts.php");
-	$conn = connect();*/
-
-?>
-
 <!DOCTYPE html>
 
 <head>
@@ -90,7 +78,68 @@
 						<div class='row'>
 				
 							<div class="col-md-12">
-								<table>
+							<?php 
+							if(isset($_GET['tname'])&&isset($_GET['rollno']))
+							{
+								require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/sql/conn.php'); 
+								$conn = connect();
+								$tname = strtolower($_GET['tname']);
+								
+								$query = "SELECT * FROM `$tname`";
+								$stmt = $conn->prepare($query);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
+								$headings = $stmt->fetch(PDO::FETCH_ASSOC);
+								$s1 = $headings['s1'];
+								$s2 = $headings['s2'];
+								$s3 = $headings['s3'];
+								$s4 = $headings['s4'];
+								$s5 = $headings['s5'];
+								$s6 = $headings['s6'];
+								
+								$rollno = $_GET['rollno'];
+								$query = "SELECT * FROM `$tname` WHERE roll_no = ?";
+								$stmt = $conn->prepare($query);
+								$stmt->bindParam(1,$rollno);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
+								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
+								$m1 = (strtoupper($marks['s1']) == 'AB')?'AB':$marks['s1'];
+								$m2 = (strtoupper($marks['s2']) == 'AB')?'AB':$marks['s2'];
+								$m3 = (strtoupper($marks['s3']) == 'AB')?'AB':$marks['s3'];
+								$m4 = (strtoupper($marks['s4']) == 'AB')?'AB':$marks['s4'];
+								$m5 = (strtoupper($marks['s5']) == 'AB')?'AB':$marks['s5'];
+								$m6 = (strtoupper($marks['s5']) == 'AB')?'AB':$marks['s6'];
+								$total = $marks['total'];
+								$attendance = $marks['attendance'];
+								$remarks = $marks['remarks'];
+
+								$arr = explode('_',$tname);
+								$year = $arr[0];
+								$next_year = new DateTime($year);
+								$next_year->add(new DateInterval('P1Y'));
+								$next_year = $next_year->format('y');
+								$class = $arr[1];
+								$section = strtoupper($arr[2]);
+								$arr = explode('-',$arr[3]);
+								$test_type = strtoupper($arr[0]);
+								$test_no = $arr[1];
+
+								$info_table = $year.'_'.$class.'_info';
+
+								$query = "SELECT * FROM `$info_table` WHERE roll_no = ? AND section = ?";
+								$stmt = $conn->prepare($query);
+								$stmt->bindParam(1,$rollno);
+								$stmt->bindParam(2,$section);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
+								$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+								$name = $result['name'];
+								$fname = $result['fname'];
+								$mname = $result['mname'];
+								$dob = $result['dob'];
+								$address = $result['address'];
+								$scholar_no = $result['scholar_no'];
+
+								$html0 = "<table>
 									<tr>
 									<td width='15%'><img class='img img-responsive' src='../../lib/image/cbse.png'/></td>
 								
@@ -104,133 +153,141 @@
 					
 						</div>	
 				
-						<div align='center' class="col-md-12">
+						<div align='center' class='col-md-12'>
 							<h3>Report Card</h3>
-							<h4>Class: V <br/>Academic Session: 2017-18 <br/><b>Periodic Test-1</b></h4>
+							<h4>Class: IX <br/>Academic Session: $year-$next_year <br/><b>Periodic Test-$test_no</b></h4>
 						</div>
 			
 						<div class='row'>
-							<div id='p' class="col-md-6 mtop">
+							<div id='p' class='col-md-6 mtop'>
 								<table>
 									<tr>
-										<td class='left'>Student's Name</td>
-										<td min-width="80%" style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+										<td class='left'>Student's Name:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$name</b></td>
 									</tr>
 									
 									<tr>
-										<td class='left'>Father's Name</td>
-										<td min-width="80%" style="border-bottom: 1px solid black;"></td>
+										<td class='left'>Father's Name:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$fname</b></td>
 									</tr>
 									<tr>
-										<td class='left'>Mother's Name</td>
-										<td min-width="80%" style="border-bottom: 1px solid black;"></td>
+										<td class='left'>Mother's Name:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$mname</b></td>
 									</tr>
 									<tr>
-										<td class='left'>Date of Birth</td>
-										<td min-width="80%" style="border-bottom: 1px solid black;"></td>
+										<td class='left'>Date of Birth:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$dob</b></td>
 									</tr>
 									<tr>
-										<td class='left'>Address</td>
-										<td min-width="80%" style="border-bottom: 1px solid black;"></td>
+										<td class='left'>Address:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$address</b></td>
 									</tr>
 								</table>
 						
 							</div>
 			
-							<div id='p' class="col-md-4 mtop">
+							<div class='col-md-4 mtop'>
 							
 								<table>
 									<tr align='center'>
-										<td style="border: 1px solid black;">Roll No.</td>
-										<td style="border: 1px solid black;">1</td>
+										<td style='border: 1px solid black;'><b>Roll No.</b></td>
+										<td style='border: 1px solid black;'> <b>$rollno</b></td>
 									</tr>
 									<tr>
 										<td colspan='2'>&nbsp;</td>
 									</tr>
 										
 									<tr>
-										<td>Admission Number</td>
-										<td width='50%' style="border-bottom: 1px solid black;"></td>
+										<td>Admission Number:</td>
+										<td width='50%' style='border-bottom: 1px solid black;'> <b>$scholar_no</b></td>
 									</tr>
 									
 								</table>
 							</div>
-						</div>
-				
-				
-						<div class='col-md-12 mtop'>
+						</div>";
+											
 						
-							<table class='table table-centered' border="2">
-								<tr>
-									<td class='bold'>SCHOLASTIC AREA</td>
-									<td class='bold'>Periodic Test (Term 1)</td>
-								</tr>
-								<tr>
-									<td class='bold'>Subjects</td>
-									<td class='bold'>MM 10</td>
-								</tr>
-								<tr>
-									<td>English</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>Hindi</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>Maths</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>Science</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>Social Science</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>Sanskrit</td>
-									<td></td>
-								</tr>
-								<tr>
-									<td>Total</td>
-									<td></td>
-								</tr>
-							</table>
-						</div>
-			
-						<div class="col-md-12 mtop">
+						$html1 ="
+								<div class='col-md-12 mtop'>
+								
+									<table class='table table-centered' border='2'>
+										<tr>
+											<td class='bold'>SCHOLASTIC AREA</td>
+											<td class='bold'>Periodic Test (Term 1)</td>
+										</tr>
+										<tr>
+											<td class='bold'>Subjects</td>
+											<td class='bold'>MM 10</td>
+										</tr>
+										<tr>
+											<td>$s1</td>
+											<td>$m1</td>
+										</tr>
+										<tr>
+											<td>$s2</td>
+											<td>$m2</td>
+										</tr>
+										<tr>
+											<td>$s3</td>
+											<td>$m3</td>
+										</tr>
+										<tr>
+											<td>$s4</td>
+											<td>$m4</td>
+										</tr>
+										<tr>
+											<td>$s5</td>
+											<td>$m5</td>
+										</tr>
+										<tr>
+											<td>$s6</td>
+											<td>$m6</td>
+										</tr>
+										<tr>
+											<td class='bold'>TOTAL</td>
+											<td class='bold'>$total</td>
+										</tr>
+									</table>
+								</div>";
+
+						$html2 = "<div class='col-md-12 mtop'>
 							
 							<div id='p' class='col-md-5'>
 								<table>
-									<tr>
-										<td>Attendance</td>
-										<td min-width='70%' style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<tr align='center'>
+										<td>Attendance:</td>
+										<td width= '100px' style='border-bottom: 1px solid black;'> <b> $attendance</b></td>
 									</tr>
 								</table>
 							</div>
 							
 							<div id='p' class='col-md-7'>
 								<table>
-									<tr>
-										<td>Remarks</td>
-										<td min-width='100%' style="border-bottom: 1px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<tr align='center'>
+										<td>Remarks:</td>
+										<td width='350px' style='border-bottom: 1px solid black;'><b>  $remarks</b> </td>
 									</tr>
 								</table>
 							</div>
 						</div>
 	
-						<div id='p' class="col-md-12 mtop">
+						<div id='p' class='col-md-12 mtop'>
 							
 							<div class='row headmargin'>
-								<table class="table-responsive table-centered" width="100%" >
+								<table class='table-responsive table-centered' width='100%'>
 									<tr>
 										<td id='p1'>Date: </td>
 										<td id='p1'>Class Teacher</td>
 										<td id='p1'>Principal</td>
 									</tr>
-								</table>
+								</table>";
+						
+							echo $html0;
+							echo $html1;
+							echo $html2;
+
+							}	
+						?>
 							</div>
 							
 						</div>
@@ -257,81 +314,3 @@
 </body>
 
 </html>
-	
-		<?php
-			
-			/*if(isset($_POST['view']))
-			{
-			$eno = strtolower($_POST['eno']);
-			$rno = strtoupper($_POST['eno']);
-			$batch_year = substr($eno, 6, 3);
-			$branch = substr($eno, 4, 2);
-			$query="SELECT * FROM batch_info WHERE batch_year = '$batch_year' AND branch = '$branch'";
-			$sql=$conn->prepare($query);
-			if(!($sql->execute()))
-			{
-				die("Error1");
-			}
-			
-			$row = $sql->fetch(PDO::FETCH_ASSOC);
-			
-			$table = "<table class='table table-centered table-striped table-bordered'> <tr> <td><b>Semester</b></td> <td><b>SGPA</b></td> <td><b>CGPA</b></td> <td><b>Result</b></td> <td><b>Marksheet</b></td> </tr>";
-			
-			$arrData = array("chart" => array(
-					  "caption" => "OVERALL RESULT",
-					  "subcaption" => "$rno",
-					  "showValues" => "1",
-					  "baseFontSize" => "15",
-					  "showBorder"=> "1",
-					  "outCnvBaseFontSize" => "18",
-					  "borderColor"=> "#666666",
-					  "borderThickness"=> "4",
-					  "borderAlpha"=> "80",
-					  "yAxisMaxValue"=> "10",
-					  "theme" => "fint"
-					 )
-				    );
-        	        $arrData["data"] = array();
-			
-			for($i=8 ; $i>0 ; $i--)
-			{
-				if ( $row[$i] == 2 )
-				{
-						$j=$i;
-						$table_name = substr($eno, 0, 9);
-						$table_name .= $i;
-						$query = "SELECT * FROM `$table_name` WHERE roll_no = '$eno'";
-						//echo $query;
-						$sql=$conn->prepare($query);
-						if(!($sql->execute()))
-						{
-							die("Error2");
-						}
-						
-						$rowtwo = $sql->fetch(PDO::FETCH_ASSOC);
-						
-						$sgpa=$rowtwo['sgpa'];
-						$cgpa=$rowtwo['cgpa'];
-						$rstatus=$rowtwo['r_status'];
-						
-						array_push($arrData["data"], array(
-							"label" => "SEM $i",
-							"value" => "$cgpa"
-						)
-						);						
-						
-						$table .= "<tr><td>$i</td><td>$sgpa</td><td>$cgpa</td><td>$rstatus</td><td><a href='./student_view_marksheet.php?sem=$j&eno=$eno'>View</a></td></tr>";
-				}					
-			}
-			
-			$table .="</table>";
-			
-			echo $table;
-			
-			$jsonEncodedData = json_encode($arrData);
-				
-				$columnChart = new FusionCharts("column3d", "myFirstChart" , 750, 550, "chart-container", "json", $jsonEncodedData);
-
-				$columnChart->render();
-			}*/
-		?>
