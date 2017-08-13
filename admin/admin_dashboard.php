@@ -107,7 +107,7 @@
 					<div class="col-md-5">
 						<div align="center" class="card subhead">
 							<a href="./admin_add_batch_info.php">
-							<div class=" card card6 padd" id="cards">
+							<div class=" card card2 padd" id="cards">
 								<img class="card-img-top" width="20%" src="../lib/image/info.png">
 									<h3 class="card-title">ADD BATCH INFORMATION</h3>
 								</div>
@@ -117,10 +117,10 @@
 					
 					<div class="col-md-5 col-md-offset-1">
 						<div style="margin-bottom:20px;" align="center" class="card">
-							<a href="./admin_delete_exam.php">
-							<div class=" card card2 padd" id="cards">
+							<a href="./admin_delete.php">
+							<div class=" card card6 padd" id="cards">
 								<img class="card-img-top" width="20%" src="../lib/image/empty.png">
-									<h3 class="card-title">DELETE RESULT</h3>
+									<h3 class="card-title">REMOVE DATA</h3>
 								</div>
 							</a>
 						</div>				
@@ -128,10 +128,10 @@
 					
 					<div class="col-md-5">
 						<div align="center" class="card">
-							<a href="./admin_delete_batch_info.php">
+							<a href="./admin_check_uploaded.php">
 							<div class=" card card1 padd" id="cards">
-								<img class="card-img-top" width="20%" src="../lib/image/delete_info.png">
-									<h3 class="card-title">DELETE BATCH INFO</h3>
+								<img class="card-img-top" width="20%" src="../lib/image/check.png">
+									<h3 class="card-title">CHECK UPLOADED DATA</h3>
 								</div>
 							</a>
 						</div>				

@@ -330,7 +330,7 @@
 					
 						<div class='row'>
 							<div id='p' class='col-md-6 mtop'>
-																<table>
+								<table>
 									<tr>
 										<td class='left'>Student's Name:</td>
 										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$name</b></td>

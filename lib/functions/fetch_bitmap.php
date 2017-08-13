@@ -33,6 +33,7 @@
         $bitmap = $result[$class];
         return $bitmap;
     }  
+	
     function checkDependency($year,$class)
     {
         $bitmaps = array(

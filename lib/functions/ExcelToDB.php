@@ -229,7 +229,7 @@
 				}
 			}
           }
-		  echo "UPLOADED!";
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function UploadResult1to4sa($tablename)
@@ -290,6 +290,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function UploadResult1to4ns($tablename)
@@ -345,6 +346,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function UploadResult1to4sea($tablename)
@@ -401,7 +403,7 @@
 				}
 			}
           }
-		  
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	//CLASS 5
@@ -466,6 +468,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function UploadResult5ns($tablename)
@@ -523,6 +526,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 
 	function UploadResult5sa($tablename)
@@ -584,6 +588,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function UploadResult5sea($tablename)
@@ -641,6 +646,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	// CLASS 6-9
@@ -704,6 +710,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function UploadResult6to9ns($tablename)
@@ -761,6 +768,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function UploadResult6to9sea($tablename)
@@ -818,6 +826,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function UploadResult6to9ae($tablename)
@@ -880,6 +889,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	// CLASS 11
@@ -949,6 +959,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function UploadResult11s($tablename)
@@ -1015,6 +1026,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function UploadResultcsa($tablename)
@@ -1076,6 +1088,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function UploadResultd($tablename)
@@ -1136,6 +1149,7 @@
 				}
 			}
           }
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
 	function CreateStudentInfo($tablename)
@@ -1210,7 +1224,7 @@
 				}
 			}
           }
-		  echo "Uploaded";
+		  echo "<script>alert('Result Uploaded Successfully!'); window.location.href='./admin_dashboard.php';</script>";
     }
 	
  ?>

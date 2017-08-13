@@ -487,28 +487,28 @@
 										<div class='row'>
 											<div id='p' class='col-md-6 mtop'>
 												<table>
-													<tr>
-														<td class='left'>Student's Name: </td>
-														<td min-width='80%' style='border-bottom: 1px solid black;'>$name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-													</tr>
-													
-													<tr>
-														<td class='left'>Father's Name: </td>
-														<td min-width='80%' style='border-bottom: 1px solid black;'>$fname</td>
-													</tr>
-													<tr>
-														<td class='left'>Mother's Name: </td>
-														<td min-width='80%' style='border-bottom: 1px solid black;'>$mname</td>
-													</tr>
-													<tr>
-														<td class='left'>Date of Birth: </td>
-														<td min-width='80%' style='border-bottom: 1px solid black;'>$dob</td>
-													</tr>
-													<tr>
-														<td class='left'>Address</td>
-														<td min-width='80%' style='border-bottom: 1px solid black;'>$address</td>
-													</tr>
-												</table>
+									<tr>
+										<td class='left'>Student's Name:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$name</b></td>
+									</tr>
+									
+									<tr>
+										<td class='left'>Father's Name:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$fname</b></td>
+									</tr>
+									<tr>
+										<td class='left'>Mother's Name:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$mname</b></td>
+									</tr>
+									<tr>
+										<td class='left'>Date of Birth:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$dob</b></td>
+									</tr>
+									<tr>
+										<td class='left'>Address:</td>
+										<td class='left' width='250px;' style='border-bottom: 1px solid black;'> <b>$address</b></td>
+									</tr>
+								</table>
 											
 											</div>
 									
@@ -516,19 +516,18 @@
 												
 												<table>
 													<tr align='center'>
-														<td style='border: 1px solid black;'>Roll No.</td>
-														<td style='border: 1px solid black;'>$rollno</td>
+														<td style='border: 1px solid black;'><b>Roll No.</b></td>
+														<td style='border: 1px solid black;'> <b>$rollno</b></td>
 													</tr>
-										
 													<tr>
 														<td colspan='2'>&nbsp;</td>
-													</tr>							
-
-													<tr>
-														<td>Admission Number: </td>
-														<td width='50%' style='border-bottom: 1px solid black;'>$scholar_no</td>
 													</tr>
 														
+													<tr>
+														<td>Admission Number:</td>
+														<td width='50%' style='border-bottom: 1px solid black;'> <b>$scholar_no</b></td>
+													</tr>
+													
 												</table>
 											</div>
 										</div>
@@ -810,31 +809,37 @@
 								</div>
 							</div>
 
-							<div class='row mtop'>
-								
-								<div class='col-md-4'>
+						<div class='col-md-12 mtop'>
+							
+							<div id='p' class='col-md-5'>
 								<table>
-									<tr>
-										<td>Attendance: </td>
-										<td min-width='70%' style='border-bottom: 1px solid black;'>$attendance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<tr align='center'>
+										<td>Attendance:</td>
+										<td width= '100px' style='border-bottom: 1px solid black;'> <b> $attendance</b></td>
 									</tr>
 								</table>
-								</div>
-								
-								<div class='col-md-8'>
+							</div>
+							
+							<div id='p' class='col-md-7'>
 								<table>
-									<tr>
-										<td>Remarks: </td>
-										<td min-width='80%' style='border-bottom: 1px solid black;'>$remarks&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									<tr align='center'>
+										<td>Remarks:</td>
+										<td width='350px' style='border-bottom: 1px solid black;'><b>  $remarks</b> </td>
 									</tr>
 								</table>
+							</div>
+							
+						</div>
+							
+								<div class='row mtop'>
+									<table style='margin-left: 30px; margin-top: 20px;' class='table-responsive t1'>
+										<tr>
+											<td><h4><b>Congratulations! Promoted to next Class.</b></h4></td>
+										</tr>
+									</table>
 								</div>
-							</div>
-							
-							<div class='row mtop'>
-								<h4><b>Congratulations! Promoted to next Class.</b></h4>
-							</div>
-							
+						
+						
 							<div class='row'>
 								<div class='row headmargin'>
 								

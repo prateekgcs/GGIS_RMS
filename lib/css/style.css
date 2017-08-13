@@ -42,11 +42,6 @@
 	
 }
 	
-.rcbl
-{
-	padding-left: 5px;
-	font-weight: bold;
-}
 	
 .header
 {
@@ -171,7 +166,7 @@
 {
 	background-color: #04202C;
 	color: #fff;
-	min-height: 550px;
+	min-height: 750px;
 }
 
 .mtop
