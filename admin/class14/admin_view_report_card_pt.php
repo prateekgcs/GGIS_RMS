@@ -101,11 +101,11 @@
 								$stmt->bindParam(1,$rollno);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
 								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$m1 = $marks['s1'];
-								$m2 = $marks['s2'];
-								$m3 = $marks['s3'];
-								$m4 = $marks['s4'];
-								$m5 = $marks['s5'];
+								$m1 = (strtoupper($marks['s1']) == 'AB')?'AB':$marks['s1'];
+								$m2 = (strtoupper($marks['s2']) == 'AB')?'AB':$marks['s2'];
+								$m3 = (strtoupper($marks['s3']) == 'AB')?'AB':$marks['s3'];
+								$m4 = (strtoupper($marks['s4']) == 'AB')?'AB':$marks['s4'];
+								$m5 = (strtoupper($marks['s5']) == 'AB')?'AB':$marks['s5'];
 								$total = $marks['total'];
 								$attendance = $marks['attendance'];
 								$remarks = $marks['remarks'];

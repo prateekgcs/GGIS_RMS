@@ -146,11 +146,11 @@
 								$pt1_m4_max = $marks['s4'];
 								$pt1_m5_max = $marks['s5'];
 
-								$pt1_m1 = ($pt1_m1/$pt1_m1_max)*$pt1_max;
-								$pt1_m2 = ($pt1_m2/$pt1_m2_max)*$pt1_max;
-								$pt1_m3 = ($pt1_m3/$pt1_m3_max)*$pt1_max;
-								$pt1_m4 = ($pt1_m4/$pt1_m4_max)*$pt1_max;
-								$pt1_m5 = ($pt1_m5/$pt1_m5_max)*$pt1_max;
+								$pt1_m1 = (strtoupper($pt1_m1) == 'AB')?'AB':($pt1_m1/$pt1_m1_max)*$pt1_max;
+								$pt1_m2 = (strtoupper($pt1_m2) == 'AB')?'AB':($pt1_m2/$pt1_m2_max)*$pt1_max;
+								$pt1_m3 = (strtoupper($pt1_m3) == 'AB')?'AB':($pt1_m3/$pt1_m3_max)*$pt1_max;
+								$pt1_m4 = (strtoupper($pt1_m4) == 'AB')?'AB':($pt1_m4/$pt1_m4_max)*$pt1_max;
+								$pt1_m5 = (strtoupper($pt1_m5) == 'AB')?'AB':($pt1_m5/$pt1_m5_max)*$pt1_max;
 
 
 								$query = "SELECT * FROM `$ns1_table` WHERE roll_no = ?";
@@ -174,11 +174,11 @@
 								$ns1_m4_max = $marks['s4'];
 								$ns1_m5_max = $marks['s5'];
 
-								$ns1_m1 = ($ns1_m1/$ns1_m1_max)*$ns1_max;
-								$ns1_m2 = ($ns1_m2/$ns1_m2_max)*$ns1_max;
-								$ns1_m3 = ($ns1_m3/$ns1_m3_max)*$ns1_max;
-								$ns1_m4 = ($ns1_m4/$ns1_m4_max)*$ns1_max;
-								$ns1_m5 = ($ns1_m5/$ns1_m5_max)*$ns1_max;
+								$ns1_m1 = (strtoupper($ns1_m1) == 'AB')?'AB':($ns1_m1/$ns1_m1_max)*$ns1_max;
+								$ns1_m2 = (strtoupper($ns1_m2) == 'AB')?'AB':($ns1_m2/$ns1_m2_max)*$ns1_max;
+								$ns1_m3 = (strtoupper($ns1_m3) == 'AB')?'AB':($ns1_m3/$ns1_m3_max)*$ns1_max;
+								$ns1_m4 = (strtoupper($ns1_m4) == 'AB')?'AB':($ns1_m4/$ns1_m4_max)*$ns1_max;
+								$ns1_m5 = (strtoupper($ns1_m5) == 'AB')?'AB':($ns1_m5/$ns1_m5_max)*$ns1_max;
 
 
 								$query = "SELECT * FROM `$sea1_table` WHERE roll_no = ?";
@@ -202,11 +202,11 @@
 								$sea1_m4_max = $marks['s4'];
 								$sea1_m5_max = $marks['s5'];
 
-								$sea1_m1 = ($sea1_m1/$sea1_m1_max)*$sea1_max;
-								$sea1_m2 = ($sea1_m2/$sea1_m2_max)*$sea1_max;
-								$sea1_m3 = ($sea1_m3/$sea1_m3_max)*$sea1_max;
-								$sea1_m4 = ($sea1_m4/$sea1_m4_max)*$sea1_max;
-								$sea1_m5 = ($sea1_m5/$sea1_m5_max)*$sea1_max;
+								$sea1_m1 = (strtoupper($sea1_m1) == 'AB')?'AB':($sea1_m1/$sea1_m1_max)*$sea1_max;
+								$sea1_m2 = (strtoupper($sea1_m2) == 'AB')?'AB':($sea1_m2/$sea1_m2_max)*$sea1_max;
+								$sea1_m3 = (strtoupper($sea1_m3) == 'AB')?'AB':($sea1_m3/$sea1_m3_max)*$sea1_max;
+								$sea1_m4 = (strtoupper($sea1_m4) == 'AB')?'AB':($sea1_m4/$sea1_m4_max)*$sea1_max;
+								$sea1_m5 = (strtoupper($sea1_m5) == 'AB')?'AB':($sea1_m5/$sea1_m5_max)*$sea1_max;
 
 
 								$query = "SELECT * FROM `$sa1_table` WHERE roll_no = ?";
@@ -233,11 +233,11 @@
 								$sa1_m4_max = $marks['s4'];
 								$sa1_m5_max = $marks['s5'];
 
-								$sa1_m1 = ($sa1_m1/$sa1_m1_max)*$sa1_max;
-								$sa1_m2 = ($sa1_m2/$sa1_m2_max)*$sa1_max;
-								$sa1_m3 = ($sa1_m3/$sa1_m3_max)*$sa1_max;
-								$sa1_m4 = ($sa1_m4/$sa1_m4_max)*$sa1_max;
-								$sa1_m5 = ($sa1_m5/$sa1_m5_max)*$sa1_max;
+								$sa1_m1 = (strtoupper($sa1_m1) == 'AB')?'AB':($sa1_m1/$sa1_m1_max)*$sa1_max;
+								$sa1_m2 = (strtoupper($sa1_m2) == 'AB')?'AB':($sa1_m2/$sa1_m2_max)*$sa1_max;
+								$sa1_m3 = (strtoupper($sa1_m3) == 'AB')?'AB':($sa1_m3/$sa1_m3_max)*$sa1_max;
+								$sa1_m4 = (strtoupper($sa1_m4) == 'AB')?'AB':($sa1_m4/$sa1_m4_max)*$sa1_max;
+								$sa1_m5 = (strtoupper($sa1_m5) == 'AB')?'AB':($sa1_m5/$sa1_m5_max)*$sa1_max;
 
 								$total1 = (($pt1_m1 + $ns1_m1 + $sea1_m1 + $sa1_m1)/$t1_max)*100;
 								$total2 = (($pt1_m2 + $ns1_m2 + $sea1_m2 + $sa1_m2)/$t1_max)*100;
