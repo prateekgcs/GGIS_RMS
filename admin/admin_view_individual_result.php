@@ -186,11 +186,13 @@
 							{
 								$file = 't1';
 								$check = 'sa-1';
+								$get_tname = 'sa-1';
 							}
 							else if($test_type == 't-2')
 							{
 								$file = 't2';
 								$check = 'sa-2';
+								$get_tname = 'sa-2';
 							}
 
 
