@@ -158,6 +158,7 @@
         $a = str_split($bitmap);
         $test_type = strtoupper($test_type);
         $bool = 0;
+		
         switch($test_type)
         {
             case 'UT-1':
