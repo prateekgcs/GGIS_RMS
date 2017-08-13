@@ -7,7 +7,7 @@
             $bool = checkOnetoFive($bitmap,$test_type);
         else if($class>=6 && $class<=9)
             $bool = checkSixToNine($bitmap,$test_type);
-        else if($class>=11) 
+        else if($class == '11s' || $class == '11c') 
             $bool = checkEleven($bitmap,$test_type);
 
         return $bool;

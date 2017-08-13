@@ -7,7 +7,7 @@
             $bitmap = updateOnetoFive($bitmap,$test_type,$num);
         else if($class>=6 && $class<=9)
             $bitmap = updateSixToNine($bitmap,$test_type,$num);
-        else if($class>=11) 
+        else if($class =='11s' || $class == '11c') 
             $bitmap = updateEleven($bitmap,$test_type,$num);
 
         rewriteBitmap($bitmap,$year,$class,$section);
