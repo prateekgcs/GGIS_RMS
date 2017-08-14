@@ -252,8 +252,10 @@
 								$g5 = calculateGrade($total5);
 
 								$g_total = $total1 + $total2 + $total3 + $total4 + $total5;
+								$g_total = number_format($g_total,2);
 								$g_max = $t1_max * 5;
 								$g_percent = ($g_total/$g_max) * 100;
+								$g_percent = number_format($g_percent,2);
 								$g_grade = calculateGrade($g_percent);
 
 								$query = "SELECT * FROM `$info_table` WHERE roll_no = ? AND section = ?";

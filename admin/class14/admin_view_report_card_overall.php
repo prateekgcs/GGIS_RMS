@@ -380,8 +380,10 @@
 								$g5 = calculateGrade($g_total_5);
 
 								$f_total = $g_total_1 + $g_total_2 + $g_total_3 + $g_total_4 + $g_total_5;
+								$f_total = number_format($f_total,2);
 								$f_max = $t1_max * 5;
 								$f_percent = ($f_total/$f_max) * 100;
+								$f_percent = number_format($f_percent,2);
 								$f_grade = calculateGrade($f_percent);
 
 								$query = "SELECT * FROM `$info_table` WHERE roll_no = ? AND section = ?";
