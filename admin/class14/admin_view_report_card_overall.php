@@ -39,6 +39,11 @@
 			border: black solid 1px !important;
 		}
 		
+		p
+		{
+			font-size: 12px;
+		}
+		
 	</style>
 	
 	<script>
@@ -534,16 +539,14 @@
 										
 										<div class='col-md-12 mtop'>
 									
-											<table class='table table-centered' border='2'>
+											<table class='table table-responsive' border='2'>
 											<tr class='bold'>
-												<td rowspan='2'>SCHOLASTIC AREA</td>
-												<td colspan='5' rowspan='2'>SA 1</td>
-												<td colspan='5' rowspan='2'>SA 2</td>
-												<td colspan='3'>OVERALL</td>
+												<td>SCHOLASTIC AREA</td>
+												<td colspan='5'>SA 1</td>
+												<td colspan='5'>SA 2</td>
+												<td colspan='2'>OVERALL</td>
 											</tr>
-											<tr class='bold'>
-												<td colspan='3'>Term 1 (50)+Term 2 (50)</td>	
-											</tr>
+										
 											<tr class='bold'>
 												<td rowspan='2'>Subjects</td>
 												<td>Per. Test</td>
@@ -558,7 +561,6 @@
 												<td>Total</td>
 												<td>Grand Total</td>
 												<td rowspan='2'>Grade</td>
-												<td rowspan='2'>Rank</td>
 											</tr>
 											
 											<tr class='bold'>
@@ -588,7 +590,7 @@
 												<td>$total2_1</td>
 												<td>$g_total_1</td>
 												<td>$g1</td>
-												<td></td>
+												
 											</tr>
 											<tr>
 												<td class='left'>$s2</td>
@@ -604,7 +606,7 @@
 												<td>$total2_2</td>
 												<td>$g_total_2</td>
 												<td>$g2</td>
-												<td></td>
+												
 											</tr>
 											<tr>
 												<td class='left'>$s3</td>
@@ -620,7 +622,7 @@
 												<td>$total2_3</td>
 												<td>$g_total_3</td>
 												<td>$g3</td>
-												<td></td>
+											
 											</tr>
 											<tr>
 												<td class='left'>$s4</td>
@@ -636,7 +638,7 @@
 												<td>$total2_4</td>
 												<td>$g_total_4</td>
 												<td>$g4</td>
-												<td></td>
+												
 											</tr>
 											<tr>
 												<td class='left'>$s5</td>
@@ -652,15 +654,15 @@
 												<td>$total2_5</td>
 												<td>$g_total_5</td>
 												<td>$g5</td>
-												<td></td>
+												
 											</tr>
+									
 											<tr>
 												<td colspan='14'><b>8 Point Grading Scale: </b>A1(91% - 100%), A2(81% - 90%), B1(71% - 80%), B2(61% - 70%), C1(51%-60%), C2(41% - 50%), D(33% - 40%), E(32% & Below) *SE=Sub Enrichment</b></td>
 											</tr>
 										</table>
 									</div>
 									
-									<br/>
 									<div id='p' class='col-md-12'>
 										<div id='p' style='margin-left: 15px;' class='col-md-4'>
 											<table class='table' border='2'>
@@ -699,9 +701,9 @@
 										</div>
 									</div>
 									
-									<div class='row'>
-								
-									<div id='p' class='col-md-6 mtop'>
+							<div style='padding-left:30px;' class='row'>
+		
+									<div id='p' class='col-md-6'>
 									<table border='2'>
 										<tr class='bold'>
 											<td colspan='3'>Co-Scholastic Area<br>(3 Point Grading Scale A,B,C)</td>
@@ -755,7 +757,7 @@
 									</div>
 									
 									
-									<div id='p' class='col-md-6 mtop'>
+									<div id='p' class='col-md-6'>
 									<table border='2'>
 										<tr class='bold'>
 											<td colspan='3'>Discipline<br>(3 Point Grading Scale A,B,C)</td>
