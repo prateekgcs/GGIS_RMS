@@ -468,7 +468,7 @@
 											<table border='2'>
 					
 					<tr class='bold'>
-						<td colspan='12'>SCHOLASTIC AREA</td>
+						<td colspan='11'>SCHOLASTIC AREA</td>
 					</tr>
 					
 					<tr class='bold'>
@@ -483,7 +483,6 @@
 						<td width='50px'>Annual Exam</td>
 						<td width='50px'>Grand Total</td>
 						<td rowspan='2'>Grade</td>
-						<td rowspan='2'>Rank</td>
 					</tr>
 					
 					<tr class='bold'>
@@ -509,7 +508,6 @@
 						<td>$ae_m1</td>
 						<td>$g_total_1</td>
 						<td>$g1</td>
-						<td></td>
 					
 					</tr>
 					<tr>
@@ -524,7 +522,6 @@
 						<td>$ae_m2</td>
 						<td>$g_total_2</td>
 						<td>$g2</td>
-						<td></td>
 						
 					</tr>
 					<tr>
@@ -539,7 +536,6 @@
 						<td>$ae_m3</td>
 						<td>$g_total_3</td>
 						<td>$g3</td>
-						<td></td>
 						
 					</tr>
 					<tr>
@@ -554,8 +550,6 @@
 						<td>$ae_m4</td>
 						<td>$g_total_4</td>
 						<td>$g4</td>
-						<td></td>
-					
 					</tr>
 					<tr>
 						<td class='left'>$s5</td>
@@ -569,7 +563,6 @@
 						<td>$ae_m5</td>
 						<td>$g_total_5</td>
 						<td>$g5</td>
-						<td></td>
 						
 					</tr>
 						<tr>
@@ -584,10 +577,9 @@
 						<td>$ae_m6</td>
 						<td>$g_total_6</td>
 						<td>$g6</td>
-						<td></td>
 					</tr>
 					<tr>
-						<td colspan='12'><b>8 Point Grading Scale: </b>A1(91% - 100%), A2(81% - 90%), B1(71% - 80%), B2(61% - 70%), C1(51%-60%), C2(41% - 50%), D(33% - 40%), E(32% & Below) *SE=Sub Enrichment</b></td>
+						<td colspan='11'><b>8 Point Grading Scale: </b>A1(91% - 100%), A2(81% - 90%), B1(71% - 80%), B2(61% - 70%), C1(51%-60%), C2(41% - 50%), D(33% - 40%), E(32% & Below) *SE=Sub Enrichment</b></td>
 					</tr>
 				</table>
 									</div>
@@ -645,42 +637,41 @@
 				<tr>
 					<td class='left'>Work Education</td>
 					<td>$csa_m1</td>
-					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Art Education</td>
 					<td>$csa_m2</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Health & Physical Education</td>
 					<td>$csa_m3</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Scientific Skills</td>
 					<td>$csa_m4</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Thinking Skills</td>
 					<td>$csa_m5</td>
-					<td></td>
+				
 				</tr>
 				<tr>
 					<td class='left'>Social Skills</td>
 					<td>$csa_m6</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Yoga/NCC</td>
 					<td>$csa_m7</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Sports</td>
 					<td>$csa_m8</td>
-					<td></td>
+					
 				</tr>
 			</table>
 			</div>
@@ -698,48 +689,48 @@
 				<tr>
 					<td class='left'>Regularity & Punctuality</td>
 					<td>$d_m1</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Sincerity</td>
 					<td>$d_m2</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Behaviour & Values</td>
 					<td>$d_m3</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Respectfulness for Rules & Regulations</td>
 					<td>$d_m4</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Attitude Towards Teachers</td>
 					<td>$d_m5</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Attitude Towards School-mates</td>
 					<td>$d_m6</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Attitude Towards Society</td>
 					<td>$d_m7</td>
-					<td></td>
+					
 				</tr>
 				<tr>
 					<td class='left'>Attitude Towards Nstion</td>
 					<td>$d_m8</td>
-					<td></td>
+					
 				</tr>
 			</table>
 		</div>
 	</div>
 
-						<div class='col-md-12'>
+						<div class='col-md-12 mtop'>
 							
 							<div id='p' class='col-md-5'>
 								<table>
@@ -762,7 +753,7 @@
 						</div>
 							
 								<div class='row'>
-									<table style='margin-left: 30px; margin-top: 20px;' class='table-responsive t1'>
+									<table style='margin-left: 80px; margin-top: 20px;' class='table-responsive t1'>
 										<tr>
 											<td><h4><b>Congratulations! Promoted to next Class.</b></h4></td>
 										</tr>
