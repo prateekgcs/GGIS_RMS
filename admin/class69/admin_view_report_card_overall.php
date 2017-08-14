@@ -83,18 +83,13 @@
 								require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/functions/calculate_grade.php'); 
 								
 								$pt1_max = 10;
-								$ns1_max = 5;
-								$sea1_max = 5;
-								$sa1_max = 80;
-								$t1_max = $pt1_max + $ns1_max + $sea1_max + $sa1_max;
-
 								$pt2_max = 10;
-								$ns2_max = 5;
-								$sea2_max = 5;
-								$sa2_max = 80;
-								$t2_max = $pt2_max + $ns2_max + $sea2_max + $sa2_max;
-
-								$g_max = $t1_max + $t2_max;
+								$pt3_max = 10;
+								$ns_max = 5;
+								$sea_max = 5;
+								$ae_max = 80;
+								$t_max = $pt1_max + $ns_max + $sea_max;
+								$g_max = $t_max + $ae_max;
 
 								$tname = $_GET['tname'];
 								$arr = explode('_',$tname);
@@ -111,15 +106,16 @@
 								$info_table = $year.'_'.$class.'_info';
 								$pt1_table = $year.'_'.$class.'_'.$section.'_pt-1';
 								$pt2_table = $year.'_'.$class.'_'.$section.'_pt-2';
-								$ns1_table = $year.'_'.$class.'_'.$section.'_ns-1';
-								$csa1_table = $year.'_'.$class.'_'.$section.'_csa-1';
-								$d1_table = $year.'_'.$class.'_'.$section.'_d-1';
-								$sea1_table = $year.'_'.$class.'_'.$section.'_sea-1';
-								$sa1_table = $year.'_'.$class.'_'.$section.'_sa-1';
+								$pt3_table = $year.'_'.$class.'_'.$section.'_pt-3';
+								$ns_table = $year.'_'.$class.'_'.$section.'_ns';
+								$csa_table = $year.'_'.$class.'_'.$section.'_csa';
+								$d_table = $year.'_'.$class.'_'.$section.'_d';
+								$sea_table = $year.'_'.$class.'_'.$section.'_sea';
+								$ae_table = $year.'_'.$class.'_'.$section.'_ae';
 
 								$conn = connect();
 								
-								$query = "SELECT * FROM `$sa2_table`";
+								$query = "SELECT * FROM `$ae_table`";
 								$stmt = $conn->prepare($query);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong1!');</script>");
 								$headings = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -192,213 +188,149 @@
 								$pt2_m5 = (strtoupper($pt2_m5) == 'AB')?'AB':($pt2_m5/$pt2_m5_max)*$pt2_max;
 								$pt2_m6 = (strtoupper($pt2_m6) == 'AB')?'AB':($pt2_m6/$pt2_m6_max)*$pt2_max;
 
-								$query = "SELECT * FROM `$ns1_table` WHERE roll_no = ?";
+								$query = "SELECT * FROM `$pt3_table` WHERE roll_no = ?";
+								$stmt = $conn->prepare($query);
+								$stmt->bindParam(1,$rollno);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong22!');</script>");
+								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
+								$pt3_m1 = $marks['s1'];
+								$pt3_m2 = $marks['s2'];
+								$pt3_m3 = $marks['s3'];
+								$pt3_m4 = $marks['s4'];
+								$pt3_m5 = $marks['s5'];
+								$pt3_m6 = $marks['s6'];
+								$pt3_total = $marks['total'];
+								$query = "SELECT * FROM `$pt3_table` WHERE roll_no = '^'";
+								$stmt = $conn->prepare($query);
+								if(!$stmt->execute()) die("<script>alert('Something went wrong22!');</script>");
+								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
+								$pt3_m1_max = $marks['s1'];
+								$pt3_m2_max = $marks['s2'];
+								$pt3_m3_max = $marks['s3'];
+								$pt3_m4_max = $marks['s4'];
+								$pt3_m5_max = $marks['s5'];
+								$pt3_m6_max = $marks['s6'];
+
+								$pt3_m1 = (strtoupper($pt3_m1) == 'AB')?'AB':($pt3_m1/$pt3_m1_max)*$pt3_max;
+								$pt3_m2 = (strtoupper($pt3_m2) == 'AB')?'AB':($pt3_m2/$pt3_m2_max)*$pt3_max;
+								$pt3_m3 = (strtoupper($pt3_m3) == 'AB')?'AB':($pt3_m3/$pt3_m3_max)*$pt3_max;
+								$pt3_m4 = (strtoupper($pt3_m4) == 'AB')?'AB':($pt3_m4/$pt3_m4_max)*$pt3_max;
+								$pt3_m5 = (strtoupper($pt3_m5) == 'AB')?'AB':($pt3_m5/$pt3_m5_max)*$pt3_max;
+								$pt3_m6 = (strtoupper($pt3_m6) == 'AB')?'AB':($pt3_m6/$pt3_m6_max)*$pt3_max;
+
+								$avg_m1 = averageBestTwo($pt1_m1, $pt2_m1, $pt3_m1);
+								$avg_m2 = averageBestTwo($pt1_m2, $pt2_m2, $pt3_m2);
+								$avg_m3 = averageBestTwo($pt1_m3, $pt2_m3, $pt3_m3);
+								$avg_m4 = averageBestTwo($pt1_m4, $pt2_m4, $pt3_m4);
+								$avg_m5 = averageBestTwo($pt1_m5, $pt2_m5, $pt3_m5);
+								$avg_m6 = averageBestTwo($pt1_m6, $pt2_m6, $pt3_m6);
+
+								$query = "SELECT * FROM `$ns_table` WHERE roll_no = ?";
 								$stmt = $conn->prepare($query);
 								$stmt->bindParam(1,$rollno);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong!31');</script>");
 								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$ns1_m1 = $marks['s1'];
-								$ns1_m2 = $marks['s2'];
-								$ns1_m3 = $marks['s3'];
-								$ns1_m4 = $marks['s4'];
-								$ns1_m5 = $marks['s5'];
-								$ns1_m6 = $marks['s6'];
-								$ns1_total = $marks['total'];
-								$query = "SELECT * FROM `$ns1_table` WHERE roll_no = '^'";
+								$ns_m1 = $marks['s1'];
+								$ns_m2 = $marks['s2'];
+								$ns_m3 = $marks['s3'];
+								$ns_m4 = $marks['s4'];
+								$ns_m5 = $marks['s5'];
+								$ns_m6 = $marks['s6'];
+								$ns_total = $marks['total'];
+								$query = "SELECT * FROM `$ns_table` WHERE roll_no = '^'";
 								$stmt = $conn->prepare($query);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong31!');</script>");
 								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$ns1_m1_max = $marks['s1'];
-								$ns1_m2_max = $marks['s2'];
-								$ns1_m3_max = $marks['s3'];
-								$ns1_m4_max = $marks['s4'];
-								$ns1_m5_max = $marks['s5'];
-								$ns1_m6_max = $marks['s6'];
+								$ns_m1_max = $marks['s1'];
+								$ns_m2_max = $marks['s2'];
+								$ns_m3_max = $marks['s3'];
+								$ns_m4_max = $marks['s4'];
+								$ns_m5_max = $marks['s5'];
+								$ns_m6_max = $marks['s6'];
 
-								$ns1_m1 = (strtoupper($ns1_m1) == 'AB')?'AB':($ns1_m1/$ns1_m1_max)*$ns1_max;
-								$ns1_m2 = (strtoupper($ns1_m2) == 'AB')?'AB':($ns1_m2/$ns1_m2_max)*$ns1_max;
-								$ns1_m3 = (strtoupper($ns1_m3) == 'AB')?'AB':($ns1_m3/$ns1_m3_max)*$ns1_max;
-								$ns1_m4 = (strtoupper($ns1_m4) == 'AB')?'AB':($ns1_m4/$ns1_m4_max)*$ns1_max;
-								$ns1_m5 = (strtoupper($ns1_m5) == 'AB')?'AB':($ns1_m5/$ns1_m5_max)*$ns1_max;
-								$ns1_m6 = (strtoupper($ns1_m6) == 'AB')?'AB':($ns1_m6/$ns1_m6_max)*$ns1_max;
-
-
-								$query = "SELECT * FROM `$ns2_table` WHERE roll_no = ?";
-								$stmt = $conn->prepare($query);
-								$stmt->bindParam(1,$rollno);
-								if(!$stmt->execute()) die("<script>alert('Something went wrong!32');</script>");
-								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$ns2_m1 = $marks['s1'];
-								$ns2_m2 = $marks['s2'];
-								$ns2_m3 = $marks['s3'];
-								$ns2_m4 = $marks['s4'];
-								$ns2_m5 = $marks['s5'];
-								$ns2_m6 = $marks['s6'];
-								$ns2_total = $marks['total'];
-								$query = "SELECT * FROM `$ns2_table` WHERE roll_no = '^'";
-								$stmt = $conn->prepare($query);
-								if(!$stmt->execute()) die("<script>alert('Something went wrong32!');</script>");
-								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$ns2_m1_max = $marks['s1'];
-								$ns2_m2_max = $marks['s2'];
-								$ns2_m3_max = $marks['s3'];
-								$ns2_m4_max = $marks['s4'];
-								$ns2_m5_max = $marks['s5'];
-								$ns2_m6_max = $marks['s6'];
-
-								$ns2_m1 = (strtoupper($ns2_m1) == 'AB')?'AB':($ns2_m1/$ns2_m1_max)*$ns2_max;
-								$ns2_m2 = (strtoupper($ns2_m2) == 'AB')?'AB':($ns2_m2/$ns2_m2_max)*$ns2_max;
-								$ns2_m3 = (strtoupper($ns2_m3) == 'AB')?'AB':($ns2_m3/$ns2_m3_max)*$ns2_max;
-								$ns2_m4 = (strtoupper($ns2_m4) == 'AB')?'AB':($ns2_m4/$ns2_m4_max)*$ns2_max;
-								$ns2_m5 = (strtoupper($ns2_m5) == 'AB')?'AB':($ns2_m5/$ns2_m5_max)*$ns2_max;
-								$ns2_m6 = (strtoupper($ns2_m6) == 'AB')?'AB':($ns2_m6/$ns2_m6_max)*$ns2_max;
+								$ns_m1 = (strtoupper($ns_m1) == 'AB')?'AB':($ns_m1/$ns_m1_max)*$ns_max;
+								$ns_m2 = (strtoupper($ns_m2) == 'AB')?'AB':($ns_m2/$ns_m2_max)*$ns_max;
+								$ns_m3 = (strtoupper($ns_m3) == 'AB')?'AB':($ns_m3/$ns_m3_max)*$ns_max;
+								$ns_m4 = (strtoupper($ns_m4) == 'AB')?'AB':($ns_m4/$ns_m4_max)*$ns_max;
+								$ns_m5 = (strtoupper($ns_m5) == 'AB')?'AB':($ns_m5/$ns_m5_max)*$ns_max;
+								$ns_m6 = (strtoupper($ns_m6) == 'AB')?'AB':($ns_m6/$ns_m6_max)*$ns_max;
 
 
-								$query = "SELECT * FROM `$sea1_table` WHERE roll_no = ?";
+								$query = "SELECT * FROM `$sea_table` WHERE roll_no = ?";
 								$stmt = $conn->prepare($query);
 								$stmt->bindParam(1,$rollno);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong!41');</script>");
 								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$sea1_m1 = $marks['s1'];
-								$sea1_m2 = $marks['s2'];
-								$sea1_m3 = $marks['s3'];
-								$sea1_m4 = $marks['s4'];
-								$sea1_m5 = $marks['s5'];
-								$sea1_m6 = $marks['s6'];
-								$sea1_total = $marks['total'];
-								$query = "SELECT * FROM `$sea1_table` WHERE roll_no = '^'";
+								$sea_m1 = $marks['s1'];
+								$sea_m2 = $marks['s2'];
+								$sea_m3 = $marks['s3'];
+								$sea_m4 = $marks['s4'];
+								$sea_m5 = $marks['s5'];
+								$sea_m6 = $marks['s6'];
+								$sea_total = $marks['total'];
+								$query = "SELECT * FROM `$sea_table` WHERE roll_no = '^'";
 								$stmt = $conn->prepare($query);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong41!');</script>");
 								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$sea1_m1_max = $marks['s1'];
-								$sea1_m2_max = $marks['s2'];
-								$sea1_m3_max = $marks['s3'];
-								$sea1_m4_max = $marks['s4'];
-								$sea1_m5_max = $marks['s5'];
-								$sea1_m6_max = $marks['s6'];
+								$sea_m1_max = $marks['s1'];
+								$sea_m2_max = $marks['s2'];
+								$sea_m3_max = $marks['s3'];
+								$sea_m4_max = $marks['s4'];
+								$sea_m5_max = $marks['s5'];
+								$sea_m6_max = $marks['s6'];
 
-								$sea1_m1 = (strtoupper($sea1_m1) == 'AB')?'AB':($sea1_m1/$sea1_m1_max)*$sea1_max;
-								$sea1_m2 = (strtoupper($sea1_m2) == 'AB')?'AB':($sea1_m2/$sea1_m2_max)*$sea1_max;
-								$sea1_m3 = (strtoupper($sea1_m3) == 'AB')?'AB':($sea1_m3/$sea1_m3_max)*$sea1_max;
-								$sea1_m4 = (strtoupper($sea1_m4) == 'AB')?'AB':($sea1_m4/$sea1_m4_max)*$sea1_max;
-								$sea1_m5 = (strtoupper($sea1_m5) == 'AB')?'AB':($sea1_m5/$sea1_m5_max)*$sea1_max;
-								$sea1_m6 = (strtoupper($sea1_m6) == 'AB')?'AB':($sea1_m6/$sea1_m6_max)*$sea1_max;
+								$sea_m1 = (strtoupper($sea_m1) == 'AB')?'AB':($sea_m1/$sea_m1_max)*$sea_max;
+								$sea_m2 = (strtoupper($sea_m2) == 'AB')?'AB':($sea_m2/$sea_m2_max)*$sea_max;
+								$sea_m3 = (strtoupper($sea_m3) == 'AB')?'AB':($sea_m3/$sea_m3_max)*$sea_max;
+								$sea_m4 = (strtoupper($sea_m4) == 'AB')?'AB':($sea_m4/$sea_m4_max)*$sea_max;
+								$sea_m5 = (strtoupper($sea_m5) == 'AB')?'AB':($sea_m5/$sea_m5_max)*$sea_max;
+								$sea_m6 = (strtoupper($sea_m6) == 'AB')?'AB':($sea_m6/$sea_m6_max)*$sea_max;
 
-								$query = "SELECT * FROM `$sea2_table` WHERE roll_no = ?";
-								$stmt = $conn->prepare($query);
-								$stmt->bindParam(1,$rollno);
-								if(!$stmt->execute()) die("<script>alert('Something went wrong!42');</script>");
-								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$sea2_m1 = $marks['s1'];
-								$sea2_m2 = $marks['s2'];
-								$sea2_m3 = $marks['s3'];
-								$sea2_m4 = $marks['s4'];
-								$sea2_m5 = $marks['s5'];
-								$sea2_m6 = $marks['s6'];
-								$sea2_total = $marks['total'];
-								$query = "SELECT * FROM `$sea2_table` WHERE roll_no = '^'";
-								$stmt = $conn->prepare($query);
-								if(!$stmt->execute()) die("<script>alert('Something went wrong42!');</script>");
-								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$sea2_m1_max = $marks['s1'];
-								$sea2_m2_max = $marks['s2'];
-								$sea2_m3_max = $marks['s3'];
-								$sea2_m4_max = $marks['s4'];
-								$sea2_m5_max = $marks['s5'];
-								$sea2_m6_max = $marks['s6'];
-
-								$sea2_m1 = (strtoupper($sea2_m1) == 'AB')?'AB':($sea2_m1/$sea2_m1_max)*$sea2_max;
-								$sea2_m2 = (strtoupper($sea2_m2) == 'AB')?'AB':($sea2_m2/$sea2_m2_max)*$sea2_max;
-								$sea2_m3 = (strtoupper($sea2_m3) == 'AB')?'AB':($sea2_m3/$sea2_m3_max)*$sea2_max;
-								$sea2_m4 = (strtoupper($sea2_m4) == 'AB')?'AB':($sea2_m4/$sea2_m4_max)*$sea2_max;
-								$sea2_m5 = (strtoupper($sea2_m5) == 'AB')?'AB':($sea2_m5/$sea2_m5_max)*$sea2_max;
-								$sea2_m6 = (strtoupper($sea2_m6) == 'AB')?'AB':($sea2_m6/$sea2_m6_max)*$sea2_max;
-
-
-								$query = "SELECT * FROM `$sa1_table` WHERE roll_no = ?";
+								$query = "SELECT * FROM `$ae_table` WHERE roll_no = ?";
 								$stmt = $conn->prepare($query);
 								$stmt->bindParam(1,$rollno);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong!51');</script>");
 								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$sa1_m1 = $marks['s1'];
-								$sa1_m2 = $marks['s2'];
-								$sa1_m3 = $marks['s3'];
-								$sa1_m4 = $marks['s4'];
-								$sa1_m5 = $marks['s5'];
-								$sa1_m6 = $marks['s6'];
-								$sa1_total = $marks['total'];
-								$query = "SELECT * FROM `$sa1_table` WHERE roll_no = '^'";
+								$ae_m1 = $marks['s1'];
+								$ae_m2 = $marks['s2'];
+								$ae_m3 = $marks['s3'];
+								$ae_m4 = $marks['s4'];
+								$ae_m5 = $marks['s5'];
+								$ae_m6 = $marks['s6'];
+								$ae_total = $marks['total'];
+								$attendance = $marks['attendance'];
+								$remarks = $marks['remarks'];
+								$query = "SELECT * FROM `$ae_table` WHERE roll_no = '^'";
 								$stmt = $conn->prepare($query);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong51!');</script>");
 								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$sa1_m1_max = $marks['s1'];
-								$sa1_m2_max = $marks['s2'];
-								$sa1_m3_max = $marks['s3'];
-								$sa1_m4_max = $marks['s4'];
-								$sa1_m5_max = $marks['s5'];
-								$sa1_m6_max = $marks['s6'];
+								$ae_m1_max = $marks['s1'];
+								$ae_m2_max = $marks['s2'];
+								$ae_m3_max = $marks['s3'];
+								$ae_m4_max = $marks['s4'];
+								$ae_m5_max = $marks['s5'];
+								$ae_m6_max = $marks['s6'];
 
-								$sa1_m1 = (strtoupper($sa1_m1) == 'AB')?'AB':($sa1_m1/$sa1_m1_max)*$sa1_max;
-								$sa1_m2 = (strtoupper($sa1_m2) == 'AB')?'AB':($sa1_m2/$sa1_m2_max)*$sa1_max;
-								$sa1_m3 = (strtoupper($sa1_m3) == 'AB')?'AB':($sa1_m3/$sa1_m3_max)*$sa1_max;
-								$sa1_m4 = (strtoupper($sa1_m4) == 'AB')?'AB':($sa1_m4/$sa1_m4_max)*$sa1_max;
-								$sa1_m5 = (strtoupper($sa1_m5) == 'AB')?'AB':($sa1_m5/$sa1_m5_max)*$sa1_max;
-								$sa1_m6 = (strtoupper($sa1_m6) == 'AB')?'AB':($sa1_m6/$sa1_m6_max)*$sa1_max;
+								$ae_m1 = (strtoupper($ae_m1) == 'AB')?'AB':($ae_m1/$ae_m1_max)*$ae_max;
+								$ae_m2 = (strtoupper($ae_m2) == 'AB')?'AB':($ae_m2/$ae_m2_max)*$ae_max;
+								$ae_m3 = (strtoupper($ae_m3) == 'AB')?'AB':($ae_m3/$ae_m3_max)*$ae_max;
+								$ae_m4 = (strtoupper($ae_m4) == 'AB')?'AB':($ae_m4/$ae_m4_max)*$ae_max;
+								$ae_m5 = (strtoupper($ae_m5) == 'AB')?'AB':($ae_m5/$ae_m5_max)*$ae_max;
+								$ae_m6 = (strtoupper($ae_m6) == 'AB')?'AB':($ae_m6/$ae_m6_max)*$ae_max;
 
+								$total_1 = ($avg_m1 + $ns_m1 + $sea_m1);
+								$total_2 = ($avg_m1 + $ns_m2 + $sea_m2);
+								$total_3 = ($avg_m1 + $ns_m3 + $sea_m3);
+								$total_4 = ($avg_m1 + $ns_m4 + $sea_m4);
+								$total_5 = ($avg_m1 + $ns_m5 + $sea_m5);
+								$total_6 = ($avg_m1 + $ns_m6 + $sea_m6);
 
-								$query = "SELECT * FROM `$sa2_table` WHERE roll_no = ?";
-								$stmt = $conn->prepare($query);
-								$stmt->bindParam(1,$rollno);
-								if(!$stmt->execute()) die("<script>alert('Something went wrong!52');</script>");
-								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$sa2_m1 = $marks['s1'];
-								$sa2_m2 = $marks['s2'];
-								$sa2_m3 = $marks['s3'];
-								$sa2_m4 = $marks['s4'];
-								$sa2_m5 = $marks['s5'];
-								$sa2_m6 = $marks['s6'];
-								$sa2_total = $marks['total'];
-								$attendance = $marks['attendance'];
-								$remarks = $marks['remarks'];
-								$query = "SELECT * FROM `$sa2_table` WHERE roll_no = '^'";
-								$stmt = $conn->prepare($query);
-								if(!$stmt->execute()) die("<script>alert('Something went wrong52!');</script>");
-								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$sa2_m1_max = $marks['s1'];
-								$sa2_m2_max = $marks['s2'];
-								$sa2_m3_max = $marks['s3'];
-								$sa2_m4_max = $marks['s4'];
-								$sa2_m5_max = $marks['s5'];
-								$sa2_m6_max = $marks['s6'];
-
-								$sa2_m1 = (strtoupper($sa2_m1) == 'AB')?'AB':($sa2_m1/$sa2_m1_max)*$sa2_max;
-								$sa2_m2 = (strtoupper($sa2_m2) == 'AB')?'AB':($sa2_m2/$sa2_m2_max)*$sa2_max;
-								$sa2_m3 = (strtoupper($sa2_m3) == 'AB')?'AB':($sa2_m3/$sa2_m3_max)*$sa2_max;
-								$sa2_m4 = (strtoupper($sa2_m4) == 'AB')?'AB':($sa2_m4/$sa2_m4_max)*$sa2_max;
-								$sa2_m5 = (strtoupper($sa2_m5) == 'AB')?'AB':($sa2_m5/$sa2_m5_max)*$sa2_max;
-								$sa2_m6 = (strtoupper($sa2_m6) == 'AB')?'AB':($sa2_m6/$sa2_m6_max)*$sa2_max;
-
-
-								$total1_1 = (($pt1_m1 + $ns1_m1 + $sea1_m1 + $sa1_m1)/$t1_max)*100;
-								$total1_2 = (($pt1_m2 + $ns1_m2 + $sea1_m2 + $sa1_m2)/$t1_max)*100;
-								$total1_3 = (($pt1_m3 + $ns1_m3 + $sea1_m3 + $sa1_m3)/$t1_max)*100;
-								$total1_4 = (($pt1_m4 + $ns1_m4 + $sea1_m4 + $sa1_m4)/$t1_max)*100;
-								$total1_5 = (($pt1_m5 + $ns1_m5 + $sea1_m5 + $sa1_m5)/$t1_max)*100;
-								$total1_6 = (($pt1_m6 + $ns1_m6 + $sea1_m6 + $sa1_m6)/$t1_max)*100;
-
-								$total2_1 = (($pt2_m1 + $ns2_m1 + $sea2_m1 + $sa2_m1)/$t2_max)*100;
-								$total2_2 = (($pt2_m2 + $ns2_m2 + $sea2_m2 + $sa2_m2)/$t2_max)*100;
-								$total2_3 = (($pt2_m3 + $ns2_m3 + $sea2_m3 + $sa2_m3)/$t2_max)*100;
-								$total2_4 = (($pt2_m4 + $ns2_m4 + $sea2_m4 + $sa2_m4)/$t2_max)*100;
-								$total2_5 = (($pt2_m5 + $ns2_m5 + $sea2_m5 + $sa2_m5)/$t2_max)*100;
-								$total2_6 = (($pt2_m6 + $ns2_m6 + $sea2_m6 + $sa2_m6)/$t2_max)*100;
-
-								$g_total_1 = (($total1_1 + $total2_1)/$g_max)*100;
-								$g_total_2 = (($total1_2 + $total2_2)/$g_max)*100;
-								$g_total_3 = (($total1_3 + $total2_3)/$g_max)*100;
-								$g_total_4 = (($total1_4 + $total2_4)/$g_max)*100;
-								$g_total_5 = (($total1_5 + $total2_5)/$g_max)*100;
-								$g_total_6 = (($total1_6 + $total2_6)/$g_max)*100;
+								$g_total_1 = $total_1 + $ae_m1;
+								$g_total_2 = $total_2 + $ae_m2;
+								$g_total_3 = $total_3 + $ae_m3;
+								$g_total_4 = $total_4 + $ae_m4;
+								$g_total_5 = $total_5 + $ae_m5;
+								$g_total_6 = $total_6 + $ae_m6;
 
 								$g1 = calculateGrade($g_total_1);
 								$g2 = calculateGrade($g_total_2);
@@ -408,8 +340,10 @@
 								$g6 = calculateGrade($g_total_6);
 
 								$f_total = $g_total_1 + $g_total_2 + $g_total_3 + $g_total_4 + $g_total_5 + $g_total_6;
-								$f_max = $t1_max * 6;
+								$f_total = number_format($f_total,2);
+								$f_max = $g_max * 6;
 								$f_percent = ($f_total/$f_max) * 100;
+								$f_percent = number_format($f_percent,2);
 								$f_grade = calculateGrade($f_percent);
 
 								$query = "SELECT * FROM `$info_table` WHERE roll_no = ? AND section = ?";
@@ -425,65 +359,34 @@
 								$dob = $result['dob'];
 								$address = $result['address'];
 								$scholar_no = $result['scholar_no'];
-
-								$query = "SELECT * FROM `$csa1_table` WHERE sch_no = ?";
+	
+								$query = "SELECT * FROM `$csa_table` WHERE sch_no = ?";
 								$stmt = $conn->prepare($query);
 								$stmt->bindParam(1,$scholar_no);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong!5');</script>");
 								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$csa1_m1 = $marks['s1'];
-								$csa1_m2 = $marks['s2'];
-								$csa1_m3 = $marks['s3'];
-								$csa1_m4 = $marks['s4'];
-								$csa1_m5 = $marks['s5'];
-								$csa1_m6 = $marks['s6'];
-								$csa1_m7 = $marks['s7'];
-								$csa1_m8 = $marks['s8'];
+								$csa_m1 = $marks['s1'];
+								$csa_m2 = $marks['s2'];
+								$csa_m3 = $marks['s3'];
+								$csa_m4 = $marks['s4'];
+								$csa_m5 = $marks['s5'];
+								$csa_m6 = $marks['s6'];
+								$csa_m7 = $marks['s7'];
+								$csa_m8 = $marks['s8'];
 
-
-								$query = "SELECT * FROM `$csa2_table` WHERE sch_no = ?";
-								$stmt = $conn->prepare($query);
-								$stmt->bindParam(1,$scholar_no);
-								if(!$stmt->execute()) die("<script>alert('Something went wrong!5');</script>");
-								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$csa2_m1 = $marks['s1'];
-								$csa2_m2 = $marks['s2'];
-								$csa2_m3 = $marks['s3'];
-								$csa2_m4 = $marks['s4'];
-								$csa2_m5 = $marks['s5'];
-								$csa2_m6 = $marks['s6'];
-								$csa2_m7 = $marks['s7'];
-								$csa2_m8 = $marks['s8'];
-
-
-								$query = "SELECT * FROM `$d1_table` WHERE sch_no = ?";
+								$query = "SELECT * FROM `$d_table` WHERE sch_no = ?";
 								$stmt = $conn->prepare($query);
 								$stmt->bindParam(1,$scholar_no);
 								if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
 								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$d1_m1 = $marks['s1'];
-								$d1_m2 = $marks['s2'];
-								$d1_m3 = $marks['s3'];
-								$d1_m4 = $marks['s4'];
-								$d1_m5 = $marks['s5'];
-								$d1_m6 = $marks['s6'];
-								$d1_m7 = $marks['s7'];
-								$d1_m8 = $marks['s8'];
-
-								$query = "SELECT * FROM `$d2_table` WHERE sch_no = ?";
-								$stmt = $conn->prepare($query);
-								$stmt->bindParam(1,$scholar_no);
-								if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
-								$marks = $stmt->fetch(PDO::FETCH_ASSOC);
-								$d2_m1 = $marks['s1'];
-								$d2_m2 = $marks['s2'];
-								$d2_m3 = $marks['s3'];
-								$d2_m4 = $marks['s4'];
-								$d2_m5 = $marks['s5'];
-								$d2_m6 = $marks['s6'];
-								$d2_m7 = $marks['s7'];
-								$d2_m8 = $marks['s8'];
-
+								$d_m1 = $marks['s1'];
+								$d_m2 = $marks['s2'];
+								$d_m3 = $marks['s3'];
+								$d_m4 = $marks['s4'];
+								$d_m5 = $marks['s5'];
+								$d_m6 = $marks['s6'];
+								$d_m7 = $marks['s7'];
+								$d_m8 = $marks['s8'];
 
 								$html = "<div class='container-fluid' id='report'>
 									<div style='border: 2px solid black' class='ht col-md-10 col-md-offset-1' >
@@ -584,103 +487,103 @@
 					</tr>
 					
 					<tr class='bold'>
-						<td>10</td>
-						<td>10</td>
-						<td>10</td>
-						<td>10</td>
-						<td>5</td>
-						<td>5</td>
-						<td>20</td>
-						<td>80</td>
-						<td>100</td>
+						<td>$pt1_max</td>
+						<td>$pt1_max</td>
+						<td>$pt1_max</td>
+						<td>$pt1_max</td>
+						<td>$ns_max</td>
+						<td>$sea_max</td>
+						<td>$t_max</td>
+						<td>$ae_max</td>
+						<td>$g_max</td>
 					</tr>
 					<tr>
-						<td class='left'>English</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class='left'>$s1</td>
+						<td>$pt1_m1</td>
+						<td>$pt2_m1</td>
+						<td>$pt3_m1</td>
+						<td>$avg_m1</td>
+						<td>$ns_m1</td>
+						<td>$sea_m1</td>
+						<td>$total_1</td>
+						<td>$ae_m1</td>
+						<td>$g_total_1</td>
+						<td>$g1</td>
 						<td></td>
 					
 					</tr>
 					<tr>
-						<td class='left'>Hindi</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						
-					</tr>
-					<tr>
-						<td class='left'>Maths</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class='left'>$s2</td>
+						<td>$pt1_m2</td>
+						<td>$pt2_m2</td>
+						<td>$pt3_m2</td>
+						<td>$avg_m2</td>
+						<td>$ns_m2</td>
+						<td>$sea_m2</td>
+						<td>$total_2</td>
+						<td>$ae_m2</td>
+						<td>$g_total_2</td>
+						<td>$g2</td>
 						<td></td>
 						
 					</tr>
 					<tr>
-						<td class='left'>Science</td>
+						<td class='left'>$s3</td>
+						<td>$pt1_m3</td>
+						<td>$pt3_m3</td>
+						<td>$pt3_m3</td>
+						<td>$avg_m3</td>
+						<td>$ns_m3</td>
+						<td>$sea_m3</td>
+						<td>$total_3</td>
+						<td>$ae_m3</td>
+						<td>$g_total_3</td>
+						<td>$g3</td>
 						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						
+					</tr>
+					<tr>
+						<td class='left'>$s4</td>
+						<td>$pt1_m4</td>
+						<td>$pt2_m4</td>
+						<td>$pt3_m4</td>
+						<td>$avg_m4</td>
+						<td>$ns_m4</td>
+						<td>$sea_m4</td>
+						<td>$total_4</td>
+						<td>$ae_m4</td>
+						<td>$g_total_4</td>
+						<td>$g4</td>
 						<td></td>
 					
 					</tr>
 					<tr>
-						<td class='left'>Social Studies</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class='left'>$s5</td>
+						<td>$pt1_m5</td>
+						<td>$pt2_m5</td>
+						<td>$pt3_m5</td>
+						<td>$avg_m5</td>
+						<td>$ns_m5</td>
+						<td>$sea_m5</td>
+						<td>$total_5</td>
+						<td>$ae_m5</td>
+						<td>$g_total_5</td>
+						<td>$g5</td>
 						<td></td>
 						
 					</tr>
 						<tr>
-						<td class='left'>Sanskrit</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td class='left'>$s6</td>
+						<td>$pt1_m6</td>
+						<td>$pt2_m6</td>
+						<td>$pt3_m6</td>
+						<td>$avg_m6</td>
+						<td>$ns_m6</td>
+						<td>$sea_m6</td>
+						<td>$total_6</td>
+						<td>$ae_m6</td>
+						<td>$g_total_6</td>
+						<td>$g6</td>
 						<td></td>
 					</tr>
 					<tr>
@@ -741,42 +644,42 @@
 				</tr>
 				<tr>
 					<td class='left'>Work Education</td>
-					<td></td>
+					<td>$csa_m1</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Art Education</td>
-					<td></td>
+					<td>$csa_m2</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Health & Physical Education</td>
-					<td></td>
+					<td>$csa_m3</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Scientific Skills</td>
-					<td></td>
+					<td>$csa_m4</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Thinking Skills</td>
-					<td></td>
+					<td>$csa_m5</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Social Skills</td>
-					<td></td>
+					<td>$csa_m6</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Yoga/NCC</td>
-					<td></td>
+					<td>$csa_m7</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Sports</td>
-					<td></td>
+					<td>$csa_m8</td>
 					<td></td>
 				</tr>
 			</table>
@@ -794,42 +697,42 @@
 				</tr>
 				<tr>
 					<td class='left'>Regularity & Punctuality</td>
-					<td></td>
+					<td>$d_m1</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Sincerity</td>
-					<td></td>
+					<td>$d_m2</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Behaviour & Values</td>
-					<td></td>
+					<td>$d_m3</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Respectfulness for Rules & Regulations</td>
-					<td></td>
+					<td>$d_m4</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Attitude Towards Teachers</td>
-					<td></td>
+					<td>$d_m5</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Attitude Towards School-mates</td>
-					<td></td>
+					<td>$d_m6</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Attitude Towards Society</td>
-					<td></td>
+					<td>$d_m7</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td class='left'>Attitude Towards Nstion</td>
-					<td></td>
+					<td>$d_m8</td>
 					<td></td>
 				</tr>
 			</table>

@@ -20,4 +20,55 @@
 
         return $grade;
     }
+
+    function averageBestTwo($m1, $m2, $m3)
+    {
+        $max1 = 0; $max2 = 0;
+        
+        if($m1 >= $m2)
+        {
+            if($m1 >= $m3)
+            {
+                $max1 = $m1;
+                if($m2 >= $m3)
+                {
+                    $max2 = $m2;
+                }
+                else
+                {
+                    $max2 = $m3;
+                }
+            }
+        }
+        else if($m2 > $m3)
+        {
+            $max1 = $m2;
+            if($m1 >= $m3)
+            {
+                $max2 = $m1;
+            }
+            else
+            {
+                $max2 = $m3;
+            }
+        }
+        else
+        {
+            $max1 = $m3;
+            if($m1 >= $m2)
+            {
+                $max2 = $m1;
+            }
+            else
+            {
+                $max2 = $m2;
+            }
+        }
+
+        $avg = ($max1+$max2)/2;
+        $avg = number_format($avg, 2);
+        return $avg;
+    }
+
+
 ?>

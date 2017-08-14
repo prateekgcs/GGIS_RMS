@@ -213,11 +213,11 @@
 								die("<script>alert('Something went wrong!');</script>");
 							
 							
-							echo $check;
+							//echo $check;
 							$bitmap = getBitMap($year,$class,$section);
-							echo $bitmap;
+							//echo $bitmap;
 							$bool = checkAvailable($class,$bitmap,$check);
-							echo $bool;
+							//echo $bool;
 
 							if(!$bool)
 								die("<script>alert('Data required to view this report card are not yet uploaded!');</script>");
