@@ -161,7 +161,7 @@
 							if($test_type == 'or')
 							{	
 								$file = 'overall';
-								$get_tname = 'AE';
+								$get_tname = 'ae';
 								$check = 'AE';
 							}
 							else
@@ -174,13 +174,18 @@
 							{
 								$file = 'pt';
 							}
-							else if($test_type == 'ns-1' || $test_type == 'ns-2')
+							else if($test_type == 'ns-1' || $test_type == 'ns-2' || $test_type == 'ns')
 							{
 								$file = 'ns';
 							}
 							else if($test_type == 'sea-1' || $test_type == 'sea-2')
 							{
 								$file = 'sea';
+							}
+							else if($test_type == 'se')
+							{
+								$file = 'sea';
+								$get_tname = 'sea';
 							}
 							else if($test_type == 't-1')
 							{
@@ -208,9 +213,11 @@
 								die("<script>alert('Something went wrong!');</script>");
 							
 							
-							//echo $check;
+							echo $check;
 							$bitmap = getBitMap($year,$class,$section);
+							echo $bitmap;
 							$bool = checkAvailable($class,$bitmap,$check);
+							echo $bool;
 
 							if(!$bool)
 								die("<script>alert('Data required to view this report card are not yet uploaded!');</script>");

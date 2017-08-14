@@ -109,6 +109,24 @@
 				}
 				break;
 			}
+			case 'NS':
+			{
+				if($a[3])
+				{
+					$bool = 1;
+					return $bool;
+				}
+				break;
+			}
+			case 'SE':
+			{
+				if($a[4])
+				{
+					$bool = 1;
+					return $bool;
+				}
+				break;
+			}
 			case 'AE':
 			{
 				if($a[0]&&$a[1]&&$a[2]&&$a[3]&&$a[4]&&$a[5]&&$a[6]&&$a[7])

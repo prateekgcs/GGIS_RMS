@@ -107,20 +107,15 @@
 								//$arr = explode('-',$arr[3]);
 								$test_type = strtoupper($arr[3]);
 								$test_no = $arr[1];
+								
 								$info_table = $year.'_'.$class.'_info';
 								$pt1_table = $year.'_'.$class.'_'.$section.'_pt-1';
+								$pt2_table = $year.'_'.$class.'_'.$section.'_pt-2';
 								$ns1_table = $year.'_'.$class.'_'.$section.'_ns-1';
 								$csa1_table = $year.'_'.$class.'_'.$section.'_csa-1';
 								$d1_table = $year.'_'.$class.'_'.$section.'_d-1';
 								$sea1_table = $year.'_'.$class.'_'.$section.'_sea-1';
 								$sa1_table = $year.'_'.$class.'_'.$section.'_sa-1';
-
-								$pt2_table = $year.'_'.$class.'_'.$section.'_pt-2';
-								$ns2_table = $year.'_'.$class.'_'.$section.'_ns-2';
-								$csa2_table = $year.'_'.$class.'_'.$section.'_csa-2';
-								$d2_table = $year.'_'.$class.'_'.$section.'_d-2';
-								$sea2_table = $year.'_'.$class.'_'.$section.'_sea-2';
-								$sa2_table = $year.'_'.$class.'_'.$section.'_sa-2';
 
 								$conn = connect();
 								
