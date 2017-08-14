@@ -211,7 +211,7 @@
 									<table class='table table-centered' border='2'>
 										<tr>
 											<td class='bold'>SCHOLASTIC AREA</td>
-											<td class='bold'>Periodic Test (Term 1)</td>
+											<td class='bold'>Notebook Submission</td>
 										</tr>
 										<tr>
 											<td class='bold'>Subjects</td>

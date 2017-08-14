@@ -153,7 +153,7 @@
 				
 						<div align='center' class='col-md-12'>
 							<h3>Report Card</h3>
-							<h4>Class: IX <br/>Academic Session: $year-$next_year <br/><b>Notebook Submission</b></h4>
+							<h4>Class: IX <br/>Academic Session: $year-$next_year <br/><b>Subject Enrichment</b></h4>
 						</div>
 			
 						<div class='row'>
@@ -211,7 +211,7 @@
 									<table class='table table-centered' border='2'>
 										<tr>
 											<td class='bold'>SCHOLASTIC AREA</td>
-											<td class='bold'>Periodic Test (Term 1)</td>
+											<td class='bold'>Subject Enrichment</td>
 										</tr>
 										<tr>
 											<td class='bold'>Subjects</td>
