@@ -836,7 +836,7 @@
 		</div>
 	</div>
 
-						<div class='col-md-12 mtop'>
+						<div class='col-md-12'>
 							
 							<div id='p' class='col-md-5'>
 								<table>
@@ -858,7 +858,7 @@
 							
 						</div>
 							
-								<div class='row mtop'>
+								<div class='row'>
 									<table style='margin-left: 30px; margin-top: 20px;' class='table-responsive t1'>
 										<tr>
 											<td><h4><b>Congratulations! Promoted to next Class.</b></h4></td>
