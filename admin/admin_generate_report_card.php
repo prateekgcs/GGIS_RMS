@@ -110,7 +110,7 @@
 							
 					 <div class="form-group">
                     <h4>Exam</h4>
-                    <select name="sem" class="form-control" id="sel3">
+                    <select name="test" class="form-control" id="sel3">
 					 <option value="default">Select</option>
                      </select>
                      </div>
@@ -118,11 +118,101 @@
 					  <br/>
 					  
 					  <div align="center">
-						<input type='submit' name='View' value='Generate' class='btn btn-success btn-block'/>
+						<input type='submit' name='generate' value='Generate' class='btn btn-success btn-block'/>
 					</div>
 					 <br/>
 					 
 					</form>
+					<?php
+						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/functions/check_available.php');
+						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/functions/fetch_bitmap.php');
+						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/functions/check_meta.php');
+						require_once ($_SERVER['DOCUMENT_ROOT']. '/GGIS_RMS/lib/sql/conn.php');
+						if(isset($_POST['generate']))
+						{
+							$year = $_POST['year'];
+							$class = $_POST['class'];
+							$section = $_POST['section'];
+							$test_type = $_POST['test'];
+
+							$val = metaCheck($year,$class);
+							if($val<2) die("<script>alert('Batch not craeted!');</script>");
+
+							if($test_type == 'or')
+							{	
+								$file = 'overall';
+								$get_tname = 'ae';
+								$check = 'AE';
+							}
+							else
+							{
+								$get_tname = $test_type;
+								$check = $test_type;
+							}
+							
+
+							if($test_type == 'pt-1' || $test_type == 'pt-2')
+							{
+								$file = 'pt';
+							}
+							else if($test_type == 'ns-1' || $test_type == 'ns-2' || $test_type == 'ns')
+							{
+								$file = 'ns';
+							}
+							else if($test_type == 'sea-1' || $test_type == 'sea-2')
+							{
+								$file = 'sea';
+							}
+							else if($test_type == 'se')
+							{
+								$file = 'sea';
+								$get_tname = 'sea';
+							}
+							else if($test_type == 't-1')
+							{
+								$file = 't1';
+								$check = 'sa-1';
+								$get_tname = 'sa-1';
+							}
+							else if($test_type == 't-2')
+							{
+								$file = 't2';
+								$check = 'sa-2';
+								$get_tname = 'sa-2';
+							}
+
+
+							if($class<5)
+								$folder = 'class14';
+							else if($class==5)
+								$folder = 'class5';
+							else if($class>5 && $class<10)
+								$folder = 'class69';
+							else if( $class=='11s' || $class=='11c' )
+								$folder = 'class11';
+							else
+								die("<script>alert('Something went wrong!');</script>");
+
+							
+							//echo $check;
+							$bitmap = getBitMap($year,$class,$section);
+							//echo $bitmap;
+							$bool = checkAvailable($class,$bitmap,$check);
+							//echo $bool;
+
+							if(!$bool)
+								die("
+								<script>
+									alert('Data required to view this report card are not yet uploaded!'); 
+								</script>
+									");
+							
+
+							printf("<script>window.location.href = './admin_generate_report_card_action.php?year=$year&class=$class&section=$section&get_tname=$get_tname&file=$file&folder=$folder'</script>");
+
+						}
+					?>
+					
 				</div>
 			</div>	
 				</div>
@@ -144,20 +234,20 @@
 	{
 			var clas= parseInt($(this).val());		
 		
-			if(clas==1)
+			if(clas<=5)
 			{
-				$("#sel3").load("./report_card/primary.txt");
+				$("#sel3").load("../lib/report_card/primary.txt");
 			}
-			else if(clas<10)
+			else if(clas<=9)
 			{
-				$("#sel3").load("./report_card/secondary.txt");
+				$("#sel3").load("../lib/report_card/secondary.txt");
 			}
 			else
 			{
-				$("#sel3").load("./report_card/senior.txt");
+				$("#sel3").load("../lib/report_card/senior.txt");
 			}
 			
-		});
+	});
 		
 	</script>
 	
