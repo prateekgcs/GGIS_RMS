@@ -47,7 +47,7 @@
 					<br/>
 					<button onclick="location.href='./admin_reset_password.php'" class="btn btn-primary btn-block"><img width="10%" src="../lib/image/reset.png"/><br/>Reset Password</button>
 					<br/>
-					<button onclick="location.href='../lib/signout.php'" class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
+					<button onclick="location.href='../../lib/functions/signout.php'" class="btn btn-primary btn-block"><img width="10%" src="../lib/image/power.png"/><br/>Sign Out</button>
 				</div>
 				
 				<div class="col-md-7 col-md-offset-1 row">
@@ -78,7 +78,7 @@
 					
 							 <div class="form-group">
 							   <h4>Class</h4>
-							   <select name="class" class="form-control" id="sel2">
+							   <select name="class" class="form-control" id="class">
 							   <option value="default">Select</option>
 							   <option value="1">1</option>
 							   <option value="2">2</option>
@@ -100,19 +100,18 @@
 								<div class="form-group">
 							   <h4>Section</h4>
 							   <select name="section" class="form-control" id="sel2">
-							   <option value="default">Select</option>
 							   <option value="a">A</option>
 							   <option value="b">B</option>
 							   <option value="c">C</option>
 							   </select>
 							 </div>
 					 					 
-					 <div class="form-group">
-                    <h4>Exam</h4>
-                    <select name="sem" class="form-control" id="sel3">
-					 <option value="default">Select</option>
-                     </select>
-                     </div>
+							 <div class="form-group">
+								<h4>Exam</h4>
+									<select name="exam" class="form-control" id="sel3">
+								 <option value="default">Select</option>
+								 </select>
+							 </div>
 					 
 					  <br/>
 					  
@@ -127,29 +126,18 @@
 				
 					<?php
 									
-					/*if(isset($_POST["download"]))
+					if(isset($_POST["Download"]))
 					{
-						$sem = $_POST['sem'];
 						$year = $_POST['year'];
 						$class = $_POST['class'];
+						$exam = $_POST['exam'];
+						$section = strtoupper($_POST['section']);
+						
 						if($class!='default')
 						{
-							
-						if($class <= 4)
-							$class = 'CLASS 1-4 ';
-						else if($class == 5)
-							$class = 'CLASS 5 ';
-						else if($class <= 8)
-							$class = 'CLASS 6-8 ';
-						else if($class == 9)
-							$class = 'CLASS 9 ';
-						else if($class == '11S')
-							$class = 'CLASS 11 SCIENCE ';
-						else if($class == '11C')
-							$class = 'CLASS 11 COMMERCE ';
 						
-						$filename = $class.$sem.'.xlsx';
-						$path = "../deb/";
+						$filename = $year.'_'.$class.'_'.$section.'_'.$exam.'.xlsx';
+						$path = "../lib/uploads/";
 						$download_file = $path.$filename;
 						
 						header('Content-Description: File Transfer');
@@ -164,7 +152,7 @@
 						readfile($download_file);
 						exit;
 						}
-					}*/
+					}
 					?>
 				</div>
 			</div>
@@ -185,17 +173,17 @@
 	{
 			var clas= parseInt($(this).val());		
 		
-			if(clas==1)
+			if(clas<=5)
 			{
-				$("#class").load("../lib/upload_template/primary.txt");
+				$("#sel3").load("../lib/upload_template/primary.txt");
 			}
-			else if(clas<10)
+			else if(clas<=9)
 			{
-				$("#class").load("../lib/upload_template/secondary.txt");
+				$("#sel3").load("../lib/upload_template/secondary.txt");
 			}
 			else
 			{
-				$("#class").load("../lib/upload_template/senior.txt");
+				$("#sel3").load("../lib/upload_template/senior.txt");
 			}
 			
 		});

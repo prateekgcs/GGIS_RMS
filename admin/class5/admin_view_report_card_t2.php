@@ -267,7 +267,7 @@
 								$g6 = calculateGrade($total6);
 
 								$g_total = $total1 + $total2 + $total3 + $total4 + $total5 + $total6;
-								$g_total = number_format($f_total,2);
+								$g_total = number_format($g_total,2);
 								$g_max = $t1_max * 6;
 								$g_percent = ($g_total/$g_max) * 100;
 								$g_percent = number_format($g_percent,2);
@@ -485,7 +485,7 @@
 						<br/>
 					
 						<div id='p' class='col-md-12'>
-							<div id='p' style='margin-left: 15px;' class='col-md-4'>
+							<div id='p' class='col-md-4'>
 								<table class='table' border='2'>
 									<tr class='bold'>
 										<td style='min-width:70%; background-color:#eee;'>Overall Marks</td>
@@ -494,11 +494,11 @@
 								</table>
 							</div>
 							
-							<div id='p' class='col-md-4'>
+							<div id='p' class='col-md-3'>
 							<table class='table' border='2'>
 								<tr class='bold'>
-									<td style='min-width:60%; background-color:#eee;'>Percentage</td>
-									<td style='min-width:40%'>$g_percent</td>
+									<td style='min-width:50px; background-color:#eee;'>Percentage</td>
+									<td style='min-width:50px;'>$g_percent</td>
 								</tr>
 							</table>
 							</div>
@@ -510,7 +510,8 @@
 									<td style='min-width:40%'>$g_grade</td>
 								</tr>
 							</table>
-							</div>
+							
+						</div>
 							
 							<div id='p' class='col-md-2'>
 							<table class='table' border='2'>
