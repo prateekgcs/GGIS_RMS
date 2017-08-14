@@ -409,8 +409,10 @@
 								$g6 = calculateGrade($g_total_6);
 
 								$f_total = $g_total_1 + $g_total_2 + $g_total_3 + $g_total_4 + $g_total_5 + $g_total_6;
+								$f_total = number_format($f_total,2);
 								$f_max = $t1_max * 6;
 								$f_percent = ($f_total/$f_max) * 100;
+								$f_percent = number_format($f_percent,2);
 								$f_grade = calculateGrade($f_percent);
 
 								$query = "SELECT * FROM `$info_table` WHERE roll_no = ? AND section = ?";
@@ -877,7 +879,7 @@
 						</div>
 							
 								<div class='row mtop'>
-									<table style='margin-left: 30px; margin-top: 20px;' class='table-responsive t1'>
+									<table style='margin-left: 30px;' class='table-responsive t1'>
 										<tr>
 											<td><h4><b>Congratulations! Promoted to next Class.</b></h4></td>
 										</tr>

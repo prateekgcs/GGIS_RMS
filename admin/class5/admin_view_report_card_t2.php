@@ -122,6 +122,7 @@
 								$s3 = $headings['s3'];
 								$s4 = $headings['s4'];
 								$s5 = $headings['s5'];
+								$s6 = $headings['s6'];
 								
 								$rollno = $_GET['rollno'];
 
@@ -135,6 +136,7 @@
 								$pt1_m3 = $marks['s3'];
 								$pt1_m4 = $marks['s4'];
 								$pt1_m5 = $marks['s5'];
+								$pt1_m6 = $marks['s6'];
 								$pt1_total = $marks['total'];
 								$query = "SELECT * FROM `$pt1_table` WHERE roll_no = '^'";
 								$stmt = $conn->prepare($query);
@@ -145,12 +147,14 @@
 								$pt1_m3_max = $marks['s3'];
 								$pt1_m4_max = $marks['s4'];
 								$pt1_m5_max = $marks['s5'];
+								$pt1_m6_max = $marks['s6'];
 
-								$pt1_m1 = ($pt1_m1/$pt1_m1_max)*$pt1_max;
-								$pt1_m2 = ($pt1_m2/$pt1_m2_max)*$pt1_max;
-								$pt1_m3 = ($pt1_m3/$pt1_m3_max)*$pt1_max;
-								$pt1_m4 = ($pt1_m4/$pt1_m4_max)*$pt1_max;
-								$pt1_m5 = ($pt1_m5/$pt1_m5_max)*$pt1_max;
+								$pt1_m1 = (strtoupper($pt1_m1) == 'AB')?'AB':($pt1_m1/$pt1_m1_max)*$pt1_max;
+								$pt1_m2 = (strtoupper($pt1_m2) == 'AB')?'AB':($pt1_m2/$pt1_m2_max)*$pt1_max;
+								$pt1_m3 = (strtoupper($pt1_m3) == 'AB')?'AB':($pt1_m3/$pt1_m3_max)*$pt1_max;
+								$pt1_m4 = (strtoupper($pt1_m4) == 'AB')?'AB':($pt1_m4/$pt1_m4_max)*$pt1_max;
+								$pt1_m5 = (strtoupper($pt1_m5) == 'AB')?'AB':($pt1_m5/$pt1_m5_max)*$pt1_max;
+								$pt1_m6 = (strtoupper($pt1_m6) == 'AB')?'AB':($pt1_m6/$pt1_m6_max)*$pt1_max;
 
 
 								$query = "SELECT * FROM `$ns1_table` WHERE roll_no = ?";
@@ -163,6 +167,7 @@
 								$ns1_m3 = $marks['s3'];
 								$ns1_m4 = $marks['s4'];
 								$ns1_m5 = $marks['s5'];
+								$ns1_m6 = $marks['s6'];
 								$ns1_total = $marks['total'];
 								$query = "SELECT * FROM `$ns1_table` WHERE roll_no = '^'";
 								$stmt = $conn->prepare($query);
@@ -173,12 +178,14 @@
 								$ns1_m3_max = $marks['s3'];
 								$ns1_m4_max = $marks['s4'];
 								$ns1_m5_max = $marks['s5'];
+								$ns1_m6_max = $marks['s6'];
 
-								$ns1_m1 = ($ns1_m1/$ns1_m1_max)*$ns1_max;
-								$ns1_m2 = ($ns1_m2/$ns1_m2_max)*$ns1_max;
-								$ns1_m3 = ($ns1_m3/$ns1_m3_max)*$ns1_max;
-								$ns1_m4 = ($ns1_m4/$ns1_m4_max)*$ns1_max;
-								$ns1_m5 = ($ns1_m5/$ns1_m5_max)*$ns1_max;
+								$ns1_m1 = (strtoupper($ns1_m1) == 'AB')?'AB':($ns1_m1/$ns1_m1_max)*$ns1_max;
+								$ns1_m2 = (strtoupper($ns1_m2) == 'AB')?'AB':($ns1_m2/$ns1_m2_max)*$ns1_max;
+								$ns1_m3 = (strtoupper($ns1_m3) == 'AB')?'AB':($ns1_m3/$ns1_m3_max)*$ns1_max;
+								$ns1_m4 = (strtoupper($ns1_m4) == 'AB')?'AB':($ns1_m4/$ns1_m4_max)*$ns1_max;
+								$ns1_m5 = (strtoupper($ns1_m5) == 'AB')?'AB':($ns1_m5/$ns1_m5_max)*$ns1_max;
+								$ns1_m6 = (strtoupper($ns1_m6) == 'AB')?'AB':($ns1_m6/$ns1_m6_max)*$ns1_max;
 
 
 								$query = "SELECT * FROM `$sea1_table` WHERE roll_no = ?";
@@ -191,6 +198,7 @@
 								$sea1_m3 = $marks['s3'];
 								$sea1_m4 = $marks['s4'];
 								$sea1_m5 = $marks['s5'];
+								$sea1_m6 = $marks['s6'];
 								$sea1_total = $marks['total'];
 								$query = "SELECT * FROM `$sea1_table` WHERE roll_no = '^'";
 								$stmt = $conn->prepare($query);
@@ -201,12 +209,14 @@
 								$sea1_m3_max = $marks['s3'];
 								$sea1_m4_max = $marks['s4'];
 								$sea1_m5_max = $marks['s5'];
+								$sea1_m6_max = $marks['s6'];
 
-								$sea1_m1 = ($sea1_m1/$sea1_m1_max)*$sea1_max;
-								$sea1_m2 = ($sea1_m2/$sea1_m2_max)*$sea1_max;
-								$sea1_m3 = ($sea1_m3/$sea1_m3_max)*$sea1_max;
-								$sea1_m4 = ($sea1_m4/$sea1_m4_max)*$sea1_max;
-								$sea1_m5 = ($sea1_m5/$sea1_m5_max)*$sea1_max;
+								$sea1_m1 = (strtoupper($sea1_m1) == 'AB')?'AB':($sea1_m1/$sea1_m1_max)*$sea1_max;
+								$sea1_m2 = (strtoupper($sea1_m2) == 'AB')?'AB':($sea1_m2/$sea1_m2_max)*$sea1_max;
+								$sea1_m3 = (strtoupper($sea1_m3) == 'AB')?'AB':($sea1_m3/$sea1_m3_max)*$sea1_max;
+								$sea1_m4 = (strtoupper($sea1_m4) == 'AB')?'AB':($sea1_m4/$sea1_m4_max)*$sea1_max;
+								$sea1_m5 = (strtoupper($sea1_m5) == 'AB')?'AB':($sea1_m5/$sea1_m5_max)*$sea1_max;
+								$sea1_m6 = (strtoupper($sea1_m6) == 'AB')?'AB':($sea1_m6/$sea1_m6_max)*$sea1_max;
 
 
 								$query = "SELECT * FROM `$sa1_table` WHERE roll_no = ?";
@@ -219,6 +229,7 @@
 								$sa1_m3 = $marks['s3'];
 								$sa1_m4 = $marks['s4'];
 								$sa1_m5 = $marks['s5'];
+								$sa1_m6 = $marks['s6'];
 								$sa1_total = $marks['total'];
 								$attendance = $marks['attendance'];
 								$remarks = $marks['remarks'];
@@ -232,27 +243,31 @@
 								$sa1_m3_max = $marks['s3'];
 								$sa1_m4_max = $marks['s4'];
 								$sa1_m5_max = $marks['s5'];
+								$sa1_m6_max = $marks['s6'];
 
-								$sa1_m1 = ($sa1_m1/$sa1_m1_max)*$sa1_max;
-								$sa1_m2 = ($sa1_m2/$sa1_m2_max)*$sa1_max;
-								$sa1_m3 = ($sa1_m3/$sa1_m3_max)*$sa1_max;
-								$sa1_m4 = ($sa1_m4/$sa1_m4_max)*$sa1_max;
-								$sa1_m5 = ($sa1_m5/$sa1_m5_max)*$sa1_max;
+								$sa1_m1 = (strtoupper($sa1_m1) == 'AB')?'AB':($sa1_m1/$sa1_m1_max)*$sa1_max;
+								$sa1_m2 = (strtoupper($sa1_m2) == 'AB')?'AB':($sa1_m2/$sa1_m2_max)*$sa1_max;
+								$sa1_m3 = (strtoupper($sa1_m3) == 'AB')?'AB':($sa1_m3/$sa1_m3_max)*$sa1_max;
+								$sa1_m4 = (strtoupper($sa1_m4) == 'AB')?'AB':($sa1_m4/$sa1_m4_max)*$sa1_max;
+								$sa1_m5 = (strtoupper($sa1_m5) == 'AB')?'AB':($sa1_m5/$sa1_m5_max)*$sa1_max;
+								$sa1_m6 = (strtoupper($sa1_m6) == 'AB')?'AB':($sa1_m6/$sa1_m6_max)*$sa1_max;
 
 								$total1 = (($pt1_m1 + $ns1_m1 + $sea1_m1 + $sa1_m1)/$t1_max)*100;
 								$total2 = (($pt1_m2 + $ns1_m2 + $sea1_m2 + $sa1_m2)/$t1_max)*100;
 								$total3 = (($pt1_m3 + $ns1_m3 + $sea1_m3 + $sa1_m3)/$t1_max)*100;
 								$total4 = (($pt1_m4 + $ns1_m4 + $sea1_m4 + $sa1_m4)/$t1_max)*100;
 								$total5 = (($pt1_m5 + $ns1_m5 + $sea1_m5 + $sa1_m5)/$t1_max)*100;
+								$total6 = (($pt1_m6 + $ns1_m6 + $sea1_m6 + $sa1_m6)/$t1_max)*100;
 
 								$g1 = calculateGrade($total1);
 								$g2 = calculateGrade($total2);
 								$g3 = calculateGrade($total3);
 								$g4 = calculateGrade($total4);
 								$g5 = calculateGrade($total5);
+								$g6 = calculateGrade($total6);
 
-								$g_total = $total1 + $total2 + $total3 + $total4 + $total5;
-								$g_max = $t1_max * 5;
+								$g_total = $total1 + $total2 + $total3 + $total4 + $total5 + $total6;
+								$g_max = $t1_max * 6;
 								$g_percent = ($g_total/$g_max) * 100;
 								$g_grade = calculateGrade($g_percent);
 
