@@ -1,59 +1,4 @@
  <?php
-		
-			/*if(isset($_POST['upload']) && $_FILES['file']['type']=="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-			{
-				$batch = $_POST['year'];
-				$sem = $_POST['sem'];
-				$branch = $_POST['branch'];
-				
-
-				$tname="0206";
-				$tname.=$branch;
-				$tname.=$batch;
-				$tname.=$sem;
-
-        //query to check sem and batch exists
-        $query0 = "SELECT * FROM batch_info WHERE batch_year = ? AND branch = ? AND (`$sem` = 1 OR `$sem` = 2)";
-        $sql0 = $conn->prepare($query0);
-        $sql0->bindParam(1,$batch);
-        $sql0->bindParam(2,$branch);
-        if(!($sql0->execute())) die(print_r($sql0->errorInfo()));
-        $count = $sql0->rowCount();
-        if($count == 0) die("<div style='font-size:20px' class='alert alert-info text-center'> <strong>Add Batch and Semester<strong><br/> Contact Administrator to add Batch and Semester</div> </div> </div> <hr> <div class='row'> <div class='footer' align='center'><br/><p>Copyright &copy; &middot;Gyan Ganga Group of Institutions&middot; All Rights Reserved</p></div></div><hr></div>");
-
-        $query1 = "SELECT * FROM batch_info WHERE batch_year = ? AND branch = ? AND `$sem` = 2";
-        $sql1 = $conn->prepare($query1);
-        $sql1->bindParam(1,$batch);
-        $sql1->bindParam(2,$branch);
-        if(!($sql1->execute())) die(print_r($sql1->errorInfo()));
-        $count = $sql1->rowCount();
-        if($count > 0) die("<div style='font-size:20px' class='alert alert-info text-center'> <strong>Data Already Exists!<strong><br/> Result for selected batch has been uploaded earlier. Please truncate existing data in order to upload new data.</div> </div> </div> <hr> <div class='row'> <div class='footer' align='center'><br/><p>Copyright &copy; &middot;Gyan Ganga Group of Institutions&middot; All Rights Reserved</p></div></div><hr></div>");
-				
-        $tmp_name = $_FILES['file']['tmp_name'];
-        $path = __DIR__ . '\..\uploads\\';
-        $exten = ".xlsx";
-        $filename = $path.$tname.$exten;
-
-        //move uploaded file from temp location to Uploads folder
-        if(!(move_uploaded_file($tmp_name, $filename))) die("Can't Upload File!");
-				
-          //upload excel to database
-          UploadExcel($tname);  
-
-          $query2 = "UPDATE batch_info SET `$sem` = 2 WHERE batch_year = ? AND branch = ?";
-          $sql2 = $conn->prepare($query2);
-          $sql2->bindParam(1,$batch);
-          $sql2->bindParam(2,$branch);
-          if(!($sql2->execute())) die(print_r($sql2->errorInfo()));
-
-          printf("<div style='font-size:20px' class='alert alert-success text-center'> <strong>Upload Successful!<strong><br/> Data has been successfully uploaded to the database.</div>");
-
-      }*/
-			
-?>
- 
- 
- <?php
  
 	
 	function connecttt()
@@ -1156,7 +1101,7 @@
     {
 		$link = connecttt();
           
-		$queryinsert = " CREATE TABLE `$tablename` ( `scholar_no` VARCHAR(5) NOT NULL , `roll_no` VARCHAR(5) NOT NULL ,`section` VARCHAR(2) NOT NULL , `name` VARCHAR(50) NOT NULL , `religion` VARCHAR(20) NOT NULL , `gender` VARCHAR(10) NOT NULL , `category` VARCHAR(10) NOT NULL , `fname` VARCHAR(80) NOT NULL , `mname` VARCHAR(80) NOT NULL , `dob` VARCHAR(15) NOT NULL , `address` VARCHAR(150) NOT NULL , `mno` VARCHAR(10) NOT NULL , `bg` VARCHAR(10) NOT NULL , `height` VARCHAR(50) NOT NULL , `weight` VARCHAR(50) NOT NULL , `house` VARCHAR(20) NOT NULL ) ";
+		$queryinsert = " CREATE TABLE `$tablename` ( `scholar_no` VARCHAR(5) NOT NULL , `roll_no` VARCHAR(5) NOT NULL ,`section` VARCHAR(2) NOT NULL , `name` VARCHAR(50) NOT NULL , `religion` VARCHAR(20) NOT NULL , `gender` VARCHAR(10) NOT NULL , `category` VARCHAR(10) NOT NULL , `fname` VARCHAR(80) NOT NULL , `mname` VARCHAR(80) NOT NULL , `dob` VARCHAR(15) NOT NULL , `address` VARCHAR(150) NOT NULL , `mno` VARCHAR(10) NOT NULL , `bg` VARCHAR(10) NOT NULL , `height` VARCHAR(50) NOT NULL , `weight` VARCHAR(50) NOT NULL , `house` VARCHAR(20) NOT NULL , `status` VARCHAR(50) NOT NULL ) ";
 		  
 		$sqlinsert = $link->prepare($queryinsert);
 		if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
@@ -1192,12 +1137,13 @@
 			$height = $worksheet->getCell('N'.$row)->getValue();
             $weight = $worksheet->getCell('O'.$row)->getValue();
             $house = $worksheet->getCell('P'.$row)->getValue();
-			            
+			$status = $worksheet->getCell('Q'.$row)->getValue();
+            
 			if($sno!='')
 			{
 				try
 				{
-					$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?)";
+					$queryinsert = "INSERT INTO `".$tablename."` VALUES (?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?)";
 					$sqlinsert = $link->prepare($queryinsert);
 					$sqlinsert->bindParam(1,$sno);
 					$sqlinsert->bindParam(2,$roll_no);
@@ -1215,6 +1161,7 @@
 					$sqlinsert->bindParam(14,$height);
 					$sqlinsert->bindParam(15,$weight);
 					$sqlinsert->bindParam(16,$house);
+					$sqlinsert->bindParam(17,$status);
 					$sqlinsert->execute();
 				} 
 				catch(PDOException $error) 
