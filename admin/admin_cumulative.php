@@ -6,11 +6,13 @@
 </form>
 
 <?php
+
+	$html="";
     if(isset($_GET['view']))
     {
         $year = $_GET['year'];
         $class = $_GET['class'];
-        $section = $_GET['section'];
+        $section = strtolower($_GET['section']);
 
         $table_name = $year.'_'.$class.'_info';
 
@@ -40,8 +42,6 @@
                 $t2_max = $pt2_max + $ns2_max + $sea2_max + $sa2_max;
 
                 $g_max = $t1_max + $t2_max;
-
-
                 
                 $next_year = new DateTime($year);
                 $next_year->add(new DateInterval('P1Y'));
@@ -65,6 +65,7 @@
                 $conn = connect();
                 
                 $query = "SELECT * FROM `$sa2_table`";
+				
                 $stmt = $conn->prepare($query);
                 if(!$stmt->execute()) die("<script>alert('Something went wrong, sa2_table!');</script>");
                 $headings = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -75,11 +76,11 @@
                 $s5 = $headings['s5'];
                 $s6 = $headings['s6'];
                 
-                $rollno = $_GET['rollno'];
+                //$roll_no = $_GET['rollno'];
 
                 $query = "SELECT * FROM `$pt1_table` WHERE roll_no = ?";
                 $stmt = $conn->prepare($query);
-                $stmt->bindParam(1,$rollno);
+                $stmt->bindParam(1,$roll_no);
                 if(!$stmt->execute()) die("<script>alert('Something went wrong21!');</script>");
                 $marks = $stmt->fetch(PDO::FETCH_ASSOC);
                 $pt1_m1 = $marks['s1'];
@@ -109,7 +110,7 @@
 
                 $query = "SELECT * FROM `$pt2_table` WHERE roll_no = ?";
                 $stmt = $conn->prepare($query);
-                $stmt->bindParam(1,$rollno);
+                $stmt->bindParam(1,$roll_no);
                 if(!$stmt->execute()) die("<script>alert('Something went wrong22!');</script>");
                 $marks = $stmt->fetch(PDO::FETCH_ASSOC);
                 $pt2_m1 = $marks['s1'];
@@ -139,8 +140,8 @@
 
                 $query = "SELECT * FROM `$ns1_table` WHERE roll_no = ?";
                 $stmt = $conn->prepare($query);
-                $stmt->bindParam(1,$rollno);
-                if(!$stmt->execute()) die("<script>alert('Something went wrong!31');</script>");
+                $stmt->bindParam(1,$roll_no);
+                if(!$stmt->execute()) die("<script>alert('Something went wrong!311');</script>");
                 $marks = $stmt->fetch(PDO::FETCH_ASSOC);
                 $ns1_m1 = $marks['s1'];
                 $ns1_m2 = $marks['s2'];
@@ -151,7 +152,7 @@
                 $ns1_total = $marks['total'];
                 $query = "SELECT * FROM `$ns1_table` WHERE roll_no = '^'";
                 $stmt = $conn->prepare($query);
-                if(!$stmt->execute()) die("<script>alert('Something went wrong31!');</script>");
+                if(!$stmt->execute()) die("<script>alert('Something went wrong312!');</script>");
                 $marks = $stmt->fetch(PDO::FETCH_ASSOC);
                 $ns1_m1_max = $marks['s1'];
                 $ns1_m2_max = $marks['s2'];
@@ -170,7 +171,7 @@
 
                 $query = "SELECT * FROM `$ns2_table` WHERE roll_no = ?";
                 $stmt = $conn->prepare($query);
-                $stmt->bindParam(1,$rollno);
+                $stmt->bindParam(1,$roll_no);
                 if(!$stmt->execute()) die("<script>alert('Something went wrong!32');</script>");
                 $marks = $stmt->fetch(PDO::FETCH_ASSOC);
                 $ns2_m1 = $marks['s1'];
@@ -201,7 +202,7 @@
 
                 $query = "SELECT * FROM `$sea1_table` WHERE roll_no = ?";
                 $stmt = $conn->prepare($query);
-                $stmt->bindParam(1,$rollno);
+                $stmt->bindParam(1,$roll_no);
                 if(!$stmt->execute()) die("<script>alert('Something went wrong!41');</script>");
                 $marks = $stmt->fetch(PDO::FETCH_ASSOC);
                 $sea1_m1 = $marks['s1'];
@@ -231,7 +232,7 @@
 
                 $query = "SELECT * FROM `$sea2_table` WHERE roll_no = ?";
                 $stmt = $conn->prepare($query);
-                $stmt->bindParam(1,$rollno);
+                $stmt->bindParam(1,$roll_no);
                 if(!$stmt->execute()) die("<script>alert('Something went wrong!42');</script>");
                 $marks = $stmt->fetch(PDO::FETCH_ASSOC);
                 $sea2_m1 = $marks['s1'];
@@ -262,7 +263,7 @@
 
                 $query = "SELECT * FROM `$sa1_table` WHERE roll_no = ?";
                 $stmt = $conn->prepare($query);
-                $stmt->bindParam(1,$rollno);
+                $stmt->bindParam(1,$roll_no);
                 if(!$stmt->execute()) die("<script>alert('Something went wrong!51');</script>");
                 $marks = $stmt->fetch(PDO::FETCH_ASSOC);
                 $sa1_m1 = $marks['s1'];
@@ -293,7 +294,7 @@
 
                 $query = "SELECT * FROM `$sa2_table` WHERE roll_no = ?";
                 $stmt = $conn->prepare($query);
-                $stmt->bindParam(1,$rollno);
+                $stmt->bindParam(1,$roll_no);
                 if(!$stmt->execute()) die("<script>alert('Something went wrong!52');</script>");
                 $marks = $stmt->fetch(PDO::FETCH_ASSOC);
                 $sa2_m1 = $marks['s1'];
@@ -361,7 +362,7 @@
 
                 $query = "SELECT * FROM `$info_table` WHERE roll_no = ? AND section = ?";
                 $stmt = $conn->prepare($query);
-                $stmt->bindParam(1,$rollno);
+                $stmt->bindParam(1,$roll_no);
                 $stmt->bindParam(2,$section);
                 if(!$stmt->execute()) die("<script>alert('Something went wrong!');</script>");
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -432,7 +433,7 @@
                 $d2_m8 = $marks['s8'];
 
 
-                $html = "<div class='container-fluid' id='report'>
+                $html .= "<div class='container-fluid' id='report'>
                     <div style='border: 2px solid black' class='ht col-md-10 col-md-offset-1' >
                         
                         <div class='container-fluid' >
@@ -492,7 +493,7 @@
                                 <table>
                                     <tr align='center'>
                                         <td style='border: 1px solid black;'><b>Roll No.</b></td>
-                                        <td style='border: 1px solid black;'> <b>$rollno</b></td>
+                                        <td style='border: 1px solid black;'> <b>$roll_no</b></td>
                                     </tr>
                                     <tr>
                                         <td colspan='2'>&nbsp;</td>
@@ -843,12 +844,8 @@
             
             </div>
             </div>
-        </div></br></br>";
-        
-        $table .= "</table>";
-        //printf($table);
-
+        </div></br></br></table>";
     }
-
+   echo $html;
 }
 ?>
