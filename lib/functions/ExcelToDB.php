@@ -979,7 +979,7 @@
 
 		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE `$tablename` ( `sch_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `s1` VARCHAR(5) NOT NULL , `s2` VARCHAR(5) NOT NULL , `s3` VARCHAR(5) NOT NULL , `s4` VARCHAR(5) NOT NULL , `s5` VARCHAR(5) NOT NULL , `s6` VARCHAR(5) NOT NULL , `s7` VARCHAR(5) NOT NULL , `s8` VARCHAR(5) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `s1` VARCHAR(5) NOT NULL , `s2` VARCHAR(5) NOT NULL , `s3` VARCHAR(5) NOT NULL , `s4` VARCHAR(5) NOT NULL , `s5` VARCHAR(5) NOT NULL , `s6` VARCHAR(5) NOT NULL , `s7` VARCHAR(5) NOT NULL , `s8` VARCHAR(5) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) 
@@ -1040,7 +1040,7 @@
     {
 		  $link = connecttt();
           
-		  $queryinsert = " CREATE TABLE `$tablename` ( `sch_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `s1` VARCHAR(5) NOT NULL , `s2` VARCHAR(5) NOT NULL , `s3` VARCHAR(5) NOT NULL , `s4` VARCHAR(5) NOT NULL , `s5` VARCHAR(5) NOT NULL , `s6` VARCHAR(5) NOT NULL , `s7` VARCHAR(5) NOT NULL , `s8` VARCHAR(5) NOT NULL ) ";
+		  $queryinsert = " CREATE TABLE `$tablename` ( `roll_no` VARCHAR(5) NOT NULL , `name` VARCHAR(50) NOT NULL , `s1` VARCHAR(5) NOT NULL , `s2` VARCHAR(5) NOT NULL , `s3` VARCHAR(5) NOT NULL , `s4` VARCHAR(5) NOT NULL , `s5` VARCHAR(5) NOT NULL , `s6` VARCHAR(5) NOT NULL , `s7` VARCHAR(5) NOT NULL , `s8` VARCHAR(5) NOT NULL ) ";
 		  
 		  $sqlinsert = $link->prepare($queryinsert);
 		  if(!($sqlinsert->execute())) die(print_r($queryinsert->errorInfo()));
